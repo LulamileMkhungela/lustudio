@@ -66,11 +66,13 @@ STATIC_HOSTS = {
     "uploads-ssl.webflow.com",
     "d3e54v103j8qbb.cloudfront.net",
     "cdn.jsdelivr.net",
+    "unpkg.com",
     "res.cloudinary.com",
     "video.cosmos.studio",
     "fonts.gstatic.com",
     "fonts.googleapis.com",
     "widget.clutch.co",
+    "raw.githubusercontent.com",
     "www.google.com",
     "www.gstatic.com",
     "clarity.ms",
@@ -104,12 +106,13 @@ MIME_EXT = {
 }
 
 MAX_PAGE_BYTES = 3 * 1024 * 1024
-MAX_ASSET_BYTES = 25 * 1024 * 1024
-MAX_TOTAL_ASSET_BYTES = 96 * 1024 * 1024
+MAX_ASSET_BYTES = 8 * 1024 * 1024
+MAX_TOTAL_ASSET_BYTES = 52 * 1024 * 1024
 MAX_EXTRA_PATHS = 500
 MAX_DISCOVERY_PASSES = 4
 MAX_RECURSION_PASSES = 6
 TEXT_SUFFIXES = {".html", ".css", ".js", ".mjs", ".json", ".lottie", ".svg", ".xml", ".txt", ".map"}
+SPECIAL_ROOT_FILES = {"rss.xml", "robots.txt", "sitemap.xml"}
 
 HEADERS = {
     "User-Agent": UA,
@@ -130,6 +133,12 @@ REMOTE_STATIC_RE = re.compile(
     r"https?://[^\s\"'<>`)\\]+\.(?:css|mjs|js|woff2?|ttf|otf|png|jpe?g|webp|avif|svg|gif|ico|mp4|webm|mov|json|lottie|pdf|txt|xml)(?:[?#][^\s\"'<>`)\\]*)?",
     re.I,
 )
+HTML_URL_ATTRS = [
+    "href", "src", "srcset", "poster", "data-src", "data-srcset",
+    "data-poster", "data-video", "content", "action", "style",
+    "data-bg", "data-image", "data-wf-bg", "data-background-image",
+]
+CSS_URL_RE = re.compile(r"url\(\s*['\"]?(https?://[^)'\"]+)", re.I)
 HREF_RE = re.compile(r"(<a\b[^>]*\bhref\s*=\s*)([\"'])(.*?)\2", re.I | re.S)
 TAG_RE = re.compile(r"<(?:link|script|img|source|video|audio)\b[^>]*>", re.I)
 CANONICAL_LINK_RE = re.compile(
@@ -247,12 +256,12 @@ def http_get(url: str, *, headers: dict | None = None, stream: bool = False,
         except Exception as exc:  # noqa: BLE001
             last = exc
             if attempt < 2:
-                time.sleep(0.4 * (attempt + 1))
+                time.sleep(1.0 * (attempt + 1))
     raise last
 
 
 def encode_existing_path(path: str) -> str:
-    return quote(path, safe="/~()*!.'_%-")
+    return quote(path, safe="/~()*!.'_%-@+,")
 
 
 def canonical_live_url(url_or_path: str) -> str:
@@ -355,14 +364,12 @@ def is_asset_url(url: str) -> bool:
     path = unquote(p.path)
     ext = Path(path).suffix.lower()
     if host in INTERNAL_HOSTS:
-        return path.startswith(ASSET_PREFIXES)
+        return path.startswith(ASSET_PREFIXES) or Path(path).name in SPECIAL_ROOT_FILES
     if host in EXTERNAL_LINK_HOSTS and host not in STATIC_HOSTS:
         return False
     if host in STATIC_HOSTS:
         return True
-    if not host:
-        return False
-    return ext in STATIC_EXTS
+    return False
 
 
 def strip_token(token: str) -> tuple[str, str]:
@@ -392,6 +399,8 @@ def normalize_asset_url(token: str, base_url: str | None) -> tuple[str, str] | N
         else:
             root = f"{bp.scheme or 'https'}://{bp.netloc}"
         absolute = root + raw
+    elif Path(unquote(urlsplit(raw).path)).name in SPECIAL_ROOT_FILES:
+        absolute = LIVE + "/" + raw
     else:
         absolute = urljoin(base, raw)
     p = urlsplit(absolute)
@@ -431,7 +440,9 @@ def public_path_for_asset(url: str, content_type: str = "") -> str:
     p = urlsplit(url)
     host = (p.hostname or "").lower()
     path = unquote(p.path)
-    if host in INTERNAL_HOSTS and path.startswith(ASSET_PREFIXES):
+    if host in INTERNAL_HOSTS and (
+        path.startswith(ASSET_PREFIXES) or Path(path).name in SPECIAL_ROOT_FILES
+    ):
         local = quote_path(path)
         if p.query:
             local += "?" + p.query
@@ -490,29 +501,41 @@ def asset_candidates(url: str) -> list[str]:
     candidates = [url]
     p = urlsplit(url)
     host = (p.hostname or "").lower()
-    ext = Path(unquote(p.path)).suffix.lower()
+    path = unquote(p.path)
+    ext = Path(path).suffix.lower()
     if host in LIVE_HOSTS and p.path.startswith(ASSET_PREFIXES):
         candidates.append(STAGING + p.path)
-    seen_keys = set()
-    for key in sorted(asset_keys(url)):
+    if host == "cdn.jsdelivr.net":
+        parts = path.strip("/").split("/")
+        if len(parts) >= 5 and parts[0] == "gh":
+            user, repo_ref = parts[1], parts[2]
+            repo, _, ref = repo_ref.partition("@")
+            ref = ref or "main"
+            raw = f"https://raw.githubusercontent.com/{user}/{repo}/{ref}/" + "/".join(parts[3:])
+            if p.query:
+                raw += "?" + p.query
+            candidates.append(raw)
+        elif len(parts) >= 2 and parts[0] == "npm":
+            unpkg = "https://unpkg.com/" + "/".join(parts[1:])
+            if p.query:
+                unpkg += "?" + p.query
+            candidates.append(unpkg)
+    basename = path.split("/")[-1].lower()
+    canonical = re.sub(r"[^a-z0-9.]+", "", re.sub(r"^[0-9a-f]{24}_", "", basename))
+    ordered_keys = [canonical] + sorted(t for t in re.findall(r"[0-9a-f]{8,}", basename) if t)
+    seen_keys: set[str] = set()
+    for key in ordered_keys:
+        if not key or key in seen_keys:
+            continue
+        seen_keys.add(key)
         for candidate in STAGING_EQUIVALENTS.get(key, []):
             if candidate in candidates:
                 continue
             if Path(unquote(urlsplit(candidate).path)).suffix.lower() != ext:
                 continue
-            seen_keys.add(key)
             candidates.append(candidate)
-            if len(candidates) >= 5:
+            if len(candidates) >= 8:
                 return candidates
-    # Same-host CDN aliases that share an exact content hash.
-    for key in sorted(asset_keys(url)):
-        if len(key) < 8 or key in seen_keys:
-            continue
-        for candidate in STAGING_EQUIVALENTS.get(key, []):
-            if candidate not in candidates and Path(unquote(urlsplit(candidate).path)).suffix.lower() == ext:
-                candidates.append(candidate)
-                if len(candidates) >= 5:
-                    return candidates
     return candidates
 
 
@@ -537,7 +560,7 @@ def download_asset(url: str) -> dict:
             if declared > MAX_ASSET_BYTES:
                 last_status = "too-large"
                 continue
-            reserve = declared or MAX_ASSET_BYTES
+            reserve = declared or 1024 * 1024
             with BUDGET_LOCK:
                 if TOTAL_ASSET_BYTES + ACTIVE_ASSET_BYTES + reserve > MAX_TOTAL_ASSET_BYTES:
                     return {"url": url, "status": "budget", "declared": declared}
@@ -1012,7 +1035,7 @@ def fetch_all_assets(initial_texts: list[tuple[str, str]]) -> tuple[list[dict], 
         if not batch:
             break
         print(f"asset pass {depth + 1}: {len(batch)} URLs")
-        with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
+        with concurrent.futures.ThreadPoolExecutor(max_workers=5) as executor:
             results = list(executor.map(download_asset, batch))
         for url, result in zip(batch, results):
             seen.add(url)
@@ -1083,20 +1106,47 @@ def write_redirects() -> None:
     (SITE / "_redirects").write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
+def html_asset_values(text: str) -> list[str]:
+    soup = BeautifulSoup(text, "html.parser")
+    values: list[str] = []
+    for tag in soup.find_all(True):
+        for attr in HTML_URL_ATTRS:
+            value = tag.get(attr)
+            if not isinstance(value, str):
+                continue
+            for item in value.split(","):
+                item = item.strip()
+                if re.search(r"\s+\d+(?:\.\d+)?[wx]\s*$", item):
+                    item = item.split()[0]
+                if item:
+                    values.append(html.unescape(item))
+    for style in soup.find_all("style"):
+        values.extend(html.unescape(value) for value in CSS_URL_RE.findall(style.get_text()))
+    return values
+
+
 def find_remaining_remote_assets() -> list[str]:
     remaining: set[str] = set()
     for path in SITE.rglob("*"):
-        if not path.is_file() or path.suffix.lower() not in TEXT_SUFFIXES:
+        if not path.is_file() or path.suffix.lower() not in {".html", ".css"}:
             continue
         try:
             text = path.read_text(encoding="utf-8")
         except UnicodeDecodeError:
             continue
-        for match in REMOTE_STATIC_RE.finditer(text):
-            url = html.unescape(match.group(0))
-            host = (urlsplit(url).hostname or "").lower()
-            if host in INTERNAL_HOSTS or host in STATIC_HOSTS:
-                remaining.add(url)
+        if path.suffix.lower() == ".html":
+            values = html_asset_values(text)
+        else:
+            values = [html.unescape(value) for value in CSS_URL_RE.findall(text)]
+        for value in values:
+            for match in REMOTE_STATIC_RE.finditer(value):
+                url = html.unescape(match.group(0)).rstrip(".,;:!?)]}")
+                url_path = urlsplit(url).path.lower()
+                if url_path.endswith(("/sitemap.xml", "/robots.txt")):
+                    continue
+                host = (urlsplit(url).hostname or "").lower()
+                if host in INTERNAL_HOSTS or host in STATIC_HOSTS:
+                    remaining.add(url)
     return sorted(remaining)
 
 
@@ -1175,6 +1225,18 @@ def main() -> None:
     for path, record in zip(probe_paths, probe_results):
         add_redirect_record(path, record)
 
+    # Some alias URLs return a bare Webflow 404 page with no Cosmos shell. Use the
+    # exact Cosmos fallback shell for those routes instead of carrying the 404 body.
+    shell_drops: list[str] = []
+    for path, page_html in list(exact_pages.items()):
+        soup = BeautifulSoup(page_html, "html.parser")
+        if not soup.select_one("nav.navbar, .navbar_component"):
+            shell_drops.append(path)
+            exact_pages.pop(path, None)
+            page_sources.pop(path, None)
+    if shell_drops:
+        print(f"using Cosmos shell fallback for {len(shell_drops)} non-shell source pages")
+
     source_counts = Counter(page_sources.values())
     print("page sources:", dict(source_counts))
     if "/" not in exact_pages:
@@ -1193,9 +1255,21 @@ def main() -> None:
     fallback_template = make_fallback_template(exact_pages["/"])
     canonical_by_path = {canonical_path(url): url for url in urls}
 
+    seed_assets = """
+<a href="/rss.xml">RSS</a>
+<link href="/assets/fonts/switzer-variable.woff2" rel="preload"/>
+<link href="/assets/fonts/intervariable-latin.woff2" rel="preload"/>
+<link href="/assets/fonts/digital-7-mono.woff2" rel="preload"/>
+<script src="/assets/js/navhide-1.0.2.js"></script>
+<script src="/assets/js/faqpolish-1.0.1.js"></script>
+<script src="/assets/js/footerhoverlite-1.0.1.js"></script>
+<script src="/assets/js/ddpolish-1.0.0.js"></script>
+<img src="/assets/img/red-dot-logo.webp"/>
+""".strip()
     pending_texts = [(exact_pages.get(path, fallback_template), LIVE + path) for path in sorted(all_paths)]
     pending_texts.extend((page_html, LIVE + path) for path, page_html in exact_pages.items())
     pending_texts.extend((text, STAGING + "/") for text in staging_texts)
+    pending_texts.append((seed_assets, LIVE + "/"))
     failures, asset_statuses = fetch_all_assets(pending_texts)
 
     pages_written = 0

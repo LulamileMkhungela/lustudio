@@ -6,6 +6,7 @@ on:
     paths:
       - .github/workflows/fetch-cosmos.yml
       - scripts/fetch_live_cosmos.py
+      - scripts/repair_cosmos_assets.py
       - scripts/validate_live_cosmos.py
       - scripts/serve.py
       - scripts/serve.sh
@@ -75,6 +76,22 @@ jobs:
           BASE_URL: http://127.0.0.1:8000
         run: node scripts/capture_preview.mjs
 
+      - name: Repair browser-discovered assets
+        run: python3 scripts/repair_cosmos_assets.py
+
+      - name: Recapture browser previews
+        env:
+          BASE_URL: http://127.0.0.1:8000
+        run: node scripts/capture_preview.mjs
+
+      - name: Repair newly discovered assets
+        run: python3 scripts/repair_cosmos_assets.py
+
+      - name: Final browser preview pass
+        env:
+          BASE_URL: http://127.0.0.1:8000
+        run: node scripts/capture_preview.mjs
+
       - name: Save build diagnostics
         if: always()
         shell: bash
@@ -82,15 +99,18 @@ jobs:
           set +e
           python3 scripts/validate_live_cosmos.py > scripts/validate-last-run.txt 2>&1
           find cosmos-copy -type f | sort > scripts/cosmos-site-file-list.txt
+          find cosmos-copy -type f -printf '%s %p\n' | sort -nr > scripts/cosmos-site-file-sizes.txt
           git config user.name "Arena source fetcher"
           git config user.email "arena-source-fetcher@users.noreply.github.com"
           git add -f scripts/validate-last-run.txt \
             scripts/cosmos-site-file-list.txt \
+            scripts/cosmos-site-file-sizes.txt \
             scripts/cosmos-canonical-urls.txt \
             scripts/cosmos-redirects.json \
             scripts/cosmos-live-build-report.json \
             scripts/cosmos-asset-map.json \
             scripts/cosmos-remaining-remote-assets.json \
+            scripts/cosmos-repair-report.json \
             scripts/cosmos-validation-report.json \
             scripts/preview-check
           if ! git diff --cached --quiet; then
@@ -119,6 +139,11 @@ jobs:
             scripts/cosmos-live-build-report.json \
             scripts/cosmos-asset-map.json \
             scripts/cosmos-remaining-remote-assets.json \
+            scripts/cosmos-repair-report.json \
+            scripts/cosmos-validation-report.json \
+            scripts/cosmos-site-file-list.txt \
+            scripts/cosmos-site-file-sizes.txt \
+            scripts/validate-last-run.txt \
             scripts/preview-check \
             sitemap.xml robots.txt README.md
           if ! git diff --cached --quiet; then

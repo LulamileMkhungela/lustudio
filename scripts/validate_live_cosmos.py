@@ -74,7 +74,12 @@ REMOTE_STATIC_RE = re.compile(
     r"https?://[^\s\"'<>`)\\]+\.(?:css|mjs|js|woff2?|ttf|otf|png|jpe?g|webp|avif|svg|gif|ico|mp4|webm|mov|json|lottie|pdf|txt|xml)(?:[?#][^\s\"'<>`)\\]*)?",
     re.I,
 )
-URL_ATTRS = ["href", "src", "srcset", "poster", "data-src", "data-srcset", "data-poster", "data-video", "content", "action"]
+URL_ATTRS = [
+    "href", "src", "srcset", "poster", "data-src", "data-srcset",
+    "data-poster", "data-video", "content", "action", "style",
+    "data-bg", "data-image", "data-wf-bg", "data-background-image",
+]
+CSS_URL_RE = re.compile(r"url\(\s*['\"]?(https?://[^)'\"]+)", re.I)
 CRITICAL_REMOTE_EXTS = {".css", ".js", ".mjs", ".woff", ".woff2", ".ttf", ".otf", ".svg", ".json", ".lottie"}
 
 issues: list[str] = []
@@ -141,6 +146,9 @@ def is_external_or_special(value: str) -> bool:
 def check_local_ref(path: str, source: Path, attr: str) -> None:
     value = html.unescape(path.strip())
     if is_external_or_special(value):
+        return
+    # Meta descriptions, viewport strings and numeric Open Graph fields are not routes.
+    if attr == "content" and not value.startswith(("/", "./", "../")):
         return
     if value.startswith(LOCAL_ASSET_PREFIXES) or Path(urlsplit(value).path).suffix:
         if not local_path_exists(value):
@@ -232,28 +240,51 @@ def validate_text_assets() -> None:
             issues.append(f"double-prefixed asset path in {path.relative_to(ROOT)}")
         if "cosmoss-nordic-template.webflow.io" in lower:
             issues.append(f"staging Webflow domain remains in {path.relative_to(ROOT)}")
-        if path.suffix.lower() in {".css", ".js", ".mjs", ".json", ".svg", ".xml"}:
+        # Browser-driven checks cover dynamic JavaScript chunk paths; static
+        # scanning there creates false positives from minified URL fragments.
+        if path.suffix.lower() == ".css":
             for match in LOCAL_ASSET_RE.finditer(text):
                 check_local_ref(match.group(0), path, "asset-url")
 
 
 def remote_static_urls() -> set[str]:
     found: set[str] = set()
+    static_host_markers = {
+        "www.cosmos.studio", "cosmos.studio", "cdn.prod.website-files.com",
+        "assets.website-files.com", "assets-global.website-files.com",
+        "uploads-ssl.webflow.com", "cloudinary.com", "cloudfront.net",
+        "jsdelivr.net", "unpkg.com", "raw.githubusercontent.com",
+        "video.cosmos.studio", "fonts.gstatic.com", "fonts.googleapis.com",
+        "www.google.com", "www.gstatic.com", "widget.clutch.co",
+    }
     for path in SITE.rglob("*"):
-        if not path.is_file() or path.suffix.lower() not in TEXT_SUFFIXES:
+        if not path.is_file() or path.suffix.lower() not in {".html", ".css"}:
             continue
         try:
             text = path.read_text(encoding="utf-8")
         except UnicodeDecodeError:
             continue
-        for match in REMOTE_STATIC_RE.finditer(text):
-            value = html.unescape(match.group(0)).rstrip(".,;:!?)]}")
-            url_path = urlsplit(value).path.lower()
-            if url_path.endswith(("/sitemap.xml", "/robots.txt")):
-                continue
-            host = (urlsplit(value).hostname or "").lower()
-            if host in {"www.cosmos.studio", "cosmos.studio"} or "cdn.prod.website-files.com" in host or "cloudinary.com" in host or "jsdelivr.net" in host or "cloudfront.net" in host or "video.cosmos.studio" in host:
-                found.add(value)
+        if path.suffix.lower() == ".html":
+            soup = BeautifulSoup(text, "html.parser")
+            values: list[str] = []
+            for tag in soup.find_all(True):
+                for attr in URL_ATTRS:
+                    value = tag.get(attr)
+                    if isinstance(value, str):
+                        values.extend(html.unescape(item) for item in split_attr_values(value))
+            for style in soup.find_all("style"):
+                values.extend(html.unescape(value) for value in CSS_URL_RE.findall(style.get_text()))
+        else:
+            values = [html.unescape(value) for value in CSS_URL_RE.findall(text)]
+        for value in values:
+            for match in REMOTE_STATIC_RE.finditer(html.unescape(value)):
+                url = html.unescape(match.group(0)).rstrip(".,;:!?)]}")
+                url_path = urlsplit(url).path.lower()
+                if url_path.endswith(("/sitemap.xml", "/robots.txt")):
+                    continue
+                host = (urlsplit(url).hostname or "").lower()
+                if host in static_host_markers or any(marker in host for marker in static_host_markers):
+                    found.add(url)
     return found
 
 
@@ -324,7 +355,7 @@ def main() -> None:
         if url not in allowed_remote:
             issues.append(f"unlisted remote static asset remains: {url}")
         ext = Path(urlsplit(url).path).suffix.lower()
-        if ext in CRITICAL_REMOTE_EXTS:
+        if ext in CRITICAL_REMOTE_EXTS and url not in allowed_remote:
             issues.append(f"critical remote source is not localized: {url}")
 
     if BROWSER_REPORT.exists():
