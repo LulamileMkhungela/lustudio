@@ -23,10 +23,19 @@ import time
 from collections import Counter, defaultdict
 from copy import deepcopy
 from pathlib import Path
-from urllib.parse import quote, unquote, urljoin, urlsplit, urlunsplit
+from urllib.parse import quote, unquote, urljoin, urlsplit as _raw_urlsplit, urlunsplit
 
 import requests
 from bs4 import BeautifulSoup
+
+
+def urlsplit(value: str):
+    """Tolerant urllib.urlsplit for exact minified JS/CSS URL fragments."""
+    try:
+        return _raw_urlsplit(value)
+    except ValueError:
+        return _raw_urlsplit("")
+
 
 ROOT = Path(__file__).resolve().parents[1]
 SITE = ROOT / "cosmos-copy"
@@ -394,6 +403,8 @@ def normalize_asset_url(token: str, base_url: str | None) -> tuple[str, str] | N
         raw = "https://" + raw[7:]
     base = base_url or LIVE + "/"
     bp = urlsplit(base)
+    if not bp.netloc and not base.startswith("/"):
+        return None
     if raw.startswith("https://"):
         absolute = raw
     elif raw.startswith("/"):
@@ -403,11 +414,18 @@ def normalize_asset_url(token: str, base_url: str | None) -> tuple[str, str] | N
         else:
             root = f"{bp.scheme or 'https'}://{bp.netloc}"
         absolute = root + raw
-    elif Path(unquote(urlsplit(raw).path)).name in SPECIAL_ROOT_FILES:
-        absolute = LIVE + "/" + raw
     else:
-        absolute = urljoin(base, raw)
+        raw_parts = urlsplit(raw)
+        if Path(unquote(raw_parts.path)).name in SPECIAL_ROOT_FILES:
+            absolute = LIVE + "/" + raw
+        else:
+            try:
+                absolute = urljoin(base, raw)
+            except ValueError:
+                return None
     p = urlsplit(absolute)
+    if not p.netloc and not p.path:
+        return None
     host = (p.hostname or "").lower()
     if host in EXTERNAL_LINK_HOSTS and host not in STATIC_HOSTS:
         return None
