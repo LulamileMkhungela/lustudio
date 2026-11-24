@@ -1,0 +1,1 @@
+import{a}from"/assets/external/d6f8a5158a1f669b1a7e.js";var f=a((v,c)=>{c.exports=p;function p(n,o,i,l){var e,r,t;return function(){if(t=this,r=Array.prototype.slice.call(arguments),e&&(i||l))return;if(!i)return u(),e=setTimeout(s,o),e;e=setTimeout(u,o),n.apply(t,r);function s(){u(),n.apply(t,r)}function u(){clearTimeout(e),e=null}}}});export{f as a};

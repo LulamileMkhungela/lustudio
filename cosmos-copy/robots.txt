@@ -1,0 +1,34 @@
+# AI search and assistant crawlers are welcome. Site summary for LLMs: https://www.cosmos.studio/llms.txt
+User-agent: *
+Allow: /
+
+Disallow: /401
+Disallow: /403
+Disallow: /404
+Disallow: /500
+
+User-agent: GPTBot
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: ClaudeBot
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+User-agent: Google-Extended
+User-agent: Applebot-Extended
+User-agent: xAI-SearchBot
+User-agent: xAI-Grok
+User-agent: GrokBot
+User-agent: Grok-DeepSearch
+User-agent: MistralAI-User
+User-agent: DuckAssistBot
+User-agent: Meta-ExternalAgent
+User-agent: Amazonbot
+Allow: /
+Disallow: /401
+Disallow: /403
+Disallow: /404
+Disallow: /500
+
+Sitemap: https://www.cosmos.studio/sitemap.xml

@@ -331,7 +331,7 @@ function start(){ill();unify();
     const wrap=document.createElement('div');wrap.className='padding-global';wrap.setAttribute('data-hfx-media','');wrap.appendChild(media);
     /* moved video: iOS pauses a moved <video>, so start it again; the poster must be a frame of this video, not another project's image (Illia, 9 Nov) */
     media.querySelectorAll('video').forEach(v=>{v.muted=true;v.defaultMuted=true;v.playsInline=true;v.setAttribute('playsinline','');
-      if(/defense-hero|r2\.dev/.test(v.currentSrc||v.src||'')||v.closest('.work_image-wrap')?.querySelector('.cc-vid-credit')){v.poster='/_m/cdn.jsdelivr.net/gh/cosmos-studio/cosmos-digest-media@4c819c6de08a49af04751f39bf0990720ad2c505/site/img/defense-hero-poster.webp';v.setAttribute('aria-label','SerenX project video')}
+      if(/defense-hero|r2\.dev/.test(v.currentSrc||v.src||'')||v.closest('.work_image-wrap')?.querySelector('.cc-vid-credit')){v.poster='/_m/cdn.jsdelivr.net/gh/cosmos-studio/cosmos-digest-media%404c819c6de08a49af04751f39bf0990720ad2c505/site/img/defense-hero-poster.webp';v.setAttribute('aria-label','SerenX project video')}
       const go=()=>{const p=v.play();if(p&&p.catch)p.catch(()=>{})};go();
       if('IntersectionObserver' in window)new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting&&v.paused)go()}),{threshold:.2}).observe(v);
       addEventListener('touchstart',go,{once:true,passive:true});});

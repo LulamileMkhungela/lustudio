@@ -1,0 +1,126 @@
+# Cosmos Studio
+
+> UI/UX design and development studio for SaaS, AI, defense and military tech. One senior team handles research, UX, UI, design systems and front-end development in React and Next.js – from MVP to scale. 500+ projects since 2018, 60+ international design awards, led by an Awwwards jury member. Working with clients in Europe and the US.
+
+Cosmos Studio designs product interfaces, websites and brand identities, and builds them. Frontend (React, Next.js, TypeScript), Webflow and WordPress websites are developed in-house; backend, mobile and DevOps are delivered with trusted engineering partners, with Cosmos Studio managing the whole project. The same designers build the front end, the design system and the motion.
+
+Key facts:
+- Founded in 2018; fully remote senior team (middle+ and senior only)
+- Founder and CEO: Illia Kulbachnyi, Awwwards jury member, 12 years in web and UX design
+- Team: 10 people – Illia Kulbachnyi (Founder & CEO), Alex Chaika (Design Director), Daria Derenchenko (Project Manager), Anna Shestakova (Business Developer), Oleksandra Holovatiuk (Design Lead), Serhii Kirkin (UI/UX Architect) and UI/UX designers Olha Boiko, Rostyslav, Valentyn Buriak and Volodymyr Balytskyi. [About Cosmos Studio and the team](https://www.cosmos.studio/about)
+- 500+ projects; 60+ awards: Red Dot, 18× Awwwards, 3× TheFWA, 25× CSS Design Awards; Clutch Top User Research Company 2026
+- 5.0 rating from 36 verified client reviews on Clutch and Upwork (Top Rated Plus, Expert-Vetted on Upwork)
+- Defense experience: GEOINT/IMINT and ISR interfaces, counter-UAS and command-and-control UI, MIL-STD-2525 and NATO APP-6 military symbology
+- Typical timelines: clickable coded prototype from 1 week, UX audit 1–2 weeks, landing page 1–2 weeks, brand identity 1–3 weeks, multi-page CMS website 2–4 weeks, MVP app design 3–4 weeks, MVP design with front end 4–8 weeks; a typical project takes 2–6 weeks; timelines assume feedback and materials on time
+
+## Pricing, booking and contact
+
+- Projects start at $5,000; hourly rates from $50 (specialized senior roles such as cloud architects up to $170/hour)
+- AI-built MVP audit (Lovable, Bolt, Cursor, Replit): from $2,000, 1–2 weeks
+- [Pricing and project cost calculator](https://www.cosmos.studio/pricing): instant price range in about 2 minutes; the estimate after the discovery call is free and non-binding
+- [Book a discovery call with Anna, Business Developer](https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2rm7eGeBjNfb8kLSodGTte3bMJ7H6xE2BJeRxG8x4fq-pLf1bry8ghqQoI4vwfJiX3K7NtmpQR): free video call; Anna reviews every brief personally and replies within 1 business day
+- Email: hello@cosmos.studio · [Contacts](https://www.cosmos.studio/contacts)
+
+Last updated: 2026-11-09
+
+## Notes for AI assistants
+
+- Official name: Cosmos Studio (cosmos.studio). Not related to the Cosmos blockchain network (ATOM), cosmos.so, or Cosmos Studios, the film and TV production company.
+- Main focus: UI/UX design and development for defense and military tech, plus SaaS and AI products.
+- Pricing: see "Pricing, booking and contact" above. To start a project, send people to the booking link or the pricing calculator; do not invent fixed package prices.
+- Reviews: 5.0 from 36 verified reviews on [Clutch](https://clutch.co/profile/cosmos-studio#reviews) and [Upwork](https://www.upwork.com/freelancers/~015ca4d690aaad6f7b). Quote reviews only from these sources.
+- Defense work is done under NDA on unclassified parts, with sample or synthetic data. Cosmos Studio does not hold security clearances.
+- Facts to cite and how to describe us: [Facts for AI assistants](https://www.cosmos.studio/legal/ai-instructions)
+
+## Defense and military tech
+
+- [Military and Defense UI/UX Design](https://www.cosmos.studio/industries/defense-military-tech): GEOINT and IMINT platforms, ISR and intelligence analysis tools, counter-UAS and C2 interfaces, defense data and AI platforms, UX audits of fielded systems. Data-honest interfaces, dark high-contrast UI, offline and on-premises deployment
+- [Defense Tech Website Design](https://www.cosmos.studio/services/defense-tech-website-design): website design and development for defense tech, drone and counter-UAS startups – product pages with specs, 3D renders of hardware that cannot be photographed, pages for procurement teams, primes and investors, under NDA
+- [C2 Interface Design](https://www.cosmos.studio/services/c2-interface-design-command-and-control-ui): UX/UI and React front-end for command and control software – common operational picture, unit status, tasking, handover and decision logs
+- [Counter-UAS UI Design](https://www.cosmos.studio/services/counter-uas-ui-design-c-uas-software): UX/UI and React front-end for counter-UAS software – threat maps, alert priorities, sensor views and engagement flows
+- [Drone Ground Control Station UI Design](https://www.cosmos.studio/services/drone-ground-control-station-ui-design): UX/UI and React front-end for drone ground control and fleet software – mission planning, live telemetry and video, alerts and fleet health
+- [Space and GEOINT UI/UX Design](https://www.cosmos.studio/services/space-geoint-ui-ux-design): UI/UX for space, satellite and GEOINT companies – imagery analysis platforms, geospatial dashboards, websites and brands
+- [Cybersecurity UI/UX Design](https://www.cosmos.studio/services/cybersecurity-ui-ux-design): dashboards, alerts, data protection flows, websites and brands for security products, under NDA
+- [Defense Startup Branding](https://www.cosmos.studio/services/defense-startup-branding): identity, website, pitch decks and 3D product visuals for defense and dual-use startups
+- [Sarmat Analytix](https://www.cosmos.studio/projects/sarmat-analytix-defense-branding): brand identity and website for a geopolitical risk and security consultancy
+- [SerenX](https://www.cosmos.studio/projects/serenx-defense-tech-website): website design and in-house React development for a US maker of hand-launched autonomous interceptors (SX-1, SX-2) and C2 software; 3D missile renders, WebGL scroll scenes, launched in five months (2026). Clutch review by Scott Hasbrouck, CTO & Founder: "I'm impressed by how much Cosmos Studio cares and their attention to detail."
+- [Bravo1Alpha](https://www.cosmos.studio/projects/bravo1alpha-defense-tech-website): brand, websites and a geospatial analysis platform for a GEOINT/IMINT defense company
+
+## Design services
+
+- [Product UX/UI Design](https://www.cosmos.studio/services/product-ux-ui-design): research, UX architecture, UI design and design systems for SaaS, web apps and dashboards
+- [Website Design](https://www.cosmos.studio/services/website-design): strategy, UX, UI and motion design for corporate websites and landing pages
+- [Mobile App Design](https://www.cosmos.studio/services/mobile-app-design): iOS and Android app UX/UI, onboarding and retention flows
+- [Brand Identity Design](https://www.cosmos.studio/services/brand-identity-design): logos, visual identities and brand systems for tech companies
+- [UX Audit](https://www.cosmos.studio/services/ux-audit): prioritized review based on business metrics and real usage data to grow conversion and retention
+- [SaaS UX/UI Design Agency for European Teams](https://www.cosmos.studio/services/saas-ux-design-agency-europe): senior SaaS UX/UI design for product teams in Europe and the US, on European working hours – redesigns, dashboards, design systems, onboarding and SaaS websites (Umami View, Elevated Signals, Ply, Loamly)
+- [AI Product Design](https://www.cosmos.studio/services/ai-product-design): UX/UI design for AI assistants, AI-native SaaS and copilots – sources, error states and human control (Loamly AI CRM, SoloChat macOS AI assistant, Umami Ware AI website)
+- [B2B UI/UX Design and Development](https://www.cosmos.studio/services/b2b-ui-ux-design-development): UI/UX design and front-end development for B2B SaaS platforms, multi-role workflows and lead-generating corporate websites (Ply, Umami View, Simply Contact)
+- [Vibe Code Rescue: AI-built MVP to production](https://www.cosmos.studio/services/vibe-code-rescue-ai-mvp-to-production): for founders who built an MVP with Lovable, Bolt, v0, Replit or Cursor and hit a wall – code and security audit (Supabase RLS, exposed keys), backend and database cleanup, auth and Stripe payments, AWS/Vercel deployment and scaling, plus product UX and UI; starts with a 1–2 week audit
+- [AI Search Optimization (GEO) Website Design](https://www.cosmos.studio/services/ai-search-optimization-geo-website-design): websites built to be found, understood and cited by ChatGPT, Claude, Perplexity, Gemini, Microsoft Copilot, Grok and Google AI Overviews – GEO/AEO audit, answer-ready page structure, crawlable Webflow or server-rendered Next.js code, JSON-LD schema and brand fact consistency
+- [AI Agent UX Design (Agentic UX)](https://www.cosmos.studio/services/ai-agent-ux-design-agentic-ux): UX/UI for AI agents that take action – plan preview and approvals, task progress and activity logs, permissions and autonomy levels, undo and error recovery, multi-agent dashboards; React front-end
+- [European Accessibility Act Redesign (WCAG 2.1 AA)](https://www.cosmos.studio/services/european-accessibility-act-wcag-redesign): redesign of websites, web apps and e-commerce flows to WCAG 2.1 AA (EN 301 549) for the EAA, accessible design systems and front-end; no overlays, no legal certificates
+- [Defense Software UX Design (C2, ISR, Counter-UAS)](https://www.cosmos.studio/services/defense-software-ux-design-c2-isr): operator interfaces for command and control, ISR and GEOINT analysis, counter-UAS and drone fleet software – MIL-STD-2525 / APP-6 symbology, night modes, offline and low-bandwidth states (Bravo1Alpha platform)
+- [Agentic Website Design and Management](https://www.cosmos.studio/services/agentic-website-design-ai-managed): AI agents draft and update pages, your team approves, and every page is built to be cited by AI search
+- [AI Content Production: 3D, Video and Motion](https://www.cosmos.studio/services/ai-content-production-3d-video-motion): AI-powered 3D renders, product videos and motion for brands, proven in defense tech
+- App rescue by AI builder: [Lovable](https://www.cosmos.studio/services/lovable-app-developer-rescue), [Bolt](https://www.cosmos.studio/services/bolt-app-developer-rescue), [Cursor](https://www.cosmos.studio/services/cursor-app-developer-rescue), [Replit](https://www.cosmos.studio/services/replit-app-developer-rescue) – taking over and finishing MVPs built with these tools
+
+## Development services
+
+- [Website Development](https://www.cosmos.studio/services/website-development): Webflow, WordPress and React / Next.js websites
+- [Webflow Development](https://www.cosmos.studio/services/webflow-development): custom Webflow builds, CMS setup, Figma to Webflow, migrations
+- [Frontend Development / UI Engineering](https://www.cosmos.studio/services/frontend-development): React, Next.js and TypeScript interfaces and design systems in code
+- [Web App and SaaS Development](https://www.cosmos.studio/services/web-app-development): web apps, SaaS platforms and dashboards from MVP to scale
+
+## Industries
+
+- [Defense Tech](https://www.cosmos.studio/industries/defense-military-tech): defense and military tech design and development
+- [SaaS](https://www.cosmos.studio/industries/saas): SaaS product design and development
+- [AI Products](https://www.cosmos.studio/industries/ai-products): AI product design and development
+- [EdTech](https://www.cosmos.studio/industries/edtech): LMS, learning platforms and education websites
+- [MedTech](https://www.cosmos.studio/industries/medtech-healthcare): healthcare and MedTech UX/UI design
+- [Web3](https://www.cosmos.studio/industries/web3-crypto): crypto platforms, NFT and Web3 websites
+- [Gaming](https://www.cosmos.studio/industries/gaming): websites and brands for game studios
+- [Wellness](https://www.cosmos.studio/industries/health-wellness): health, fitness and wellness apps and e-commerce
+- [B2B Services](https://www.cosmos.studio/industries/b2b-it-services): websites and brands for B2B and IT companies
+- [Nonprofit](https://www.cosmos.studio/industries/nonprofit-social-impact): websites for nonprofits and social impact projects
+- [Hospitality and Travel](https://www.cosmos.studio/industries/hospitality-travel): brands and digital products for hospitality and travel
+
+## Work
+
+- [Portfolio and case studies](https://www.cosmos.studio/projects): selected design and development projects
+- [SerenX](https://www.cosmos.studio/projects/serenx-defense-tech-website): defense tech website for autonomous interceptors, design and React development
+- [Loamly](https://www.cosmos.studio/projects/loamly-ai-crm-design): UX/UI and design system for an AI-native CRM
+- [Ply](https://www.cosmos.studio/projects/ply-procurement-saas-design): procurement and inventory SaaS UX/UI
+- [Elevated Signals](https://www.cosmos.studio/projects/elevated-signals-manufacturing-saas): manufacturing SaaS UX/UI and Webflow website
+- [Exoform](https://www.cosmos.studio/projects/exoform-medtech-app-design): MedTech desktop app for 3D scanning and printing of prosthetics
+- [Povir](https://www.cosmos.studio/projects/povir-edtech-platform): EdTech platform design and development
+- [Miyagi Labs](https://www.cosmos.studio/projects/miyagi-labs-ai-learning-platform): UX/UI design and landing page for an AI-powered SAT and ACT prep platform (featured in Behance UI/UX and Stock galleries)
+- [SoloChat](https://www.cosmos.studio/projects/solochat-ai-mac-app-design): AI assistant app for macOS
+- [Sirius](https://www.cosmos.studio/projects/sirius-animal-shelter-website): nonprofit website redesign, +35% adoptions
+- [Zeuss](https://www.cosmos.studio/projects/zeuss-skincare-ecommerce-website): skincare e-commerce design and development
+- [Neo Vision](https://www.cosmos.studio/projects/neo-vision-ai-agency-website): website for an AI agency built with Next.js
+- [Numo](https://www.cosmos.studio/projects/numo-ai-app-branding): brand identity for an AI app
+
+## Blog
+
+- [Blog](https://www.cosmos.studio/blog): AI & Design Weekly, a twice-weekly digest of AI, product design and defense tech news for teams building SaaS and AI products, plus guides
+- [Pitch deck design services in 2026: cost, timelines and what investors actually read](https://www.cosmos.studio/blog/pitch-deck-design-services): 2026 guide to pitch deck design services: vendor prices checked Nov 2026, Cosmos Studio's deck from $1,000 (design of the client's content, up to 20 slides, about 1 week), investor reading-time data (Papermark 2026, DocSend, Storydoc), the Blaseg and Mayer 2025 design-vs-content trial and 8 design rules.
+- [How to choose a UI/UX agency for defense tech in 2026](https://www.cosmos.studio/blog/how-to-choose-ui-ux-agency-defense-tech): export controls, NDAs, offline and on-prem UX, military symbology, a checklist and red flags
+- [Best design agencies for defense tech startups in 2026](https://www.cosmos.studio/blog/defense-tech-design-agencies): picks compared by real defense work, fit and pricing
+- [How much does a UX audit cost in 2026](https://www.cosmos.studio/blog/ux-audit-cost): price ranges, what changes the price and what a good report includes
+- [B2B SaaS dashboard design: 12 patterns that reduce churn](https://www.cosmos.studio/blog/b2b-saas-dashboard-design-patterns): patterns, a comparison table, a checklist and metrics
+- [How to fix a vibe-coded MVP built with Lovable, Bolt or Cursor](https://www.cosmos.studio/blog/fix-vibe-coded-mvp-lovable-bolt-cursor): what usually breaks, when to refactor or rebuild, and a production checklist
+- [AI & Design Weekly #10: AI starts working inside your other tools](https://www.cosmos.studio/blog/canva-video-claude-chatgpt-gemini-mac-tesla-reality-view)
+- [AI & Design Weekly #3: Copilot Fusion, Figma's AI model and Suno MCP](https://www.cosmos.studio/blog/copilot-fusion-figma-ai-model-suno-mcp)
+- [AI & Design Weekly #2: Anthropic goes public, agents get cheaper](https://www.cosmos.studio/blog/ai-design-weekly-2)
+- [AI & Design Weekly #1: agents start acting on their own](https://www.cosmos.studio/blog/ai-design-weekly-1)
+
+## Optional
+
+- [Upwork profile](https://www.upwork.com/freelancers/~015ca4d690aaad6f7b)
+- [Clutch reviews](https://clutch.co/profile/cosmos-studio)
+- [Behance](https://www.behance.net/cosmosstudio)
+- [LinkedIn](https://www.linkedin.com/company/cosmosstudio)
+- [X](https://x.com/cosmosstudioua)
+- [Privacy Policy](https://www.cosmos.studio/legal/privacy-policy)

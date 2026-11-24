@@ -1,4 +1,4 @@
-/* wf-form-bridge.v2.js – loaded right after jQuery on pages that carry a Turnstile form (ARCHITECTURE.md §5.1, §6.1).
+/* /_c/wf-form-bridge.v2.js – loaded right after jQuery on pages that carry a Turnstile form (ARCHITECTURE.md §5.1, §6.1).
    Webflow's forms module keeps doing everything (validation alerts, "Please wait…", success redirect to
    /thank-you, the .w-form-fail box). This script only
      1. sends the form POST to our own /api/form instead of webflow.com,
