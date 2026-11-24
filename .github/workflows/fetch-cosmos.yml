@@ -7,6 +7,7 @@ on:
       - .github/workflows/fetch-cosmos.yml
       - scripts/fetch_live_cosmos.py
       - scripts/repair_cosmos_assets.py
+      - scripts/browser_report_clean.py
       - scripts/validate_live_cosmos.py
       - scripts/serve.py
       - scripts/serve.sh
@@ -24,6 +25,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     timeout-minutes: 40
+    env:
+      BASE_URL: http://127.0.0.1:8000
     steps:
       - name: Check out
         uses: actions/checkout@v4
@@ -72,25 +75,25 @@ jobs:
           PY
 
       - name: Capture browser previews
-        env:
-          BASE_URL: http://127.0.0.1:8000
         run: node scripts/capture_preview.mjs
 
-      - name: Repair browser-discovered assets
-        run: python3 scripts/repair_cosmos_assets.py
-
-      - name: Recapture browser previews
-        env:
-          BASE_URL: http://127.0.0.1:8000
-        run: node scripts/capture_preview.mjs
-
-      - name: Repair newly discovered assets
-        run: python3 scripts/repair_cosmos_assets.py
-
-      - name: Final browser preview pass
-        env:
-          BASE_URL: http://127.0.0.1:8000
-        run: node scripts/capture_preview.mjs
+      - name: Iteratively repair dynamic browser-discovered assets
+        shell: bash
+        run: |
+          set -e
+          for i in $(seq 1 8); do
+            echo "dynamic asset repair cycle $i"
+            python3 scripts/repair_cosmos_assets.py
+            node scripts/capture_preview.mjs
+            if python3 scripts/browser_report_clean.py; then
+              break
+            fi
+            if [ "$i" -eq 8 ]; then
+              echo "browser preview still has missing local assets after $i cycles"
+              exit 1
+            fi
+          done
+          python3 scripts/browser_report_clean.py
 
       - name: Save build diagnostics
         if: always()
@@ -98,8 +101,14 @@ jobs:
         run: |
           set +e
           python3 scripts/validate_live_cosmos.py > scripts/validate-last-run.txt 2>&1
-          find cosmos-copy -type f | sort > scripts/cosmos-site-file-list.txt
-          find cosmos-copy -type f -printf '%s %p\n' | sort -nr > scripts/cosmos-site-file-sizes.txt
+          if [ -d cosmos-copy ]; then
+            find cosmos-copy -type f | sort > scripts/cosmos-site-file-list.txt
+            find cosmos-copy -type f -printf '%s %p\n' | sort -nr > scripts/cosmos-site-file-sizes.txt
+          fi
+          touch scripts/cosmos-canonical-urls.txt scripts/cosmos-redirects.json \
+            scripts/cosmos-live-build-report.json scripts/cosmos-asset-map.json \
+            scripts/cosmos-remaining-remote-assets.json scripts/cosmos-repair-report.json \
+            scripts/cosmos-validation-report.json
           git config user.name "Arena source fetcher"
           git config user.email "arena-source-fetcher@users.noreply.github.com"
           git add -f scripts/validate-last-run.txt \
@@ -128,9 +137,14 @@ jobs:
           cat /tmp/cosmos-server.log || true
 
       - name: Save clone to this branch
+        if: always()
         shell: bash
         run: |
           set -e
+          if [ ! -d cosmos-copy ]; then
+            echo "cosmos-copy was not generated; nothing to save"
+            exit 0
+          fi
           git config user.name "Arena source fetcher"
           git config user.email "arena-source-fetcher@users.noreply.github.com"
           git add -f cosmos-copy \

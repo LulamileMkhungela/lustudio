@@ -79,7 +79,10 @@ class CosmosHandler(SimpleHTTPRequestHandler):
             return True
 
         new_path = parsed.path
-        if new_path == "/":
+        rel_path = unquote(new_path).lstrip("/")
+        if rel_path.endswith("rss.xml") and rel_path not in {"rss.xml", "blog/rss.xml"} and not (SITE / rel_path).exists() and (SITE / "rss.xml").exists():
+            new_path = "/rss.xml"
+        elif new_path == "/":
             new_path = "/index.html"
         elif not Path(urlsplit(new_path).path).suffix:
             rel = unquote(new_path).lstrip("/")

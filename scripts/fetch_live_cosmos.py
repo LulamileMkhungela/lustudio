@@ -505,7 +505,22 @@ def asset_candidates(url: str) -> list[str]:
     ext = Path(path).suffix.lower()
     if host in LIVE_HOSTS and p.path.startswith(ASSET_PREFIXES):
         candidates.append(STAGING + p.path)
+    if host in LIVE_HOSTS and p.path.startswith("/_m/"):
+        mirrored = p.path[4:].split("/", 1)
+        if len(mirrored) == 2 and "." in mirrored[0]:
+            mirror_host, mirror_path = mirrored[0], mirrored[1].lstrip("/")
+            for decoded in (mirror_path, unquote(mirror_path)):
+                candidate = f"https://{mirror_host}/{decoded}"
+                if p.query:
+                    candidate += "?" + p.query
+                if candidate not in candidates:
+                    candidates.append(candidate)
     if host == "cdn.jsdelivr.net":
+        decoded_path = unquote(path)
+        if decoded_path != path:
+            decoded = urlunsplit((p.scheme or "https", p.netloc, quote(decoded_path, safe="/~()*!.'_%-@+,"), p.query, ""))
+            if decoded not in candidates:
+                candidates.append(decoded)
         parts = path.strip("/").split("/")
         if len(parts) >= 5 and parts[0] == "gh":
             user, repo_ref = parts[1], parts[2]
@@ -598,6 +613,13 @@ def download_asset(url: str) -> dict:
                         duplicate = True
                     else:
                         CONTENT_TO_PATH[digest] = local
+            # Account for the downloaded bytes immediately. Otherwise a whole
+            # pass of parallel workers is budgeted against the previous pass's
+            # total and the generated clone can grow far past the repository cap.
+            with BUDGET_LOCK:
+                TOTAL_ASSET_BYTES += size
+                ACTIVE_ASSET_BYTES -= reserved
+                reserved = 0
             return {
                 "url": url,
                 "status": "ok",
@@ -1046,8 +1068,6 @@ def fetch_all_assets(initial_texts: list[tuple[str, str]]) -> tuple[list[dict], 
             local = result["local"]
             ASSET_MAP[url] = local
             ASSET_RECORDS.append(result)
-            with BUDGET_LOCK:
-                TOTAL_ASSET_BYTES += result["size"]
             if result.get("write"):
                 target = file_for_public_path(local)
                 target.parent.mkdir(parents=True, exist_ok=True)
@@ -1307,6 +1327,15 @@ def main() -> None:
         (SITE / "404.html").write_text((SITE / "404/index.html").read_text(encoding="utf-8"), encoding="utf-8")
     elif (SITE / "index.html").exists() and not (SITE / "404.html").exists():
         (SITE / "404.html").write_text((SITE / "index.html").read_text(encoding="utf-8"), encoding="utf-8")
+
+    # Exact blog pages use a relative `rss.xml` link. Keep the literal link
+    # unchanged, but also expose the captured feed at the site root so the
+    # static server and validator can resolve that special file.
+    blog_rss = SITE / "blog" / "rss.xml"
+    root_rss = SITE / "rss.xml"
+    if blog_rss.exists() and not root_rss.exists():
+        root_rss.write_bytes(blog_rss.read_bytes())
+        ASSET_MAP[f"{LIVE}/rss.xml"] = "/rss.xml"
 
     write_sitemap(urls)
     write_robots()

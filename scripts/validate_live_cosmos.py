@@ -79,6 +79,8 @@ URL_ATTRS = [
     "data-poster", "data-video", "content", "action", "style",
     "data-bg", "data-image", "data-wf-bg", "data-background-image",
 ]
+SRCSET_ATTRS = {"srcset", "data-srcset"}
+STYLE_URL_RE = re.compile(r"url\(\s*['\"]?([^)'\"]+)", re.I)
 CSS_URL_RE = re.compile(r"url\(\s*['\"]?(https?://[^)'\"]+)", re.I)
 CRITICAL_REMOTE_EXTS = {".css", ".js", ".mjs", ".woff", ".woff2", ".ttf", ".otf", ".svg", ".json", ".lottie"}
 
@@ -157,11 +159,22 @@ def check_local_ref(path: str, source: Path, attr: str) -> None:
         issues.append(f"missing local route in {source.relative_to(ROOT)} [{attr}]: {value}")
 
 
-def split_attr_values(value: str) -> list[str]:
+def split_attr_values(value: str, attr: str = "") -> list[str]:
     value = html.unescape(value)
+    if attr in SRCSET_ATTRS and "," in value:
+        return [chunk.strip().split()[0] for chunk in value.split(",") if chunk.strip()]
     if "," in value and re.search(r"\s+\d+(\.\d+)?[wx]\b", value):
         return [chunk.strip().split()[0] for chunk in value.split(",") if chunk.strip()]
     return [value]
+
+
+def looks_like_ref(value: str) -> bool:
+    value = html.unescape(value.strip())
+    if not value:
+        return False
+    if value.startswith(("/", "./", "../", "//", "http://", "https://")):
+        return True
+    return "/" in value or bool(Path(urlsplit(value).path).suffix)
 
 
 def validate_html(path: Path) -> None:
@@ -206,7 +219,13 @@ def validate_html(path: Path) -> None:
             value = tag.get(attr)
             if not isinstance(value, str):
                 continue
-            for item in split_attr_values(value):
+            if attr == "style":
+                for item in STYLE_URL_RE.findall(value):
+                    check_local_ref(item, path, attr)
+                continue
+            for item in split_attr_values(value, attr):
+                if attr in {"content", "data-video", "data-bg", "data-image", "data-wf-bg", "data-background-image"} and not looks_like_ref(item):
+                    continue
                 check_local_ref(item, path, attr)
     lower = raw.lower()
     for marker in OWNER_MARKERS:
@@ -270,10 +289,14 @@ def remote_static_urls() -> set[str]:
             for tag in soup.find_all(True):
                 for attr in URL_ATTRS:
                     value = tag.get(attr)
-                    if isinstance(value, str):
-                        values.extend(html.unescape(item) for item in split_attr_values(value))
+                    if not isinstance(value, str):
+                        continue
+                    if attr == "style":
+                        values.extend(html.unescape(item) for item in STYLE_URL_RE.findall(value))
+                    else:
+                        values.extend(html.unescape(item) for item in split_attr_values(value, attr))
             for style in soup.find_all("style"):
-                values.extend(html.unescape(value) for value in CSS_URL_RE.findall(style.get_text()))
+                values.extend(html.unescape(value) for value in STYLE_URL_RE.findall(style.get_text()))
         else:
             values = [html.unescape(value) for value in CSS_URL_RE.findall(text)]
         for value in values:
@@ -286,6 +309,15 @@ def remote_static_urls() -> set[str]:
                 if host in static_host_markers or any(marker in host for marker in static_host_markers):
                     found.add(url)
     return found
+
+
+def browser_count(value) -> int:
+    if isinstance(value, list):
+        return len(value)
+    try:
+        return int(value or 0)
+    except (TypeError, ValueError):
+        return 0
 
 
 def main() -> None:
@@ -360,10 +392,19 @@ def main() -> None:
 
     if BROWSER_REPORT.exists():
         browser = json.loads(BROWSER_REPORT.read_text(encoding="utf-8"))
-        if browser.get("failed_local_responses"):
-            issues.append(f"browser preview had local failed responses: {browser['failed_local_responses']}")
-        if browser.get("legacy_marker_hits"):
-            issues.append(f"browser preview showed legacy personal-site content: {browser['legacy_marker_hits']}")
+        failed_count = browser_count(browser.get("failedLocalResponses", browser.get("failed_local_responses")))
+        legacy_count = browser_count(browser.get("legacyMarkerHits", browser.get("legacy_marker_hits")))
+        error_count = browser_count(browser.get("pageErrors", browser.get("page_errors")))
+        if failed_count:
+            issues.append(f"browser preview had local failed responses: {failed_count}")
+        if legacy_count:
+            issues.append(f"browser preview showed legacy personal-site content: {legacy_count}")
+        if error_count:
+            issues.append(f"browser preview had page errors: {error_count}")
+        dom_checks = browser.get("domChecks", [])
+        for check in dom_checks:
+            if check.get("bodyTextLength", 0) < 800:
+                issues.append(f"browser preview body looks blank: {check.get('page')}")
         for screenshot in ["home.png", "home-dark-scheme.png", "services.png", "projects.png", "dropdown.png"]:
             if not (ROOT / "scripts/preview-check" / screenshot).exists():
                 issues.append(f"missing browser preview screenshot: {screenshot}")

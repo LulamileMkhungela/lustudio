@@ -25,6 +25,7 @@ const pageErrors = [];
 const legacyMarkerHits = [];
 const screenshots = [];
 const dropdownChecks = [];
+const domChecks = [];
 
 const browser = await chromium.launch({ headless: true, args: ['--no-sandbox'] });
 const context = await browser.newContext({
@@ -51,6 +52,18 @@ for (const item of pages) {
   });
   await page.waitForTimeout(5000);
   const text = (await page.locator('body').innerText()).toLowerCase();
+  const domCheck = await page.evaluate(() => {
+    const navbar = document.querySelector('nav.navbar, .navbar_component');
+    const navbarStyle = navbar ? getComputedStyle(navbar) : null;
+    return {
+      bodyTextLength: (document.body.innerText || '').trim().length,
+      sectionCount: document.querySelectorAll('section').length,
+      imageCount: document.querySelectorAll('img').length,
+      navbarVisible: !!navbar && navbarStyle.display !== 'none' && navbarStyle.visibility !== 'hidden',
+      title: document.title,
+    };
+  });
+  domChecks.push({ page: item.name, ...domCheck });
   for (const token of legacyTokens) {
     if (text.includes(token)) legacyMarkerHits.push({ page: item.name, token });
   }
@@ -79,6 +92,7 @@ const report = {
   viewport: { width: 1440, height: 1000 },
   screenshots,
   dropdownChecks,
+  domChecks,
   failedLocalResponses,
   pageErrors,
   legacyMarkerHits,
