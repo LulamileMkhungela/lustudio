@@ -1,0 +1,25 @@
+canonical URLs: 112
+page discovery pass 1: fetching 121 routes
+using Cosmos shell fallback for 7 non-shell source pages
+page sources: {'live': 114}
+staging equivalent keys: 501
+asset pass 1: 1227 URLs
+asset pass 2: 285 URLs
+Traceback (most recent call last):
+  File "/home/runner/work/lustudio/lustudio/scripts/fetch_live_cosmos.py", line 1389, in <module>
+    main()
+  File "/home/runner/work/lustudio/lustudio/scripts/fetch_live_cosmos.py", line 1304, in main
+    failures, asset_statuses = fetch_all_assets(pending_texts)
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/lustudio/lustudio/scripts/fetch_live_cosmos.py", line 1087, in fetch_all_assets
+    pending.update(discover_asset_urls(result["text"], result.get("fetched_from") or url))
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/lustudio/lustudio/scripts/fetch_live_cosmos.py", line 428, in discover_asset_urls
+    resolved = normalize_asset_url(core, base_url)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/lustudio/lustudio/scripts/fetch_live_cosmos.py", line 410, in normalize_asset_url
+    p = urlsplit(absolute)
+        ^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.11.18/x64/lib/python3.11/urllib/parse.py", line 514, in urlsplit
+    raise ValueError("Invalid IPv6 URL")
+ValueError: Invalid IPv6 URL
