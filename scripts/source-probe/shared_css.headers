@@ -1,0 +1,18 @@
+HTTP/2 200 
+date: Tue, 24 Nov 2026 20:25:41 GMT
+content-type: text/css
+x-amz-request-id: ZPWHK2X56VTH93DQ
+x-amz-id-2: +ow9DEM5KWrUUXm6iU56vBOwepAjLigafQrarlcLtShfhH2phRaR2/kp9aikPAG0xcTX2+zLuWA4O4cfd2vCSoNxipNdnhI4
+etag: W/"3b41f4bb66cb594e15c8240abf52e21f"
+server: cloudflare
+last-modified: Thu, 10 Sep 2026 00:36:03 GMT
+x-amz-version-id: uK3o0K4Xo02XSTrEoY0C5BZ9MD3y7nVK
+cache-control: public, max-age=31536000, immutable
+x-amz-server-side-encryption: AES256
+age: 1326396
+access-control-allow-origin: *
+cf-cache-status: HIT
+content-encoding: br
+cf-ray: a5fb24f46f74c96c-IAD
+alt-svc: h3=":443"; ma=86400
+

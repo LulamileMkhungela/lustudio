@@ -1,0 +1,19 @@
+HTTP/2 200 
+date: Tue, 24 Nov 2026 20:25:41 GMT
+content-type: text/html; charset=utf-8
+set-cookie: _cfuvid=HcuZKN4abJ07lhw6OYSsIp5arSF1.KUMsv3INXv5KTw-1795551941.630757-1.0.1.1-XdJC7lASazOMtgO1h1.LeAw7itlWc6q3PPH9GyNRD90; HttpOnly; SameSite=None; Secure; Path=/; Domain=webflow.io
+cf-ray: a5fb24f32858416e-IAD
+cf-cache-status: HIT
+age: 77
+content-encoding: gzip
+last-modified: Tue, 24 Nov 2026 20:24:23 GMT
+link: <https://cdn.prod.website-files.com>; rel=preconnect; crossorigin, <https://cdn.prod.website-files.com/69f9c76884333229e651e7bc/css/cosmoss-nordic-template.webflow.shared.6d70d358d.min.css>; rel=preload; as=style; crossorigin; integrity="sha384-bXDTWNmmRixe7WCih1kan1ZAtH2cc7Pu2WOs43ro9/9M/qOUkBrPYqp7oJsQu+VC", <https://cdn.prod.website-files.com/69f9c76884333229e651e7bc/css/cosmoss-nordic-template.webflow.69f9c76e84333229e651e8e2.d887f04ca.opt.min.css>; rel=preload; as=style; crossorigin; integrity="sha384-2IfwTKs2k1LzIKFO20YDN1kjIVv5bbYBMVEA9kLalxDexd+QU0htSsWBHbLOqfdP"
+server: cloudflare
+vary: accept-encoding
+content-security-policy: frame-ancestors 'self' https://*.webflow.com http://*.webflow.com http://*.webflow.io http://webflow.com https://webflow.com
+surrogate-control: max-age=432000
+surrogate-key: cosmoss-nordic-template.webflow.io 69f9c76884333229e651e7bc pageId:69f9c76e84333229e651e8e2 69f9c76f84333229e651e913 6a4247470ba1ee06e9ff6db9 69f9c76f84333229e651e972 69f9c76f84333229e651e92d 69f9c76f84333229e651e950 sp:3684b9effa4236a78bb239f6910283d4
+x-lambda-id: 87668ac9-83e8-4b76-b7cf-ac8ead021d80
+x-wf-region: us-east-1
+alt-svc: h3=":443"; ma=86400
+

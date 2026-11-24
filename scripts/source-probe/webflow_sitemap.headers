@@ -1,0 +1,16 @@
+HTTP/2 200 
+date: Tue, 24 Nov 2026 20:25:41 GMT
+content-type: application/rss+xml; charset=utf-8
+set-cookie: _cfuvid=lDN6qni11b0eqGkiAWiigVKglK2SbV7M7qqtwgzBJ1s-1795551941.6960254-1.0.1.1-6byovGBMibKtgIpV13QJtBToQAx_oaJaNf49mIifLWI; HttpOnly; SameSite=None; Secure; Path=/; Domain=webflow.io
+cf-ray: a5fb24f39e3f45a9-IAD
+cf-cache-status: HIT
+age: 2504
+last-modified: Tue, 24 Nov 2026 19:43:56 GMT
+server: cloudflare
+content-security-policy: frame-ancestors 'self' https://*.webflow.com http://*.webflow.com http://*.webflow.io http://webflow.com https://webflow.com
+surrogate-control: max-age=43200
+surrogate-key: cosmoss-nordic-template.webflow.io 69f9c76884333229e651e7bc sitemap:69f9c76884333229e651e7bc sp:21fe04fe08009745fdaf84cc9d6ad2ab
+x-wf-region: us-east-1
+content-encoding: br
+alt-svc: h3=":443"; ma=86400
+
