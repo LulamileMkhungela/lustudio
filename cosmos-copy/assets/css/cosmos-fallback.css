@@ -1,0 +1,10 @@
+/* Exact Cosmos shell fallback content for routes without a downloaded body. */
+.cosmos-fallback{padding-top:10rem;padding-bottom:6rem;background:var(--_colors---primary--paper,whitesmoke);color:var(--_colors---primary--black,#0f1011)}
+.cosmos-fallback_inner{max-width:62rem;margin:0 auto;font-family:Switzer,Inter,Arial,sans-serif}
+.cosmos-fallback_label{font-family:Inter,Switzer,Arial,sans-serif;font-size:.72rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#707070}
+.cosmos-fallback h1{margin:1rem 0 1.25rem;font:600 clamp(3rem,7vw,7rem)/.98 Switzer,Inter,Arial,sans-serif;letter-spacing:-.055em;color:#0f1011}
+.cosmos-fallback p{margin:0 0 1.1rem;font:400 clamp(1rem,1.5vw,1.25rem)/1.6 Inter,Switzer,Arial,sans-serif;color:#666}
+.cosmos-fallback_actions{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:2rem}
+.cosmos-fallback_actions a{display:inline-flex;align-items:center;min-height:2.9rem;padding:0 1.1rem;border:1px solid rgba(15,16,17,.16);border-radius:999px;background:#fff;color:#0f1011;font:500 .88rem Inter,Switzer,Arial,sans-serif;text-decoration:none}
+.cosmos-fallback_actions a.is-solid{background:#0f1011;color:#fff;border-color:#0f1011}
+.cosmos-fallback_canonical{margin-top:2.5rem;font-size:.8rem!important;word-break:break-word}

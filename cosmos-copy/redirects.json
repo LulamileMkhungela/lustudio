@@ -1,0 +1,26 @@
+{
+  "/404.html": {
+    "external": false,
+    "final_url": "https://www.cosmos.studio/404",
+    "source": "/404.html",
+    "status": 308,
+    "target": "https://www.cosmos.studio/404",
+    "target_path": "/404"
+  },
+  "/index.html": {
+    "external": false,
+    "final_url": "https://www.cosmos.studio/",
+    "source": "/index.html",
+    "status": 308,
+    "target": "https://www.cosmos.studio/",
+    "target_path": "/"
+  },
+  "/works": {
+    "external": false,
+    "final_url": "https://www.cosmos.studio/projects",
+    "source": "/works",
+    "status": 301,
+    "target": "https://www.cosmos.studio/projects",
+    "target_path": "/projects"
+  }
+}

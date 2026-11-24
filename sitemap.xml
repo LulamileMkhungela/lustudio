@@ -1,66 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://www.cosmos.studio</loc></url>
+  <url><loc>https://www.cosmos.studio/</loc></url>
   <url><loc>https://www.cosmos.studio/about</loc></url>
   <url><loc>https://www.cosmos.studio/projects</loc></url>
-  <url><loc>https://www.cosmos.studio/blog</loc></url>
-  <url><loc>https://www.cosmos.studio/pricing</loc></url>
-  <url><loc>https://www.cosmos.studio/contacts</loc></url>
-  <url><loc>https://www.cosmos.studio/reviews</loc></url>
-  <url><loc>https://www.cosmos.studio/services/aerospace-digital-solutions-ux-design</loc></url>
-  <url><loc>https://www.cosmos.studio/services/agentic-website-design-ai-managed</loc></url>
-  <url><loc>https://www.cosmos.studio/services/ai-agent-ux-design-agentic-ux</loc></url>
-  <url><loc>https://www.cosmos.studio/services/ai-content-production-3d-video-motion</loc></url>
-  <url><loc>https://www.cosmos.studio/services/ai-product-design</loc></url>
-  <url><loc>https://www.cosmos.studio/services/ai-search-optimization-geo-website-design</loc></url>
-  <url><loc>https://www.cosmos.studio/services/b2b-ui-ux-design-development</loc></url>
-  <url><loc>https://www.cosmos.studio/services/bolt-app-developer-rescue</loc></url>
-  <url><loc>https://www.cosmos.studio/services/brand-identity-design</loc></url>
-  <url><loc>https://www.cosmos.studio/services/c2-interface-design-command-and-control-ui</loc></url>
-  <url><loc>https://www.cosmos.studio/services/counter-uas-ui-design-c-uas-software</loc></url>
-  <url><loc>https://www.cosmos.studio/services/cursor-app-developer-rescue</loc></url>
-  <url><loc>https://www.cosmos.studio/services/cybersecurity-ui-ux-design</loc></url>
-  <url><loc>https://www.cosmos.studio/services/defense-software-ux-design-c2-isr</loc></url>
-  <url><loc>https://www.cosmos.studio/services/defense-startup-branding</loc></url>
-  <url><loc>https://www.cosmos.studio/services/defense-tech-website-design</loc></url>
-  <url><loc>https://www.cosmos.studio/services/drone-ground-control-station-ui-design</loc></url>
-  <url><loc>https://www.cosmos.studio/services/european-accessibility-act-wcag-redesign</loc></url>
-  <url><loc>https://www.cosmos.studio/services/frontend-development</loc></url>
-  <url><loc>https://www.cosmos.studio/services/lovable-app-developer-rescue</loc></url>
-  <url><loc>https://www.cosmos.studio/services/mobile-app-design</loc></url>
-  <url><loc>https://www.cosmos.studio/services/pitch-deck-design-defense-deep-tech</loc></url>
-  <url><loc>https://www.cosmos.studio/services/product-ux-ui-design</loc></url>
-  <url><loc>https://www.cosmos.studio/services/replit-app-developer-rescue</loc></url>
-  <url><loc>https://www.cosmos.studio/services/saas-ux-design-agency-europe</loc></url>
-  <url><loc>https://www.cosmos.studio/services/space-geoint-ui-ux-design</loc></url>
-  <url><loc>https://www.cosmos.studio/services/ux-audit</loc></url>
-  <url><loc>https://www.cosmos.studio/services/vibe-code-rescue-ai-mvp-to-production</loc></url>
-  <url><loc>https://www.cosmos.studio/services/web-app-development</loc></url>
-  <url><loc>https://www.cosmos.studio/services/webflow-development</loc></url>
-  <url><loc>https://www.cosmos.studio/services/website-design</loc></url>
-  <url><loc>https://www.cosmos.studio/services/website-development</loc></url>
-  <url><loc>https://www.cosmos.studio/blog/adobe-creative-cloud-agents-claude-sheets-chatgpt-businesses</loc></url>
-  <url><loc>https://www.cosmos.studio/blog/ai-design-weekly-1</loc></url>
-  <url><loc>https://www.cosmos.studio/blog/ai-design-weekly-2</loc></url>
-  <url><loc>https://www.cosmos.studio/blog/ai-product-design-agencies</loc></url>
-  <url><loc>https://www.cosmos.studio/blog/b2b-saas-dashboard-design-patterns</loc></url>
-  <url><loc>https://www.cosmos.studio/blog/c2-interface-design</loc></url>
-  <url><loc>https://www.cosmos.studio/blog/chatgpt-chat-work-images-2-6-claude-finance</loc></url>
-  <url><loc>https://www.cosmos.studio/blog/claude-fable-5-2-gemini-omni-shield-ai-echodyne</loc></url>
-  <url><loc>https://www.cosmos.studio/blog/claude-meetings-figma-3d-chatgpt-wallet</loc></url>
-  <url><loc>https://www.cosmos.studio/blog/claude-ultra-chatgpt-pro-limits-salesforce-rune</loc></url>
-  <url><loc>https://www.cosmos.studio/blog/clutch-global-award-fall-2026</loc></url>
-  <url><loc>https://www.cosmos.studio/blog/copilot-fusion-figma-ai-model-suno-mcp</loc></url>
-  <url><loc>https://www.cosmos.studio/blog/defense-tech-design-agencies</loc></url>
-  <url><loc>https://www.cosmos.studio/blog/defense-tech-pitch-deck</loc></url>
-  <url><loc>https://www.cosmos.studio/blog/fix-vibe-coded-mvp-lovable-bolt-cursor</loc></url>
-  <url><loc>https://www.cosmos.studio/blog/gpt-6-2-astra-sol-gemini-4-neon-microsoft-today</loc></url>
-  <url><loc>https://www.cosmos.studio/blog/how-to-choose-ui-ux-agency-defense-tech</loc></url>
-  <url><loc>https://www.cosmos.studio/blog/how-to-choose-ui-ux-design-agency</loc></url>
-  <url><loc>https://www.cosmos.studio/blog/military-symbology-ui-design</loc></url>
-  <url><loc>https://www.cosmos.studio/blog/pitch-deck-design-services</loc></url>
-  <url><loc>https://www.cosmos.studio/blog/ui-ux-design-cost-startup</loc></url>
-  <url><loc>https://www.cosmos.studio/blog/ux-audit-cost</loc></url>
   <url><loc>https://www.cosmos.studio/projects/30ua-interactive-website</loc></url>
   <url><loc>https://www.cosmos.studio/projects/bravo1alpha-defense-tech-website</loc></url>
   <url><loc>https://www.cosmos.studio/projects/edcamp-education-website</loc></url>
@@ -97,9 +39,65 @@
   <url><loc>https://www.cosmos.studio/projects/umami-ware-ai-website</loc></url>
   <url><loc>https://www.cosmos.studio/projects/yawn-crypto-website</loc></url>
   <url><loc>https://www.cosmos.studio/projects/zeuss-skincare-ecommerce-website</loc></url>
-  <url><loc>https://www.cosmos.studio/legal/ai-instructions</loc></url>
-  <url><loc>https://www.cosmos.studio/legal/privacy-policy</loc></url>
-  <url><loc>https://www.cosmos.studio/legal/terms-of-use</loc></url>
+  <url><loc>https://www.cosmos.studio/blog</loc></url>
+  <url><loc>https://www.cosmos.studio/blog/adobe-creative-cloud-agents-claude-sheets-chatgpt-businesses</loc></url>
+  <url><loc>https://www.cosmos.studio/blog/ai-design-weekly-1</loc></url>
+  <url><loc>https://www.cosmos.studio/blog/ai-design-weekly-2</loc></url>
+  <url><loc>https://www.cosmos.studio/blog/ai-product-design-agencies</loc></url>
+  <url><loc>https://www.cosmos.studio/blog/b2b-saas-dashboard-design-patterns</loc></url>
+  <url><loc>https://www.cosmos.studio/blog/c2-interface-design</loc></url>
+  <url><loc>https://www.cosmos.studio/blog/canva-video-claude-chatgpt-gemini-mac-tesla-reality-view</loc></url>
+  <url><loc>https://www.cosmos.studio/blog/chatgpt-chat-work-images-2-6-claude-finance</loc></url>
+  <url><loc>https://www.cosmos.studio/blog/claude-fable-5-2-gemini-omni-shield-ai-echodyne</loc></url>
+  <url><loc>https://www.cosmos.studio/blog/claude-meetings-figma-3d-chatgpt-wallet</loc></url>
+  <url><loc>https://www.cosmos.studio/blog/claude-ultra-chatgpt-pro-limits-salesforce-rune</loc></url>
+  <url><loc>https://www.cosmos.studio/blog/clutch-global-award-fall-2026</loc></url>
+  <url><loc>https://www.cosmos.studio/blog/copilot-fusion-figma-ai-model-suno-mcp</loc></url>
+  <url><loc>https://www.cosmos.studio/blog/defense-tech-design-agencies</loc></url>
+  <url><loc>https://www.cosmos.studio/blog/defense-tech-pitch-deck</loc></url>
+  <url><loc>https://www.cosmos.studio/blog/fix-vibe-coded-mvp-lovable-bolt-cursor</loc></url>
+  <url><loc>https://www.cosmos.studio/blog/gpt-6-2-astra-sol-gemini-4-neon-microsoft-today</loc></url>
+  <url><loc>https://www.cosmos.studio/blog/how-to-choose-ui-ux-agency-defense-tech</loc></url>
+  <url><loc>https://www.cosmos.studio/blog/how-to-choose-ui-ux-design-agency</loc></url>
+  <url><loc>https://www.cosmos.studio/blog/military-symbology-ui-design</loc></url>
+  <url><loc>https://www.cosmos.studio/blog/pitch-deck-design-services</loc></url>
+  <url><loc>https://www.cosmos.studio/blog/ui-ux-design-cost-startup</loc></url>
+  <url><loc>https://www.cosmos.studio/blog/ux-audit-cost</loc></url>
+  <url><loc>https://www.cosmos.studio/pricing</loc></url>
+  <url><loc>https://www.cosmos.studio/contacts</loc></url>
+  <url><loc>https://www.cosmos.studio/reviews</loc></url>
+  <url><loc>https://www.cosmos.studio/services/aerospace-digital-solutions-ux-design</loc></url>
+  <url><loc>https://www.cosmos.studio/services/agentic-website-design-ai-managed</loc></url>
+  <url><loc>https://www.cosmos.studio/services/ai-agent-ux-design-agentic-ux</loc></url>
+  <url><loc>https://www.cosmos.studio/services/ai-content-production-3d-video-motion</loc></url>
+  <url><loc>https://www.cosmos.studio/services/ai-product-design</loc></url>
+  <url><loc>https://www.cosmos.studio/services/ai-search-optimization-geo-website-design</loc></url>
+  <url><loc>https://www.cosmos.studio/services/b2b-ui-ux-design-development</loc></url>
+  <url><loc>https://www.cosmos.studio/services/bolt-app-developer-rescue</loc></url>
+  <url><loc>https://www.cosmos.studio/services/brand-identity-design</loc></url>
+  <url><loc>https://www.cosmos.studio/services/c2-interface-design-command-and-control-ui</loc></url>
+  <url><loc>https://www.cosmos.studio/services/counter-uas-ui-design-c-uas-software</loc></url>
+  <url><loc>https://www.cosmos.studio/services/cursor-app-developer-rescue</loc></url>
+  <url><loc>https://www.cosmos.studio/services/cybersecurity-ui-ux-design</loc></url>
+  <url><loc>https://www.cosmos.studio/services/defense-software-ux-design-c2-isr</loc></url>
+  <url><loc>https://www.cosmos.studio/services/defense-startup-branding</loc></url>
+  <url><loc>https://www.cosmos.studio/services/defense-tech-website-design</loc></url>
+  <url><loc>https://www.cosmos.studio/services/drone-ground-control-station-ui-design</loc></url>
+  <url><loc>https://www.cosmos.studio/services/european-accessibility-act-wcag-redesign</loc></url>
+  <url><loc>https://www.cosmos.studio/services/frontend-development</loc></url>
+  <url><loc>https://www.cosmos.studio/services/lovable-app-developer-rescue</loc></url>
+  <url><loc>https://www.cosmos.studio/services/mobile-app-design</loc></url>
+  <url><loc>https://www.cosmos.studio/services/pitch-deck-design-defense-deep-tech</loc></url>
+  <url><loc>https://www.cosmos.studio/services/product-ux-ui-design</loc></url>
+  <url><loc>https://www.cosmos.studio/services/replit-app-developer-rescue</loc></url>
+  <url><loc>https://www.cosmos.studio/services/saas-ux-design-agency-europe</loc></url>
+  <url><loc>https://www.cosmos.studio/services/space-geoint-ui-ux-design</loc></url>
+  <url><loc>https://www.cosmos.studio/services/ux-audit</loc></url>
+  <url><loc>https://www.cosmos.studio/services/vibe-code-rescue-ai-mvp-to-production</loc></url>
+  <url><loc>https://www.cosmos.studio/services/web-app-development</loc></url>
+  <url><loc>https://www.cosmos.studio/services/webflow-development</loc></url>
+  <url><loc>https://www.cosmos.studio/services/website-design</loc></url>
+  <url><loc>https://www.cosmos.studio/services/website-development</loc></url>
   <url><loc>https://www.cosmos.studio/industries/ai-products</loc></url>
   <url><loc>https://www.cosmos.studio/industries/b2b-it-services</loc></url>
   <url><loc>https://www.cosmos.studio/industries/defense-military-tech</loc></url>
@@ -111,5 +109,7 @@
   <url><loc>https://www.cosmos.studio/industries/nonprofit-social-impact</loc></url>
   <url><loc>https://www.cosmos.studio/industries/saas</loc></url>
   <url><loc>https://www.cosmos.studio/industries/web3-crypto</loc></url>
-  <url><loc>https://www.cosmos.studio/blog/canva-video-claude-chatgpt-gemini-mac-tesla-reality-view</loc></url>
+  <url><loc>https://www.cosmos.studio/legal/ai-instructions</loc></url>
+  <url><loc>https://www.cosmos.studio/legal/privacy-policy</loc></url>
+  <url><loc>https://www.cosmos.studio/legal/terms-of-use</loc></url>
 </urlset>

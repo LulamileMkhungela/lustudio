@@ -1,0 +1,9 @@
+/* footerhoverlite: replaces heavy IX3 footer link hover init (was 2-4s main-thread block) with lazy CSS letters roll */(function(){var d=document,h=d.documentElement,L=[],done=0;
+function strip(){if(done)return;done=1;L=[].slice.call(d.querySelectorAll('.footer_link'));L.forEach(function(a){a.classList.remove('footer_link');a.setAttribute('data-cs-fl','')});var n=0,iv=setInterval(function(){if(h.classList.contains('w-mod-ix3')||++n>400){clearInterval(iv);L.forEach(function(a){a.classList.add('footer_link')})}},25)}
+if(d.readyState!=='loading')strip();d.addEventListener('readystatechange',strip);d.addEventListener('DOMContentLoaded',strip);
+var s=d.createElement('style');s.textContent='[data-cs-fl] .cs-ch{display:inline-block;white-space:pre;transition:transform .5s cubic-bezier(.25,1,.5,1) calc(var(--i)*25ms)}[data-cs-fl].cs-on .cs-ch{transform:translateY(-100%)}[data-cs-fl] .footer_link-dot{display:block;transform:scale(0);transition:transform .5s cubic-bezier(.25,1,.5,1)}[data-cs-fl].cs-on .footer_link-dot{transform:scale(1)}';d.head.appendChild(s);
+function split(a){if(a.__cs)return;a.__cs=1;var t1=a.querySelector('.footer_link-text._1');if(t1&&!a.getAttribute('aria-label'))a.setAttribute('aria-label',t1.textContent.trim());[].forEach.call(a.querySelectorAll('.footer_link-text'),function(t){var x=t.textContent;t.textContent='';t.setAttribute('aria-hidden','true');for(var i=0;i<x.length;i++){var c=d.createElement('span');c.className='cs-ch';c.style.setProperty('--i',i);c.textContent=x[i];t.appendChild(c)}})}
+var mq=matchMedia('(min-width:992px)');
+d.addEventListener('mouseover',function(e){if(!mq.matches)return;var a=e.target.closest&&e.target.closest('[data-cs-fl]');if(!a||a.contains(e.relatedTarget))return;split(a);a.offsetWidth;a.classList.add('cs-on')});
+d.addEventListener('mouseout',function(e){var a=e.target.closest&&e.target.closest('[data-cs-fl]');if(!a||a.contains(e.relatedTarget))return;a.classList.remove('cs-on')});
+})();

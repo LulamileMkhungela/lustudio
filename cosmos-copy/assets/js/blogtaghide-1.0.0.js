@@ -1,0 +1,1 @@
+(function(){var s=document.createElement('style');s.textContent='.blog_img-wrap .blog_tag{display:none!important}';document.head.appendChild(s);})();
