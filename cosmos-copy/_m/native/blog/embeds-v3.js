@@ -1,4 +1,4 @@
-/* /_m/native/blog/embeds-v3.js – shows third-party deck embeds open, loading each when it comes near the viewport.
+/* embeds-v3.js – shows third-party deck embeds open, loading each when it comes near the viewport.
    Scope: only [data-embed-src]. Allow-list: LinkedIn and Pitch embed routes. No storage, no cookies of ours.
    The placeholder stays behind the frame, and a 34px strip with the link to the original stays under it, so a blocked or failed frame still shows the link. */
 (function () {
