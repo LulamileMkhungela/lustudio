@@ -9,6 +9,7 @@ then rewrites and refreshes the build manifests.
 """
 from __future__ import annotations
 
+import concurrent.futures
 import html
 import json
 import re
@@ -16,6 +17,9 @@ import sys
 from collections import Counter
 from pathlib import Path
 from urllib.parse import urlsplit
+
+import requests
+from bs4 import BeautifulSoup
 
 import fetch_live_cosmos as f
 
@@ -28,15 +32,53 @@ BROWSER_REPORT = ROOT / "scripts/preview-check/browser-report.json"
 REPAIR_REPORT = ROOT / "scripts/cosmos-repair-report.json"
 
 LOCAL_STATIC_RE = re.compile(
-    r"""(?<!:)/[A-Za-z0-9_\-./%~+]+\.(?:css|mjs|js|woff2?|ttf|otf|png|jpe?g|webp|avif|svg|gif|ico|mp4|webm|mov|json|lottie|pdf|txt|xml)(?:\?[^\s"'`<>)\\]*)?""",
+    r"""(?<![:/])/[A-Za-z0-9_\-./%~+]+\.(?:css|mjs|js|woff2?|ttf|otf|png|jpe?g|webp|avif|svg|gif|ico|mp4|webm|mov|json|lottie|pdf|txt|xml)(?:\?[^\s"'`<>)\\]*)?""",
     re.I,
 )
+CSS_LOCAL_URL_RE = re.compile(r"url\(\s*['\"]?([^)'\"]+)", re.I)
 CRITICAL_EXTS = {".css", ".js", ".mjs", ".woff", ".woff2", ".ttf", ".otf", ".svg", ".json", ".lottie"}
 
 initial_map: dict[str, str] = {}
 if ASSET_MAP_FILE.exists():
     initial_map = json.loads(ASSET_MAP_FILE.read_text(encoding="utf-8"))
 f.ASSET_MAP.update(initial_map)
+
+
+def fast_fetch(url: str) -> dict:
+    """Fetch one exact asset quickly from a small set of equivalent mirrors."""
+    last_status = "no-candidate"
+    for candidate in f.asset_candidates(url)[:4]:
+        try:
+            response = requests.get(
+                candidate,
+                headers=f.ASSET_HEADERS,
+                timeout=12,
+                allow_redirects=True,
+            )
+            if not response.ok:
+                last_status = f"http-{response.status_code}"
+                continue
+            ctype = response.headers.get("content-type", "")
+            data = response.content
+            if not data or len(data) > f.MAX_ASSET_BYTES:
+                last_status = "empty-or-too-large"
+                continue
+            if ctype.startswith("text/html") and not data.lstrip().lower().startswith(b"<svg"):
+                last_status = "html-response"
+                continue
+            text = f.is_text_asset(url, ctype, data)
+            return {
+                "url": url,
+                "status": "ok",
+                "data": data,
+                "text": text,
+                "size": len(data),
+                "content_type": ctype,
+                "fetched_from": response.url,
+            }
+        except Exception as exc:  # noqa: BLE001
+            last_status = f"error:{type(exc).__name__}"
+    return {"url": url, "status": last_status}
 
 
 def write_result(result: dict, url: str, local: str) -> None:
@@ -57,7 +99,7 @@ def local_exists(local: str) -> bool:
 def build_equivalents() -> None:
     texts: list[str] = []
     try:
-        response = f.http_get(f.STAGING + "/", headers=f.HEADERS, timeout=45)
+        response = requests.get(f.STAGING + "/", headers=f.HEADERS, timeout=10)
         if response.ok:
             texts.append(response.text)
     except Exception as exc:  # noqa: BLE001
@@ -93,21 +135,42 @@ def browser_failed_paths() -> set[str]:
     return paths
 
 
+def html_local_values(text: str) -> list[str]:
+    soup = BeautifulSoup(text, "html.parser")
+    values: list[str] = []
+    for tag in soup.find_all(True):
+        for attr in f.HTML_URL_ATTRS:
+            value = tag.get(attr)
+            if not isinstance(value, str):
+                continue
+            for item in value.split(","):
+                item = item.strip()
+                if re.search(r"\s+\d+(?:\.\d+)?[wx]\s*$", item):
+                    item = item.split()[0]
+                if item:
+                    values.append(html.unescape(item))
+    for style in soup.find_all("style"):
+        values.extend(html.unescape(v) for v in CSS_LOCAL_URL_RE.findall(style.get_text()))
+    return values
+
+
 def missing_local_paths() -> set[str]:
     paths = browser_failed_paths()
     for path in SITE.rglob("*"):
-        if not path.is_file() or path.suffix.lower() not in f.TEXT_SUFFIXES:
+        if not path.is_file() or path.suffix.lower() not in {".html", ".css"}:
             continue
         try:
             text = path.read_text(encoding="utf-8")
         except UnicodeDecodeError:
             continue
-        for match in LOCAL_STATIC_RE.finditer(text):
-            local = html.unescape(match.group(0)).rstrip(".,;:!?)]}")
-            if local.startswith("//") or Path(urlsplit(local).path).suffix.lower() not in f.STATIC_EXTS:
-                continue
-            if not local_exists(local):
-                paths.add(local)
+        values = html_local_values(text) if path.suffix.lower() == ".html" else CSS_LOCAL_URL_RE.findall(text)
+        for value in values:
+            for match in LOCAL_STATIC_RE.finditer(html.unescape(value)):
+                local = html.unescape(match.group(0)).rstrip(".,;:!?)]}")
+                if local.startswith("//") or Path(urlsplit(local).path).suffix.lower() not in f.STATIC_EXTS:
+                    continue
+                if not local_exists(local):
+                    paths.add(local)
     return {p for p in paths if p.startswith("/") and not p.startswith("//")}
 
 
@@ -193,20 +256,25 @@ def main() -> None:
         remote = {u for u in critical_remote_urls() if u not in attempted_remote}
         print(f"repair pass {pass_index + 1}: {len(missing)} local paths, {len(remote)} critical remote URLs")
         new_mappings = False
-        for local in sorted(missing):
+
+        local_batch = sorted(missing)
+        with concurrent.futures.ThreadPoolExecutor(max_workers=8) as executor:
+            local_results = list(executor.map(fast_fetch, [f.LIVE + p for p in local_batch]))
+        for local, result in zip(local_batch, local_results):
             attempted_local.add(local)
-            url = f.LIVE + local
-            result = f.download_asset(url)
             if result.get("status") == "ok":
-                write_result(result, url, local)
-                f.ASSET_MAP[url] = local
+                write_result(result, f.LIVE + local, local)
+                f.ASSET_MAP[f.LIVE + local] = local
                 local_repaired.add(local)
                 new_mappings = True
             else:
-                failures.append({"url": url, "local": local, **{k: v for k, v in result.items() if k not in {"data", "text"}}})
-        for remote_url in sorted(remote):
+                failures.append({"url": f.LIVE + local, "local": local, **{k: v for k, v in result.items() if k != "data" and k != "text"}})
+
+        remote_batch = sorted(remote)
+        with concurrent.futures.ThreadPoolExecutor(max_workers=8) as executor:
+            remote_results = list(executor.map(fast_fetch, remote_batch))
+        for remote_url, result in zip(remote_batch, remote_results):
             attempted_remote.add(remote_url)
-            result = f.download_asset(remote_url)
             if result.get("status") == "ok":
                 local = f.public_path_for_asset(remote_url, result.get("content_type", ""))
                 write_result(result, remote_url, local)
@@ -214,7 +282,8 @@ def main() -> None:
                 remote_repaired.add(remote_url)
                 new_mappings = True
             else:
-                failures.append({"url": remote_url, **{k: v for k, v in result.items() if k not in {"data", "text"}}})
+                failures.append({"url": remote_url, **{k: v for k, v in result.items() if k != "data" and k != "text"}})
+
         if new_mappings:
             rewrite_all_text_files()
         summary = update_manifests(local_repaired, remote_repaired, failures)
