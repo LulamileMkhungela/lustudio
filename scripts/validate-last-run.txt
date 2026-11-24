@@ -1,13 +1,35 @@
-Traceback (most recent call last):
-  File "/home/runner/work/lustudio/lustudio/scripts/validate_live_cosmos.py", line 446, in <module>
-    main()
-  File "/home/runner/work/lustudio/lustudio/scripts/validate_live_cosmos.py", line 347, in main
-    index = (SITE / "index.html").read_text(encoding="utf-8")
-            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.11.18/x64/lib/python3.11/pathlib.py", line 1058, in read_text
-    with self.open(mode='r', encoding=encoding, errors=errors) as f:
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.11.18/x64/lib/python3.11/pathlib.py", line 1044, in open
-    return io.open(self, mode, buffering, encoding, errors, newline)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-FileNotFoundError: [Errno 2] No such file or directory: '/home/runner/work/lustudio/lustudio/cosmos-copy/index.html'
+{
+  "all_issues": [],
+  "asset_status_counts": {
+    "html-response": 6,
+    "http-400": 1,
+    "http-403": 49,
+    "http-404": 180,
+    "ok": 1136,
+    "remote": 203,
+    "repaired": 2
+  },
+  "canonical_counts": {
+    "about": 1,
+    "blog": 24,
+    "contacts": 1,
+    "industries": 11,
+    "legal": 3,
+    "pricing": 1,
+    "projects": 37,
+    "reviews": 1,
+    "root": 1,
+    "services": 32
+  },
+  "canonical_urls": 112,
+  "exact_pages": 114,
+  "html_pages": 120,
+  "issue_samples": [],
+  "issues": 0,
+  "localized_assets": 1377,
+  "redirects": 3,
+  "remaining_remote_assets": 172,
+  "site_bytes": 98176595,
+  "site_files": 1297,
+  "warnings": []
+}
