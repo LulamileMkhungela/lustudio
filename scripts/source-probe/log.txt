@@ -1,167 +1,0 @@
-=== jina_html ===
-  % Total    % Received % Xferd  Average Speed  Time    Time    Time   Current
-                                 Dload  Upload  Total   Spent   Left   Speed
-  0      0   0      0   0      0      0      0                              0  0      0   0      0   0      0      0      0           00:01              0  0      0   0      0   0      0      0      0           00:02              0  0      0   0      0   0      0      0      0           00:03              0100  67749 100  67749   0      0  18148      0   00:03   00:03          18148100  67749 100  67749   0      0  18148      0   00:03   00:03          18148100  67749 100  67749   0      0  18147      0   00:03   00:03          18148
-jina_html bytes: 362145
-HTTP/2 200 
-date: Tue, 24 Nov 2026 20:25:40 GMT
-content-type: text/plain; charset=utf-8
-content-length: 67749
-vary: *
-x-usage-tokens: 107920
-x-ratelimit-limit: 20, 20;w=60
-x-ratelimit-remaining: 19
-<html data-wf-domain="www.cosmos.studio" data-wf-page="69f9c76e84333229e651e8e2" data-wf-site="69f9c76884333229e651e7bc" lang="en"><head><script src="/_c/env.v2.js"></script><meta charset="utf-8"><title>UI/UX Design Studio for SaaS, AI & De
-=== jina_sitemap ===
-  % Total    % Received % Xferd  Average Speed  Time    Time    Time   Current
-                                 Dload  Upload  Total   Spent   Left   Speed
-  0      0   0      0   0      0      0      0                              0100   2420 100   2420   0      0   3535      0                              0100   2420 100   2420   0      0   3534      0                              0100   2420 100   2420   0      0   3534      0                              0
-jina_sitemap bytes: 16819
-HTTP/2 200 
-date: Tue, 24 Nov 2026 20:25:41 GMT
-content-type: text/plain; charset=utf-8
-content-length: 2420
-vary: *
-x-usage-tokens: 5693
-x-ratelimit-limit: 20, 20;w=60
-x-ratelimit-remaining: 19
-Title: Sitemap
-
-URL Source: http://www.cosmos.studio/sitemap.xml
-
-Final URL: https://www.cosmos.studio/sitemap.xml
-
-Markdown Content:
-[https://www.cosmos.studio](https://www.cosmos.studio/)  
-2026-11-19T05:26:08.929Z
-
-[https://www.cosmos.st
-=== live_root ===
-  % Total    % Received % Xferd  Average Speed  Time    Time    Time   Current
-                                 Dload  Upload  Total   Spent   Left   Speed
-  0      0   0      0   0      0      0      0                              0100  77243   0  77243   0      0 253.9k      0                              0100  77243   0  77243   0      0 253.8k      0                              0100  77243   0  77243   0      0 253.7k      0                              0
-live_root bytes: 395894
-HTTP/2 103 
-link: </assets/css/shared.6d70d358d.min.css>; as=style; crossorigin; integrity=sha384-sHZRJpdI1QjpD9Am1StahfZ5YYo3FcBWdZ+rrWqUnUUGhwFGv4WDgEoScc2ZDt2v; rel=preload, </assets/css/page-51e8e2.d887f04ca.min.css>; as=style; crossorigin; integrity=sha384-d1NiG78xqKkhGt+YmUIj/dkD0TkkpIT8jiKJaIh17LUd8ItRR+ZJkDdgPMF8Swqc; rel=preload
-
-HTTP/2 200 
-date: Tue, 24 Nov 2026 20:25:41 GMT
-content-type: text/html; charset=utf-8
-cache-control: public, max-age=0, must-revalidate
-nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}
-<!DOCTYPE html><!-- This site was created in Webflow. https://webflow.com --><!-- Last Published: Thu Nov 19 2026 05:29:47 GMT+0000 (Coordinated Universal Time) --><html data-wf-domain="www.cosmos.studio" data-wf-page="69f9c76e84333229e651e
-=== live_sitemap ===
-  % Total    % Received % Xferd  Average Speed  Time    Time    Time   Current
-                                 Dload  Upload  Total   Spent   Left   Speed
-  0      0   0      0   0      0      0      0                              0100   2102   0   2102   0      0  48514      0                              0100   2102   0   2102   0      0  48357      0                              0100   2102   0   2102   0      0  48249      0                              0
-live_sitemap bytes: 17432
-HTTP/2 200 
-date: Tue, 24 Nov 2026 20:25:41 GMT
-content-type: application/xml
-cache-control: public, max-age=0, must-revalidate
-nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}
-strict-transport-security: max-age=31536000
-x-content-type-options: nosniff
-report-to: {"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=CGOKbdDOhfN8LgtouOklmbARhLqaoTUvwBrUyA1Ddh2irK%2FnXlypQOiRTMuOWuVUMH6KSDzsXsjQGjZPOLPbpfFhD9gQp%2BPB9ZkS3Rbt8poNG0EKMd8PDUfBBTy6G6eeRgtEBA%3D%3D"}]}
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
-    <url>
-        <loc>https://www.cosmos.studio</loc>
-        <lastmod>2026-11-19T05:26:08.9
-=== webflow_root ===
-  % Total    % Received % Xferd  Average Speed  Time    Time    Time   Current
-                                 Dload  Upload  Total   Spent   Left   Speed
-  0      0   0      0   0      0      0      0                              0100  96035   0  96035   0      0  1.48M      0                              0100  96035   0  96035   0      0  1.48M      0                              0100  96035   0  96035   0      0  1.48M      0                              0
-webflow_root bytes: 414199
-HTTP/2 200 
-date: Tue, 24 Nov 2026 20:25:41 GMT
-content-type: text/html; charset=utf-8
-set-cookie: _cfuvid=HcuZKN4abJ07lhw6OYSsIp5arSF1.KUMsv3INXv5KTw-1795551941.630757-1.0.1.1-XdJC7lASazOMtgO1h1.LeAw7itlWc6q3PPH9GyNRD90; HttpOnly; SameSite=None; Secure; Path=/; Domain=webflow.io
-cf-ray: a5fb24f32858416e-IAD
-cf-cache-status: HIT
-age: 77
-content-encoding: gzip
-<!DOCTYPE html><!-- This site was created in Webflow. https://webflow.com --><!-- Last Published: Fri Nov 20 2026 09:41:19 GMT+0000 (Coordinated Universal Time) --><html data-wf-domain="cosmoss-nordic-template.webflow.io" data-wf-page="69f9
-=== webflow_sitemap ===
-  % Total    % Received % Xferd  Average Speed  Time    Time    Time   Current
-                                 Dload  Upload  Total   Spent   Left   Speed
-  0      0   0      0   0      0      0      0                              0100   2162   0   2162   0      0  18994      0                              0100   2162   0   2162   0      0  18977      0                              0100   2162   0   2162   0      0  18955      0                              0
-webflow_sitemap bytes: 17423
-HTTP/2 200 
-date: Tue, 24 Nov 2026 20:25:41 GMT
-content-type: application/rss+xml; charset=utf-8
-set-cookie: _cfuvid=lDN6qni11b0eqGkiAWiigVKglK2SbV7M7qqtwgzBJ1s-1795551941.6960254-1.0.1.1-6byovGBMibKtgIpV13QJtBToQAx_oaJaNf49mIifLWI; HttpOnly; SameSite=None; Secure; Path=/; Domain=webflow.io
-cf-ray: a5fb24f39e3f45a9-IAD
-cf-cache-status: HIT
-age: 2504
-last-modified: Tue, 24 Nov 2026 19:43:56 GMT
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
-    <url>
-        <loc>https://www.cosmos.studio</loc>
-        <lastmod>2026-11-19T05:26:08.9
-=== shared_css ===
-  % Total    % Received % Xferd  Average Speed  Time    Time    Time   Current
-                                 Dload  Upload  Total   Spent   Left   Speed
-  0      0   0      0   0      0      0      0                              0100   8341   0   8341   0      0 334.9k      0                              0100   8341   0   8341   0      0 333.7k      0                              0100   8341   0   8341   0      0 332.7k      0                              0
-shared_css bytes: 30774
-HTTP/2 200 
-date: Tue, 24 Nov 2026 20:25:41 GMT
-content-type: text/css
-x-amz-request-id: ZPWHK2X56VTH93DQ
-x-amz-id-2: +ow9DEM5KWrUUXm6iU56vBOwepAjLigafQrarlcLtShfhH2phRaR2/kp9aikPAG0xcTX2+zLuWA4O4cfd2vCSoNxipNdnhI4
-etag: W/"3b41f4bb66cb594e15c8240abf52e21f"
-server: cloudflare
-last-modified: Thu, 10 Sep 2026 00:36:03 GMT
-html{-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;font-family:sans-serif}body{margin:0}article,aside,details,figcaption,figure,footer,header,hgroup,main,menu,nav,section,summary{display:block}audio,canvas,progress,video{vertical-
-=== site_js ===
-  % Total    % Received % Xferd  Average Speed  Time    Time    Time   Current
-                                 Dload  Upload  Total   Spent   Left   Speed
-  0      0   0      0   0      0      0      0                              0100   2261   0   2261   0      0  98274      0                              0100   2261   0   2261   0      0  97836      0                              0100   2261   0   2261   0      0  97427      0                              0
-site_js bytes: 5048
-HTTP/2 200 
-date: Tue, 24 Nov 2026 20:25:41 GMT
-content-type: text/javascript
-x-amz-request-id: YC5K6VNE6XCQPWR7
-x-amz-id-2: 50byd7jr3GP8ESMBkCb5U3sR1BN4gYZSREfdXGLqt/qQo+HO7Y150ymKteoCxtJLxpCKpyC734aBD7PxQKkoOM0L4Heiz7EF
-etag: W/"e8d42e596b4f6d600c42075e4d304cb4"
-server: cloudflare
-last-modified: Thu, 10 Sep 2026 00:12:57 GMT
-(()=>{var e={},t={};function r(n){var o=t[n];if(void 0!==o)return o.exports;var a=t[n]={id:n,loaded:!1,exports:{}};return e[n].call(a.exports,a,a.exports,r),a.loaded=!0,a.exports}r.m=e,(()=>{var e,t=Object.getPrototypeOf?e=>Object.getProtot
-=== gsap ===
-  % Total    % Received % Xferd  Average Speed  Time    Time    Time   Current
-                                 Dload  Upload  Total   Spent   Left   Speed
-  0      0   0      0   0      0      0      0                              0100  29466   0  29466   0      0 887.9k      0                              0100  29466   0  29466   0      0 885.4k      0                              0100  29466   0  29466   0      0 883.3k      0                              0
-gsap bytes: 72927
-HTTP/2 200 
-date: Tue, 24 Nov 2026 20:25:41 GMT
-content-type: text/javascript
-x-amz-id-2: PCDLmBD4DvXCkfs8Y5s3i3XO1Q+iICWMSxiTgeB3yJxp1Lz2YxClIxyfCwObd/QGeIIA50tkUOuzxhel9CoKWXYemPC3E+T5
-x-amz-request-id: JAG25T3VKPH987VG
-last-modified: Mon, 20 Apr 2026 21:16:11 GMT
-x-amz-server-side-encryption: AES256
-x-amz-version-id: V8op0kZq.Xpg2kvTPCwvwCTfWicx89F0
-/*!
- * GSAP 3.15.0
- * https://gsap.com
- * 
- * @license Copyright 2026, GreenSock. All rights reserved.
- * Subject to the terms at https://gsap.com/standard-license.
- * @author: Jack Doyle, jack@greensock.com
- */
-
-!function(t,e){"object"==ty
-=== sample_image ===
-  % Total    % Received % Xferd  Average Speed  Time    Time    Time   Current
-                                 Dload  Upload  Total   Spent   Left   Speed
-  0      0   0      0   0      0      0      0                              0100   2072 100   2072   0      0  71544      0                              0100   2072 100   2072   0      0  71293      0                              0100   2072 100   2072   0      0  71058      0                              0
-sample_image bytes: 2072
-HTTP/2 200 
-date: Tue, 24 Nov 2026 20:25:41 GMT
-content-type: image/webp
-content-length: 2072
-x-amz-id-2: jfqna/W7+qCfP4SqYDHcliIHTC1mHsYaB340jdayUft4SSzT2RqDH0OH7UD+VZDTXOMkgmHqgf0=
-x-amz-request-id: XNWAZ0Y5TNYQBDM2
-last-modified: Mon, 31 Aug 2026 16:51:10 GMT
-etag: "b90a37c927384d2e6d48bf86a89892e1"
-RIFF  WEBPVP8   # *X X >i*E¤"¡™ÊîØ@„±€b+ÚJ²SWÖõGhôG·/žÊýM¾Ä˜¼üvß4 drn“Ç5ˆðõ‘ÿgÊGÔþÁ¿®Þ™^Ê=?c–éºÍ¨qbenCºô‘rùÞU±y iø¼¾ÅÏGkæ‘ùÄæãpµ)éÿ«:µç«ÊÑp=¶8ÓÁG ¶V•¤Æìx~v>âˆplQò†zÀ¬vèÁ×ÐÀŽÏg|O«Ÿ‡ŒÅßòD“¯Hi Õ´©”_dõ5îd¿Ü><á‚¦

@@ -1,18 +1,28 @@
-name: Fetch Cosmos source artifact
+name: Fetch Cosmos full source clone
 
 on:
   workflow_dispatch:
   push:
     paths:
       - .github/workflows/fetch-cosmos.yml
+      - scripts/fetch_live_cosmos.py
+      - scripts/validate_live_cosmos.py
+      - scripts/serve.py
+      - scripts/serve.sh
+      - scripts/capture_preview.mjs
+      - scripts/cosmos-sitemap-raw.txt
 
 permissions:
   contents: write
 
+concurrency:
+  group: fetch-cosmos-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
-  probe:
+  build:
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    timeout-minutes: 40
     steps:
       - name: Check out
         uses: actions/checkout@v4
@@ -20,45 +30,75 @@ jobs:
           ref: ${{ github.ref_name }}
           fetch-depth: 0
 
-      - name: Fetch source probes
-        shell: bash
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install Python dependencies
+        run: python3 -m pip install --disable-pip-version-check beautifulsoup4==4.12.3 requests==2.31.0
+
+      - name: Fetch and build exact static clone
         env:
           UA: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
-        run: |
-          set +e
-          mkdir -p scripts/source-probe
-          : > scripts/source-probe/log.txt
-          fetch() {
-            name="$1"; shift
-            echo "=== $name ===" >> scripts/source-probe/log.txt
-            curl -L --compressed --connect-timeout 15 --max-time 60 -A "$UA" "$@" -D "scripts/source-probe/${name}.headers" -o "scripts/source-probe/${name}.body" 2>>scripts/source-probe/log.txt
-            printf '%s bytes: ' "$name" >> scripts/source-probe/log.txt
-            wc -c < "scripts/source-probe/${name}.body" >> scripts/source-probe/log.txt
-            head -n 8 "scripts/source-probe/${name}.headers" >> scripts/source-probe/log.txt
-            head -c 240 "scripts/source-probe/${name}.body" >> scripts/source-probe/log.txt
-            printf '\n' >> scripts/source-probe/log.txt
-          }
-          fetch jina_html -H 'x-respond-with: html' -H 'x-return-format: html' 'https://r.jina.ai/http://www.cosmos.studio/'
-          fetch jina_sitemap 'https://r.jina.ai/http://www.cosmos.studio/sitemap.xml'
-          fetch live_root -H 'Accept: text/html' 'https://www.cosmos.studio/'
-          fetch live_sitemap -H 'Accept: application/xml' 'https://www.cosmos.studio/sitemap.xml'
-          fetch webflow_root -H 'Accept: text/html' 'https://cosmoss-nordic-template.webflow.io/'
-          fetch webflow_sitemap -H 'Accept: application/xml' 'https://cosmoss-nordic-template.webflow.io/sitemap.xml'
-          fetch shared_css 'https://cdn.prod.website-files.com/69f9c76884333229e651e7bc/css/cosmoss-nordic-template.webflow.shared.996aaf44d.min.css'
-          fetch site_js 'https://cdn.prod.website-files.com/69f9c76884333229e651e7bc/js/webflow.870bd618.475ada7d0632014b.js'
-          fetch gsap 'https://cdn.prod.website-files.com/gsap/3.15.0/gsap.min.js'
-          fetch sample_image 'https://cdn.prod.website-files.com/69f9c76884333229e651e7bc/6a6c779df1bd42c0d5633bbf_Profile%20Picture.webp'
-          echo '=== log ==='
-          cat scripts/source-probe/log.txt
+        run: python3 scripts/fetch_live_cosmos.py
 
-      - name: Save probes to this branch
+      - name: Install browser and Playwright
+        run: |
+          npm install --no-save --no-package-lock playwright
+          npx playwright install chromium --with-deps
+
+      - name: Start local clone server
+        run: |
+          python3 scripts/serve.py 8000 > /tmp/cosmos-server.log 2>&1 &
+          echo $! > /tmp/cosmos-server.pid
+          python3 - <<'PY'
+          import socket, time
+          for _ in range(40):
+              try:
+                  with socket.create_connection(('127.0.0.1', 8000), timeout=1):
+                      print('server ready')
+                      break
+              except OSError:
+                  time.sleep(0.5)
+          else:
+              raise SystemExit('server did not start')
+          PY
+
+      - name: Capture browser previews
+        env:
+          BASE_URL: http://127.0.0.1:8000
+        run: node scripts/capture_preview.mjs
+
+      - name: Validate clone
+        run: python3 scripts/validate_live_cosmos.py
+
+      - name: Stop local clone server
+        if: always()
+        run: |
+          if [ -f /tmp/cosmos-server.pid ]; then kill "$(cat /tmp/cosmos-server.pid)" || true; fi
+          cat /tmp/cosmos-server.log || true
+
+      - name: Save clone to this branch
         shell: bash
         run: |
           set -e
           git config user.name "Arena source fetcher"
           git config user.email "arena-source-fetcher@users.noreply.github.com"
-          git add -f scripts/source-probe
+          git add -f cosmos-copy \
+            scripts/cosmos-canonical-urls.txt \
+            scripts/cosmos-redirects.json \
+            scripts/cosmos-live-build-report.json \
+            scripts/cosmos-asset-map.json \
+            scripts/cosmos-remaining-remote-assets.json \
+            scripts/preview-check \
+            sitemap.xml robots.txt README.md
           if ! git diff --cached --quiet; then
-            git commit -m "Temp: add Cosmos source probes"
+            git commit -m "Build exact static Cosmos clone from live source"
             git push origin "HEAD:${{ github.ref_name }}"
           fi
