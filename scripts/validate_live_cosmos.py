@@ -21,6 +21,7 @@ ASSET_MAP_FILE = ROOT / "scripts/cosmos-asset-map.json"
 REDIRECT_FILE = ROOT / "scripts/cosmos-redirects.json"
 REMOTE_FILE = ROOT / "scripts/cosmos-remaining-remote-assets.json"
 BROWSER_REPORT = ROOT / "scripts/preview-check/browser-report.json"
+VALIDATION_REPORT = ROOT / "scripts/cosmos-validation-report.json"
 
 
 def hex_text(value: str) -> str:
@@ -345,7 +346,7 @@ def main() -> None:
             issues.append(f"custom JS syntax error: {result.stderr.strip()}")
 
     total_size = sum(p.stat().st_size for p in SITE.rglob("*") if p.is_file())
-    print(json.dumps({
+    summary = {
         "issues": len(issues),
         "warnings": warnings,
         "canonical_urls": len(canonical_urls),
@@ -359,7 +360,10 @@ def main() -> None:
         "remaining_remote_assets": len(remaining),
         "asset_status_counts": report.get("asset_status_counts"),
         "issue_samples": issues[:100],
-    }, indent=2, sort_keys=True))
+        "all_issues": issues,
+    }
+    VALIDATION_REPORT.write_text(json.dumps(summary, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    print(json.dumps(summary, indent=2, sort_keys=True))
     if issues:
         sys.exit(1)
 
