@@ -1,18 +1,26 @@
-# LulaZel Hub — Cosmos UI
+# LulaZel Hub — exact light Cosmos UI
 
-The site keeps the captured **Cosmos/Webflow layout** as its base: Cosmos top navigation,
-Cosmos sections, Cosmos typography and the large Cosmos-style wordmark treatment. The
-earlier touchfoundry-style bar has been removed.
+`cosmos-copy/` keeps the captured **original Cosmos/Webflow UI**: the off-white
+page, white rounded navbar, black typography and buttons, Cosmos hero,
+sections, cards, filters, footer and interactions. The later dark adaptation
+CSS and generic text wordmark were removed.
 
-The wordmark is rebuilt as **LulaZel Hub** in the Cosmos condensed block-letter style.
-Content is taken from `LulamileMkhungela/my-new-site` and
-`LulamileMkhungela/portfolio.github.io` wherever those repositories have it; captured
-Cosmos content remains in place wherever they do not.
+Only the requested tweaks remain on top:
 
-The dropdown beside the logo contains **For Marketing Teams**, **For You**, **For Tech**
-and **Something Else**. **For You** is selected by default and shows the Cosmos/default
-view. The other options intentionally keep that same default view until their layouts
-are specified — no extra views were invented.
+- the brand is **LulaZel Hub**, rebuilt with inline geometric `.logo-word` /
+  `.logo-letter` vector forms in black;
+- the light Cosmos navbar keeps the dropdown beside the logo, with
+  **For You** selected by default;
+- all navbar/list items are Cosmos items, including `Services`, `Industries`,
+  `Works`, `About`, `Blog`, `Contacts`, the Cosmos services dropdown and the
+  right-side `Contact Lulamile` / `Business Developer` / `Book a Call` block;
+- Cosmos service labels remain in the hero: `UI/UX Product design`,
+  `Web design`, `Branding`, `Development`;
+- supplied South African contact details and owner project/testimonial content
+  are used where they exist, with Cosmos copy retained elsewhere.
+
+`For Marketing Teams`, `For Tech` and `Something Else` intentionally keep the
+default Cosmos view; no extra views were invented.
 
 ## Run locally
 
@@ -20,9 +28,9 @@ are specified — no extra views were invented.
 ./scripts/serve.sh 3000
 ```
 
-## Clone note
+## Rebuild
 
-HTTrack 3.51 was built and installed from upstream source. Direct HTTPS transfer to
-`www.cosmos.studio` was blocked in this sandbox, so the aggressive fallback mirrored a
-complete local Cosmos reference source with all files/assets and unlimited depth. The
-finished site is in `cosmos-copy/`.
+`scripts/rebuild_exact_cosmos.py` is idempotent within this workspace. It resets
+`cosmos-copy/` from the complete local `/tmp/site-source` Cosmos fallback,
+strips the non-Cosmos dark CSS, writes the light theme/tweaks and reapplies the
+brand, navigation, wordmark and content changes.

@@ -1,5 +1,7 @@
+
+/* Cosmos/Webflow typography. Browser-facing CDN URLs preserve the exact faces. */
+@font-face{font-family:Switzer;src:url('https://cdn.prod.website-files.com/69f9c76884333229e651e7bc/69f9c76f84333229e651ea81_Switzer-Variable.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap}
+@font-face{font-family:Inter;src:url('https://cdn.prod.website-files.com/69f9c76884333229e651e7bc/69f9c76f84333229e651e91b_InterVariable.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap}
+@font-face{font-family:'Digital 7 Mono';src:url('https://cdn.prod.website-files.com/69f9c76884333229e651e7bc/6a2b431dff5a5c84fd2c5f0a_digital-7%20%5C(mono%5C).woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
 @font-face{font-family:Poppins;src:url('../owner/my-new-site/fonts/poppins-latin-400-normal.woff2') format('woff2');font-weight:400;font-display:swap}
-@font-face{font-family:Poppins;src:url('../owner/my-new-site/fonts/poppins-latin-500-normal.woff2') format('woff2');font-weight:500;font-display:swap}
 @font-face{font-family:Poppins;src:url('../owner/my-new-site/fonts/poppins-latin-600-normal.woff2') format('woff2');font-weight:600;font-display:swap}
-@font-face{font-family:Poppins;src:url('../owner/my-new-site/fonts/poppins-latin-700-normal.woff2') format('woff2');font-weight:700;font-display:swap}
-@font-face{font-family:Poppins;src:url('../owner/my-new-site/fonts/poppins-latin-800-normal.woff2') format('woff2');font-weight:800;font-display:swap}
