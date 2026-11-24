@@ -107,7 +107,11 @@ MIME_EXT = {
 
 MAX_PAGE_BYTES = 3 * 1024 * 1024
 MAX_ASSET_BYTES = 8 * 1024 * 1024
-MAX_TOTAL_ASSET_BYTES = 52 * 1024 * 1024
+MAX_LOCAL_MEDIA_BYTES = 250 * 1024
+CRITICAL_LOCAL_EXTS = {
+    ".css", ".js", ".mjs", ".json", ".lottie", ".svg", ".xml", ".txt",
+    ".woff", ".woff2", ".ttf", ".otf", ".map", ".html",
+}
 MAX_EXTRA_PATHS = 500
 MAX_DISCOVERY_PASSES = 4
 MAX_RECURSION_PASSES = 6
@@ -555,10 +559,20 @@ def asset_candidates(url: str) -> list[str]:
 
 
 def download_asset(url: str) -> dict:
-    global TOTAL_ASSET_BYTES, ACTIVE_ASSET_BYTES
-    reserved = 0
+    """Download a source asset, or keep oversized media at its exact remote URL.
+
+    Text, fonts, script chunks and SVG assets are always localized because the
+    Cosmos runtime needs them to animate and link correctly. Large raster/video
+    assets stay at their exact Cosmos/CDN URL so the generated site remains a
+    practical static repository while preserving all original media sources.
+    """
     last_status = "no-candidate"
+    p = urlsplit(url)
+    ext = Path(unquote(p.path)).suffix.lower()
+    critical = ext in CRITICAL_LOCAL_EXTS
+    size_limit = MAX_ASSET_BYTES if critical else MAX_LOCAL_MEDIA_BYTES
     for candidate in asset_candidates(url):
+        response = None
         try:
             headers = ASSET_HEADERS.copy()
             if "jsdelivr.net" in (urlsplit(candidate).hostname or ""):
@@ -571,27 +585,31 @@ def download_asset(url: str) -> dict:
                 declared = 0
             if not response.ok:
                 last_status = f"http-{response.status_code}"
+                response.close()
                 continue
-            if declared > MAX_ASSET_BYTES:
+            if declared > size_limit:
+                if not critical:
+                    response.close()
+                    return {"url": url, "status": "remote", "local": url, "declared": declared}
                 last_status = "too-large"
+                response.close()
                 continue
-            reserve = declared or 1024 * 1024
-            with BUDGET_LOCK:
-                if TOTAL_ASSET_BYTES + ACTIVE_ASSET_BYTES + reserve > MAX_TOTAL_ASSET_BYTES:
-                    return {"url": url, "status": "budget", "declared": declared}
-                ACTIVE_ASSET_BYTES += reserve
-                reserved = reserve
             chunks: list[bytes] = []
             size = 0
+            streamed_too_large = False
             for chunk in response.iter_content(64 * 1024):
                 if not chunk:
                     continue
                 size += len(chunk)
-                if size > MAX_ASSET_BYTES:
-                    last_status = "too-large-stream"
+                if size > size_limit:
+                    streamed_too_large = True
                     break
                 chunks.append(chunk)
-            if size > MAX_ASSET_BYTES:
+            response.close()
+            if streamed_too_large:
+                if not critical:
+                    return {"url": url, "status": "remote", "local": url, "declared": size}
+                last_status = "too-large-stream"
                 continue
             data = b"".join(chunks)
             if not data:
@@ -613,13 +631,6 @@ def download_asset(url: str) -> dict:
                         duplicate = True
                     else:
                         CONTENT_TO_PATH[digest] = local
-            # Account for the downloaded bytes immediately. Otherwise a whole
-            # pass of parallel workers is budgeted against the previous pass's
-            # total and the generated clone can grow far past the repository cap.
-            with BUDGET_LOCK:
-                TOTAL_ASSET_BYTES += size
-                ACTIVE_ASSET_BYTES -= reserved
-                reserved = 0
             return {
                 "url": url,
                 "status": "ok",
@@ -635,12 +646,9 @@ def download_asset(url: str) -> dict:
             }
         except Exception as exc:  # noqa: BLE001
             last_status = f"error:{type(exc).__name__}"
+            if response is not None:
+                response.close()
             continue
-        finally:
-            if reserved:
-                with BUDGET_LOCK:
-                    ACTIVE_ASSET_BYTES -= reserved
-                reserved = 0
     return {"url": url, "status": last_status, "declared": 0}
 
 
@@ -1062,6 +1070,9 @@ def fetch_all_assets(initial_texts: list[tuple[str, str]]) -> tuple[list[dict], 
         for url, result in zip(batch, results):
             seen.add(url)
             statuses[result["status"]] += 1
+            if result["status"] == "remote":
+                ASSET_MAP[url] = result.get("local") or url
+                continue
             if result["status"] != "ok":
                 failures.append({k: v for k, v in result.items() if k not in {"data", "text"}})
                 continue

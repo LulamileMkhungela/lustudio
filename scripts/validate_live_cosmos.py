@@ -378,6 +378,8 @@ def main() -> None:
         issues.append(f"site is too large: {report.get('site_total_bytes')} bytes")
     asset_map = json.loads(ASSET_MAP_FILE.read_text(encoding="utf-8"))
     for remote, local in asset_map.items():
+        if local.startswith(("http://", "https://", "//")):
+            continue
         if not local_path_exists(local):
             issues.append(f"asset map target missing for {remote}: {local}")
 

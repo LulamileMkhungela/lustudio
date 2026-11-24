@@ -41,6 +41,7 @@ JS_RELATIVE_RE = re.compile(
     re.I,
 )
 CRITICAL_EXTS = {".css", ".js", ".mjs", ".woff", ".woff2", ".ttf", ".otf", ".svg", ".json", ".lottie"}
+LOCAL_CRITICAL_EXTS = f.CRITICAL_LOCAL_EXTS
 REMOTE_HOST_MARKERS = {
     "cdn.prod.website-files.com", "assets.website-files.com",
     "assets-global.website-files.com", "uploads-ssl.webflow.com",
@@ -58,6 +59,13 @@ f.ASSET_MAP.update(initial_map)
 def is_static_host(host: str) -> bool:
     host = host.lower()
     return host in f.INTERNAL_HOSTS or host in f.STATIC_HOSTS or any(marker in host for marker in REMOTE_HOST_MARKERS)
+
+
+def intentional_remote_urls() -> set[str]:
+    return {
+        url for url, local in f.ASSET_MAP.items()
+        if local.startswith(("http://", "https://", "//"))
+    }
 
 
 def local_mirror_for_remote(url: str) -> str | None:
@@ -105,7 +113,15 @@ def fast_fetch(url: str) -> dict:
                 continue
             ctype = response.headers.get("content-type", "")
             data = response.content
-            if not data or len(data) > f.MAX_ASSET_BYTES:
+            ext = Path(urlsplit(url).path).suffix.lower()
+            critical = ext in LOCAL_CRITICAL_EXTS
+            limit = f.MAX_ASSET_BYTES if critical else f.MAX_LOCAL_MEDIA_BYTES
+            if not data:
+                last_status = "empty-or-too-large"
+                continue
+            if len(data) > limit:
+                if not critical:
+                    return {"url": url, "status": "remote", "local": url, "size": len(data)}
                 last_status = "empty-or-too-large"
                 continue
             if ctype.startswith("text/html") and not data.lstrip().lower().startswith(b"<svg"):
@@ -177,7 +193,7 @@ def browser_failed_paths() -> set[str]:
         url = item.get("url", "")
         p = urlsplit(url)
         local = p.path + (("?" + p.query) if p.query else "")
-        if local and Path(p.path).suffix.lower() in f.STATIC_EXTS:
+        if local and Path(p.path).suffix.lower() in f.STATIC_EXTS and f.LIVE + local not in intentional_remote_urls():
             paths.add(local)
     return paths
 
@@ -203,7 +219,7 @@ def html_local_values(text: str) -> list[str]:
 
 def base_url_for_generated_js(public: str) -> str:
     for remote, local in f.ASSET_MAP.items():
-        if urlsplit(local).path == public:
+        if not local.startswith(("http://", "https://", "//")) and urlsplit(local).path == public:
             return remote
     return f.LIVE + public
 
@@ -231,6 +247,7 @@ def discovered_remote_urls() -> set[str]:
             urls.update(json.loads(REMOTE_FILE.read_text(encoding="utf-8")))
         except ValueError:
             pass
+    urls -= intentional_remote_urls()
     for path in SITE.rglob("*"):
         if not path.is_file() or path.suffix.lower() not in {".js", ".mjs"}:
             continue
@@ -244,6 +261,7 @@ def discovered_remote_urls() -> set[str]:
             host = (urlsplit(value).hostname or "").lower()
             if is_static_host(host) and Path(urlsplit(value).path).suffix.lower() in CRITICAL_EXTS:
                 urls.add(value)
+    urls -= intentional_remote_urls()
     return urls
 
 
@@ -297,6 +315,8 @@ def critical_remote_urls() -> set[str]:
 def rewrite_all_text_files() -> None:
     reverse_map: dict[str, str] = {}
     for remote, local in f.ASSET_MAP.items():
+        if local.startswith(("http://", "https://", "//")):
+            continue
         reverse_map.setdefault(urlsplit(local).path, remote)
     changed = 0
     for path in SITE.rglob("*"):
@@ -387,6 +407,9 @@ def main() -> None:
             local_results = list(executor.map(fast_fetch, [f.LIVE + p for p in local_batch]))
         for local, result in zip(local_batch, local_results):
             attempted_local.add(local)
+            if result.get("status") == "remote":
+                f.ASSET_MAP[f.LIVE + local] = f.LIVE + local
+                continue
             if result.get("status") == "ok":
                 write_result(result, f.LIVE + local, local)
                 extra = [result.get("base_url"), result.get("fetched_from")]
@@ -401,6 +424,9 @@ def main() -> None:
             remote_results = list(executor.map(fast_fetch, remote_batch))
         for remote_url, result in zip(remote_batch, remote_results):
             attempted_remote.add(remote_url)
+            if result.get("status") == "remote":
+                f.ASSET_MAP[remote_url] = remote_url
+                continue
             if result.get("status") == "ok":
                 local = local_mirror_for_remote(remote_url) or f.public_path_for_asset(remote_url, result.get("content_type", ""))
                 write_result(result, remote_url, local)
