@@ -2531,7 +2531,7 @@ textarea.w-select {
 
 
 /* ==========================================================================
-   LulaZel Hub NEXT.JS ENHANCEMENTS & MATCHING ANIMATIONS
+   LULAZEL HUB STUDIO NEXT.JS ENHANCEMENTS & MATCHING ANIMATIONS
    ========================================================================== */
 
 :root {
@@ -2556,7 +2556,7 @@ html, body {
 }
 
 /* --------------------------------------------------------------------------
-   HERO / HOME HEADER (LulaZel Hub & SERVICES)
+   HERO / HOME HEADER (LULAZEL HUB STUDIO & SERVICES)
    -------------------------------------------------------------------------- */
 .section_home-header {
     background-color: var(--_colors---primary--black, #0f1011);
@@ -5086,7 +5086,7 @@ img, video {
 }
 
 /* ==========================================================================
-   LulaZel Hub FOOTER & WORLD TIMERS (MATCHING REFERENCE IMAGE)
+   LULAZEL HUB STUDIO FOOTER & WORLD TIMERS (MATCHING REFERENCE IMAGE)
    ========================================================================== */
 
 .section_footer {
@@ -5359,37 +5359,37 @@ img, video {
 }
 
 /* ==========================================================================
-   LulaZel Hub IMPRESSIVE INTERACTIVE ANIMATIONS SUITE
+   LULAZEL HUB STUDIO IMPRESSIVE INTERACTIVE ANIMATIONS SUITE
    ========================================================================== */
 
 /* ── 1. Kinetic Text & Section Stagger Reveal ── */
-.lulazelhub-reveal {
+.LulaZel Hub-reveal {
     opacity: 0;
     transform: translateY(28px);
     transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
     will-change: opacity, transform;
 }
 
-.lulazelhub-reveal.is-revealed {
+.LulaZel Hub-reveal.is-revealed {
     opacity: 1;
     transform: translateY(0);
 }
 
 /* Stagger delay utilities */
-.lulazelhub-stagger-1 { transition-delay: 0.08s; }
-.lulazelhub-stagger-2 { transition-delay: 0.16s; }
-.lulazelhub-stagger-3 { transition-delay: 0.24s; }
-.lulazelhub-stagger-4 { transition-delay: 0.32s; }
-.lulazelhub-stagger-5 { transition-delay: 0.40s; }
+.LulaZel Hub-stagger-1 { transition-delay: 0.08s; }
+.LulaZel Hub-stagger-2 { transition-delay: 0.16s; }
+.LulaZel Hub-stagger-3 { transition-delay: 0.24s; }
+.LulaZel Hub-stagger-4 { transition-delay: 0.32s; }
+.LulaZel Hub-stagger-5 { transition-delay: 0.40s; }
 
-/* ── 2. Interactive 3D Tilt & Specular Cursor Light (lulazelhub Card Physics) ── */
-.lulazelhub-tilt-card {
+/* ── 2. Interactive 3D Tilt & Specular Cursor Light (LulaZel Hub Card Physics) ── */
+.LulaZel Hub-tilt-card {
     transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.35s ease;
     transform-style: preserve-3d;
     will-change: transform;
 }
 
-.lulazelhub-glow-overlay {
+.LulaZel Hub-glow-overlay {
     position: absolute;
     inset: 0;
     pointer-events: none;
@@ -5400,12 +5400,12 @@ img, video {
     z-index: 10;
 }
 
-.lulazelhub-tilt-card:hover .lulazelhub-glow-overlay {
+.LulaZel Hub-tilt-card:hover .LulaZel Hub-glow-overlay {
     opacity: 1;
 }
 
 /* ── 3. Magnetic Element Attraction Physics ── */
-.lulazelhub-magnetic {
+.LulaZel Hub-magnetic {
     transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1);
     will-change: transform;
 }

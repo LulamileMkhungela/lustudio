@@ -1,0 +1,34 @@
+
+/* Small additions only; the captured LulaZel Hub layout remains the base UI. */
+.lz-nav-logo{display:inline-block;font-family:Impact,'Arial Narrow','Helvetica Neue',Arial,sans-serif;font-weight:900;font-size:1.35rem;letter-spacing:-.045em;line-height:1;text-transform:uppercase;color:#f4f5f5!important;transform:scaleX(.82);transform-origin:left center;white-space:nowrap}
+.lz-hero-wordmark,.lz-footer-wordmark{font-family:Impact,'Arial Narrow','Helvetica Neue',Arial,sans-serif;font-weight:900;text-transform:uppercase;letter-spacing:-.055em;line-height:.78;color:#f4f5f5!important;white-space:nowrap}
+.lz-hero-wordmark{width:100%;text-align:center;font-size:clamp(4rem,16.5vw,17rem);transform:scaleX(.82);transform-origin:center}
+.lz-footer-wordmark{width:100%;text-align:left;font-size:clamp(3rem,11vw,11rem);margin:2rem 0 .75rem;transform:scaleX(.82);transform-origin:left center}
+.home-header_headings{justify-content:center}
+.lz-view-switch{position:relative;flex:none;margin-left:1rem;z-index:10002}
+.lz-view-toggle{display:flex;align-items:center;gap:.55rem;height:2.25rem;padding:0 .9rem;border:1px solid rgba(255,255,255,.18);border-radius:999px;background:rgba(255,255,255,.04);color:#f4f5f5;font-family:Poppins,Inter,system-ui,sans-serif;font-size:.8rem;font-weight:500;line-height:1;cursor:pointer;white-space:nowrap}
+.lz-view-toggle:hover,.lz-view-toggle:focus-visible{background:rgba(255,255,255,.09);outline:none}
+.lz-view-dot{display:inline-block;width:.42rem;height:.42rem;border-radius:50%;background:#f4f5f5;opacity:.9;flex:none}
+.lz-view-chevron{width:.65rem;height:.4rem;opacity:.8;transition:transform .2s ease}
+.lz-view-switch.is-open .lz-view-chevron{transform:rotate(180deg)}
+.lz-view-menu{position:absolute;left:0;top:calc(100% + .6rem);width:15rem;padding:.5rem;border:1px solid rgba(255,255,255,.16);border-radius:1rem;background:#17191b;box-shadow:0 1rem 3rem rgba(0,0,0,.5)}
+.lz-view-menu[hidden]{display:none}
+.lz-view-option{display:flex;align-items:center;gap:.7rem;width:100%;padding:.65rem .75rem;border:0;border-radius:.65rem;background:transparent;color:#f4f5f5;font:inherit;text-align:left;cursor:pointer}
+.lz-view-option:hover,.lz-view-option:focus-visible{background:rgba(255,255,255,.08);outline:none}
+.lz-view-option .lz-view-check{margin-left:auto;width:.9rem;height:.9rem;opacity:0}
+.lz-view-option.is-selected .lz-view-check{opacity:1}
+.lz-view-status{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+.lz-testimonials{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;margin-top:1rem}
+.lz-testimonial{padding:1.25rem;border:1px solid rgba(255,255,255,.14);border-radius:1rem;background:#151719}
+.lz-testimonial p{margin:0 0 .9rem;color:#c9ced0;font-size:.9rem;line-height:1.6}
+.lz-testimonial strong{display:block;font-size:.9rem;font-weight:600}
+.lz-testimonial span{display:block;margin-top:.25rem;color:#8f989b;font-size:.78rem;line-height:1.5}
+.lz-contact-strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.8rem;margin:2rem 0}
+.lz-contact-strip a{display:block;padding:1rem;border:1px solid rgba(255,255,255,.14);border-radius:1rem;background:#151719;color:#f4f5f5}
+.lz-contact-strip span{display:block;margin-bottom:.35rem;color:#8ff5c0;font-size:.68rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase}
+.lz-contact-strip strong{font-size:.88rem;font-weight:600;line-height:1.5;word-break:break-word}
+.lz-page-footer{padding:4rem 2rem 2rem;border-top:1px solid rgba(255,255,255,.1);background:#0e0e10}
+.lz-page-footer-in{max-width:1200px;margin:0 auto}
+.lz-page-footer-note{margin:0;color:#8f989b;font-size:.85rem}
+@media(max-width:991px){.lz-testimonials,.lz-contact-strip{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:767px){.lz-view-switch{margin-left:.5rem}.lz-view-toggle{height:2rem;padding:0 .65rem;font-size:.72rem}.lz-view-menu{width:13.5rem}.lz-testimonials,.lz-contact-strip{grid-template-columns:1fr}.lz-hero-wordmark{font-size:clamp(3rem,17vw,6rem)}.lz-footer-wordmark{font-size:clamp(2.5rem,14vw,5rem)}}
