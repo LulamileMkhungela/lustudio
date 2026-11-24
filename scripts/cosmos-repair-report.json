@@ -1,0 +1,148 @@
+{
+  "failures": [
+    {
+      "local": "/69f9c76884333229e651e7bc/fonts/6aeaa6c1464661f4ab7c0ba5-InterVariable-latin.woff2",
+      "status": "http-404",
+      "url": "https://www.cosmos.studio/69f9c76884333229e651e7bc/fonts/6aeaa6c1464661f4ab7c0ba5-InterVariable-latin.woff2"
+    },
+    {
+      "local": "/Mad%20Dogs_4.mp4",
+      "status": "empty-or-too-large",
+      "url": "https://www.cosmos.studio/Mad%20Dogs_4.mp4"
+    },
+    {
+      "local": "/Portals/36/Documents/Doctrine/Other_Pubs/ms_2525d.pdf",
+      "status": "http-404",
+      "url": "https://www.cosmos.studio/Portals/36/Documents/Doctrine/Other_Pubs/ms_2525d.pdf"
+    },
+    {
+      "local": "/Portals/54/Documents/DD/issuances/dodd/300009p.PDF",
+      "status": "http-404",
+      "url": "https://www.cosmos.studio/Portals/54/Documents/DD/issuances/dodd/300009p.PDF"
+    },
+    {
+      "local": "/Povir_3.mp4",
+      "status": "empty-or-too-large",
+      "url": "https://www.cosmos.studio/Povir_3.mp4"
+    },
+    {
+      "local": "/Sirius_3.mp4",
+      "status": "empty-or-too-large",
+      "url": "https://www.cosmos.studio/Sirius_3.mp4"
+    },
+    {
+      "local": "/Skylight_10.mp4",
+      "status": "empty-or-too-large",
+      "url": "https://www.cosmos.studio/Skylight_10.mp4"
+    },
+    {
+      "local": "/Skylight_2.mp4",
+      "status": "empty-or-too-large",
+      "url": "https://www.cosmos.studio/Skylight_2.mp4"
+    },
+    {
+      "local": "/Skylight_6.mp4",
+      "status": "empty-or-too-large",
+      "url": "https://www.cosmos.studio/Skylight_6.mp4"
+    },
+    {
+      "local": "/Skylight_7.mp4",
+      "status": "empty-or-too-large",
+      "url": "https://www.cosmos.studio/Skylight_7.mp4"
+    },
+    {
+      "local": "/Skylight_9.mp4",
+      "status": "empty-or-too-large",
+      "url": "https://www.cosmos.studio/Skylight_9.mp4"
+    },
+    {
+      "local": "/Sportfaction_2.mp4",
+      "status": "empty-or-too-large",
+      "url": "https://www.cosmos.studio/Sportfaction_2.mp4"
+    },
+    {
+      "local": "/Talis_2.mp4",
+      "status": "empty-or-too-large",
+      "url": "https://www.cosmos.studio/Talis_2.mp4"
+    },
+    {
+      "local": "/_astro/thinkyville.CSVNowDo.mp4",
+      "status": "http-404",
+      "url": "https://www.cosmos.studio/_astro/thinkyville.CSVNowDo.mp4"
+    },
+    {
+      "local": "/assets/data/globe.js",
+      "status": "http-404",
+      "url": "https://www.cosmos.studio/assets/data/globe.js"
+    },
+    {
+      "local": "/datasets/huggingface/documentation-images/resolve/main/llama.cpp/llama-cpp-hardware-coverage-final.mp4",
+      "status": "http-404",
+      "url": "https://www.cosmos.studio/datasets/huggingface/documentation-images/resolve/main/llama.cpp/llama-cpp-hardware-coverage-final.mp4"
+    },
+    {
+      "local": "/gweb-uniblog-publish-prod/original_videos/rapid-generate-1x-speed_resized.mp4",
+      "status": "http-404",
+      "url": "https://www.cosmos.studio/gweb-uniblog-publish-prod/original_videos/rapid-generate-1x-speed_resized.mp4"
+    },
+    {
+      "local": "/kftzwdyauwt9/658zg0FHAg7zuL73DTFCfC/fff21fd18c260ce64a10a14ee8d4e851/advancing-chip-design-social.png?w=1600&h=900&fit=fill",
+      "status": "http-404",
+      "url": "https://www.cosmos.studio/kftzwdyauwt9/658zg0FHAg7zuL73DTFCfC/fff21fd18c260ce64a10a14ee8d4e851/advancing-chip-design-social.png?w=1600&h=900&fit=fill"
+    },
+    {
+      "local": "/mdx-assets/e193aefe-5e58-431c-8cd2-adadac0c1496/44573edd-9653-49b3-ba07-7b3643545ef9.d3072be3.png",
+      "status": "http-404",
+      "url": "https://www.cosmos.studio/mdx-assets/e193aefe-5e58-431c-8cd2-adadac0c1496/44573edd-9653-49b3-ba07-7b3643545ef9.d3072be3.png"
+    },
+    {
+      "local": "/productions/intel/research/trust/Lee%20%26%20See%20Trust%20Review.pdf",
+      "status": "http-404",
+      "url": "https://www.cosmos.studio/productions/intel/research/trust/Lee%20%26%20See%20Trust%20Review.pdf"
+    },
+    {
+      "local": "/sites/default/files/documents/5794867/National-Security-Archive-David-Gunning-DARPA.pdf",
+      "status": "http-404",
+      "url": "https://www.cosmos.studio/sites/default/files/documents/5794867/National-Security-Archive-David-Gunning-DARPA.pdf"
+    },
+    {
+      "local": "/sti/tr/pdf/ADA570220.pdf",
+      "status": "http-404",
+      "url": "https://www.cosmos.studio/sti/tr/pdf/ADA570220.pdf"
+    },
+    {
+      "local": "/wp-content/uploads/2023/09/Scientific-Measurement-of-Situation-Awareness-in-Operational-Testing-1.pdf",
+      "status": "http-404",
+      "url": "https://www.cosmos.studio/wp-content/uploads/2023/09/Scientific-Measurement-of-Situation-Awareness-in-Operational-Testing-1.pdf"
+    }
+  ],
+  "local_repaired": [
+    "/_m/cdn.jsdelivr.net/npm/%40finsweet/attributes%402/dist/src-T7SM3ONB.js",
+    "/assets/js/runtime/webflow.achunk.3b30247fffb28e48.js",
+    "/assets/js/runtime/webflow.achunk.91a6f07ab49e2764.js"
+  ],
+  "passes": [
+    {
+      "failures": 23,
+      "local_repaired": 3,
+      "remaining_missing_local_paths": 26,
+      "remaining_remote_assets": 13,
+      "remote_repaired": 2,
+      "site_file_count": 1292,
+      "site_total_bytes": 259749854
+    },
+    {
+      "failures": 23,
+      "local_repaired": 3,
+      "remaining_missing_local_paths": 26,
+      "remaining_remote_assets": 13,
+      "remote_repaired": 2,
+      "site_file_count": 1292,
+      "site_total_bytes": 259747207
+    }
+  ],
+  "remote_repaired": [
+    "https://cdn.prod.website-files.com/69f9c76884333229e651e7bc/69f9c76f84333229e651ea81_Switzer-Variable.woff2",
+    "https://cdn.prod.website-files.com/69f9c76884333229e651e7bc/69f9c76f84333229e651eb6b_bullet-icon.svg"
+  ]
+}

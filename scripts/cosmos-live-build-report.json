@@ -2,61 +2,6 @@
   "asset_failures": [
     {
       "declared": 0,
-      "status": "http-400",
-      "url": "https://cdn.jsdelivr.net/gh/cosmos-studio/cosmos-digest-media%4000c12478d6ab1fdd2cb7abacecb0c495f51c7acb/site/headkit-1.0.24.js"
-    },
-    {
-      "declared": 0,
-      "status": "http-400",
-      "url": "https://cdn.jsdelivr.net/gh/cosmos-studio/cosmos-digest-media%403ac2e31/site/reviews-letter-1.1.0.js"
-    },
-    {
-      "declared": 0,
-      "status": "http-400",
-      "url": "https://cdn.jsdelivr.net/npm/%40finsweet/attributes%402/attributes.js"
-    },
-    {
-      "declared": 0,
-      "status": "html-response",
-      "url": "https://apps.dtic.mil/sti/tr/pdf/ADA570220.pdf"
-    },
-    {
-      "declared": 0,
-      "status": "http-400",
-      "url": "https://cdn.jsdelivr.net/gh/cosmos-studio/cosmos-digest-media%40main/issues/03/suno.mp4"
-    },
-    {
-      "declared": 0,
-      "status": "http-400",
-      "url": "https://cdn.jsdelivr.net/gh/cosmos-studio/cosmos-digest-media%40main/issues/03/weave.mp4"
-    },
-    {
-      "declared": 0,
-      "status": "http-400",
-      "url": "https://cdn.jsdelivr.net/gh/cosmos-studio/cosmos-digest-media%40main/issues/04/reanimate.mp4"
-    },
-    {
-      "declared": 0,
-      "status": "http-400",
-      "url": "https://cdn.jsdelivr.net/gh/cosmos-studio/cosmos-digest-media%40main/issues/04/subframe-motion.mp4"
-    },
-    {
-      "declared": 0,
-      "status": "http-400",
-      "url": "https://cdn.jsdelivr.net/gh/cosmos-studio/cosmos-digest-media%40main/issues/04/suncatcher-photo.mp4"
-    },
-    {
-      "declared": 0,
-      "status": "http-400",
-      "url": "https://cdn.jsdelivr.net/gh/cosmos-studio/cosmos-digest-media%40main/issues/05/digest05-figma-agent.mp4"
-    },
-    {
-      "declared": 0,
-      "status": "http-400",
-      "url": "https://cdn.jsdelivr.net/gh/cosmos-studio/cosmos-digest-media%40main/issues/05/images26.mp4"
-    },
-    {
-      "declared": 0,
       "status": "http-403",
       "url": "https://cdn.prod.website-files.com"
     },
@@ -67,28 +12,8 @@
     },
     {
       "declared": 0,
-      "status": "error:SSLError",
-      "url": "https://csel.eng.ohio-state.edu/productions/intel/research/trust/Lee%20%26%20See%20Trust%20Review.pdf"
-    },
-    {
-      "declared": 0,
       "status": "http-404",
       "url": "https://fonts.googleapis.com"
-    },
-    {
-      "declared": 0,
-      "status": "http-404",
-      "url": "https://fonts.gstatic.com"
-    },
-    {
-      "declared": 0,
-      "status": "http-403",
-      "url": "https://media.giphy.com/media/%24%7Be%7D/giphy.gif"
-    },
-    {
-      "declared": 0,
-      "status": "too-large",
-      "url": "https://pub-20f1446e7b0742a883bf8aa1f91aac83.r2.dev/full%20video%20mute%20(1).mp4"
     },
     {
       "declared": 0,
@@ -117,6 +42,11 @@
     },
     {
       "declared": 0,
+      "status": "too-large",
+      "url": "https://video.cosmos.studio/Mad%20Dogs_4.mp4"
+    },
+    {
+      "declared": 0,
       "status": "http-404",
       "url": "https://video.cosmos.studio/Make"
     },
@@ -127,53 +57,8 @@
     },
     {
       "declared": 0,
-      "status": "http-429",
-      "url": "https://video.cosmos.studio/Numo_1.mp4"
-    },
-    {
-      "declared": 0,
-      "status": "http-429",
-      "url": "https://video.cosmos.studio/Numo_10.mp4"
-    },
-    {
-      "declared": 0,
-      "status": "http-429",
-      "url": "https://video.cosmos.studio/Numo_17.mp4"
-    },
-    {
-      "declared": 0,
-      "status": "http-429",
-      "url": "https://video.cosmos.studio/Numo_2.mp4"
-    },
-    {
-      "declared": 0,
-      "status": "http-429",
-      "url": "https://video.cosmos.studio/Numo_5.1.mp4"
-    },
-    {
-      "declared": 0,
-      "status": "http-429",
-      "url": "https://video.cosmos.studio/Plarium_1_1.mp4"
-    },
-    {
-      "declared": 0,
-      "status": "http-429",
-      "url": "https://video.cosmos.studio/Povir_1.mp4"
-    },
-    {
-      "declared": 0,
-      "status": "http-429",
-      "url": "https://video.cosmos.studio/Povir_2.mp4"
-    },
-    {
-      "declared": 0,
-      "status": "http-429",
+      "status": "too-large",
       "url": "https://video.cosmos.studio/Povir_3.mp4"
-    },
-    {
-      "declared": 0,
-      "status": "http-429",
-      "url": "https://video.cosmos.studio/Procamp_Instagram.mp4"
     },
     {
       "declared": 0,
@@ -182,108 +67,48 @@
     },
     {
       "declared": 0,
-      "status": "http-429",
-      "url": "https://video.cosmos.studio/Procamp_Main.mp4"
-    },
-    {
-      "declared": 0,
-      "status": "http-429",
-      "url": "https://video.cosmos.studio/Remroom_1.2.mp4"
-    },
-    {
-      "declared": 0,
-      "status": "http-429",
-      "url": "https://video.cosmos.studio/Seatwiz_1.mp4"
-    },
-    {
-      "declared": 0,
-      "status": "http-429",
-      "url": "https://video.cosmos.studio/Seatwiz_2.mp4"
-    },
-    {
-      "declared": 0,
-      "status": "http-429",
-      "url": "https://video.cosmos.studio/Seatwiz_3.mp4"
-    },
-    {
-      "declared": 0,
       "status": "http-404",
       "url": "https://video.cosmos.studio/Simply"
     },
     {
       "declared": 0,
-      "status": "http-429",
-      "url": "https://video.cosmos.studio/Sirius_1.mp4"
-    },
-    {
-      "declared": 0,
-      "status": "http-429",
+      "status": "too-large",
       "url": "https://video.cosmos.studio/Sirius_3.mp4"
     },
     {
       "declared": 0,
-      "status": "http-429",
+      "status": "too-large",
       "url": "https://video.cosmos.studio/Skylight_10.mp4"
     },
     {
       "declared": 0,
-      "status": "http-429",
+      "status": "too-large",
       "url": "https://video.cosmos.studio/Skylight_2.mp4"
     },
     {
       "declared": 0,
-      "status": "http-429",
+      "status": "too-large",
       "url": "https://video.cosmos.studio/Skylight_6.mp4"
     },
     {
       "declared": 0,
-      "status": "http-429",
+      "status": "too-large",
       "url": "https://video.cosmos.studio/Skylight_7.mp4"
     },
     {
       "declared": 0,
-      "status": "http-429",
+      "status": "too-large",
       "url": "https://video.cosmos.studio/Skylight_9.mp4"
     },
     {
       "declared": 0,
-      "status": "http-429",
-      "url": "https://video.cosmos.studio/SoloChat_1.mp4"
-    },
-    {
-      "declared": 0,
-      "status": "http-429",
-      "url": "https://video.cosmos.studio/SoloChat_11.mp4"
-    },
-    {
-      "declared": 0,
-      "status": "http-429",
-      "url": "https://video.cosmos.studio/Sportfaction_1.mp4"
-    },
-    {
-      "declared": 0,
-      "status": "http-429",
+      "status": "too-large",
       "url": "https://video.cosmos.studio/Sportfaction_2.mp4"
     },
     {
       "declared": 0,
-      "status": "http-429",
-      "url": "https://video.cosmos.studio/Sportfaction_4.mp4"
-    },
-    {
-      "declared": 0,
-      "status": "http-429",
-      "url": "https://video.cosmos.studio/Talis_1.mp4"
-    },
-    {
-      "declared": 0,
-      "status": "http-429",
+      "status": "too-large",
       "url": "https://video.cosmos.studio/Talis_2.mp4"
-    },
-    {
-      "declared": 0,
-      "status": "http-429",
-      "url": "https://video.cosmos.studio/Talis_3.mp4"
     },
     {
       "declared": 0,
@@ -292,33 +117,8 @@
     },
     {
       "declared": 0,
-      "status": "http-429",
-      "url": "https://video.cosmos.studio/edway_video.mp4"
-    },
-    {
-      "declared": 0,
-      "status": "http-429",
-      "url": "https://video.cosmos.studio/jobcannon_text.mp4"
-    },
-    {
-      "declared": 0,
-      "status": "http-429",
-      "url": "https://video.cosmos.studio/octy_web_poster.mp4"
-    },
-    {
-      "declared": 0,
       "status": "http-403",
       "url": "https://video.cosmos.studio/wf/6ae8a62e"
-    },
-    {
-      "declared": 0,
-      "status": "http-429",
-      "url": "https://video.cosmos.studio/wf/6affe7fd2bd5f15dcb5494ef_digest09-ms-today.mp4"
-    },
-    {
-      "declared": 0,
-      "status": "http-429",
-      "url": "https://video.cosmos.studio/yawn_1.mp4"
     },
     {
       "declared": 0,
@@ -332,8 +132,8 @@
     },
     {
       "declared": 0,
-      "status": "http-403",
-      "url": "https://www.esd.whs.mil/Portals/54/Documents/DD/issuances/dodd/300009p.PDF"
+      "status": "http-404",
+      "url": "https://www.cosmos.studio/rss.xml"
     },
     {
       "declared": 0,
@@ -352,8 +152,238 @@
     },
     {
       "declared": 0,
-      "status": "http-403",
-      "url": "https://www.jcs.mil/Portals/36/Documents/Doctrine/Other_Pubs/ms_2525d.pdf"
+      "status": "http-404",
+      "url": "https://cdn.jsdelivr.net/gh/cosmos-studio/cosmos-digest-media@00c12478d6ab1fdd2cb7abacecb0c495f51c7acb/site/6adda69239f5d800b26ad6f1%2Fnavhide-1.0.2.js"
+    },
+    {
+      "declared": 0,
+      "status": "http-404",
+      "url": "https://cdn.jsdelivr.net/gh/cosmos-studio/cosmos-digest-media@00c12478d6ab1fdd2cb7abacecb0c495f51c7acb/site/6adf40c72c38c5b74a2a4978%2Ffooterhoverlite-1.0.1.js"
+    },
+    {
+      "declared": 0,
+      "status": "budget",
+      "url": "https://cdn.jsdelivr.net/gh/cosmos-studio/cosmos-digest-media@00c12478d6ab1fdd2cb7abacecb0c495f51c7acb/site/dx-v2.css"
+    },
+    {
+      "declared": 0,
+      "status": "http-404",
+      "url": "https://cdn.jsdelivr.net/gh/cosmos-studio/cosmos-digest-media@3ac2e31/site/a.style.css"
+    },
+    {
+      "declared": 0,
+      "status": "budget",
+      "url": "https://cdn.jsdelivr.net/npm/@finsweet/attributes@2/dist/chunk-ADKL4AJZ.js"
+    },
+    {
+      "declared": 0,
+      "status": "budget",
+      "url": "https://cdn.jsdelivr.net/npm/@finsweet/attributes@2/dist/chunk-CB6LZ537.js"
+    },
+    {
+      "declared": 0,
+      "status": "budget",
+      "url": "https://cdn.jsdelivr.net/npm/@finsweet/attributes@2/dist/chunk-GGDEANQW.js"
+    },
+    {
+      "declared": 0,
+      "status": "budget",
+      "url": "https://cdn.jsdelivr.net/npm/@finsweet/attributes@2/dist/chunk-J3PPETVR.js"
+    },
+    {
+      "declared": 0,
+      "status": "budget",
+      "url": "https://cdn.jsdelivr.net/npm/@finsweet/attributes@2/dist/chunk-K46K3RI5.js"
+    },
+    {
+      "declared": 0,
+      "status": "budget",
+      "url": "https://cdn.jsdelivr.net/npm/@finsweet/attributes@2/dist/chunk-L4B2V5MO.js"
+    },
+    {
+      "declared": 0,
+      "status": "budget",
+      "url": "https://cdn.jsdelivr.net/npm/@finsweet/attributes@2/dist/chunk-N2ZCN6XY.js"
+    },
+    {
+      "declared": 0,
+      "status": "budget",
+      "url": "https://cdn.jsdelivr.net/npm/@finsweet/attributes@2/dist/chunk-OF4NI3Y7.js"
+    },
+    {
+      "declared": 0,
+      "status": "budget",
+      "url": "https://cdn.jsdelivr.net/npm/@finsweet/attributes@2/dist/chunk-VDEO3AAR.js"
+    },
+    {
+      "declared": 0,
+      "status": "budget",
+      "url": "https://cdn.jsdelivr.net/npm/@finsweet/attributes@2/dist/chunk-WIALCYDY.js"
+    },
+    {
+      "declared": 0,
+      "status": "budget",
+      "url": "https://cdn.jsdelivr.net/npm/@finsweet/attributes@2/dist/chunk-XRTLPMPO.js"
+    },
+    {
+      "declared": 0,
+      "status": "budget",
+      "url": "https://cdn.jsdelivr.net/npm/@finsweet/attributes@2/dist/chunk-ZI7TAH2K.js"
+    },
+    {
+      "declared": 0,
+      "status": "budget",
+      "url": "https://cdn.jsdelivr.net/npm/@finsweet/attributes@2/dist/src-42KUKVDL.js"
+    },
+    {
+      "declared": 0,
+      "status": "budget",
+      "url": "https://cdn.jsdelivr.net/npm/@finsweet/attributes@2/dist/src-54HM7DDM.js"
+    },
+    {
+      "declared": 0,
+      "status": "budget",
+      "url": "https://cdn.jsdelivr.net/npm/@finsweet/attributes@2/dist/src-54MDR7OA.js"
+    },
+    {
+      "declared": 0,
+      "status": "budget",
+      "url": "https://cdn.jsdelivr.net/npm/@finsweet/attributes@2/dist/src-5FJEVIDV.js"
+    },
+    {
+      "declared": 0,
+      "status": "budget",
+      "url": "https://cdn.jsdelivr.net/npm/@finsweet/attributes@2/dist/src-5N4JJT7X.js"
+    },
+    {
+      "declared": 0,
+      "status": "budget",
+      "url": "https://cdn.jsdelivr.net/npm/@finsweet/attributes@2/dist/src-7W5OKVYP.js"
+    },
+    {
+      "declared": 0,
+      "status": "budget",
+      "url": "https://cdn.jsdelivr.net/npm/@finsweet/attributes@2/dist/src-A2VD7CGF.js"
+    },
+    {
+      "declared": 0,
+      "status": "budget",
+      "url": "https://cdn.jsdelivr.net/npm/@finsweet/attributes@2/dist/src-A6N4LPNU.js"
+    },
+    {
+      "declared": 0,
+      "status": "budget",
+      "url": "https://cdn.jsdelivr.net/npm/@finsweet/attributes@2/dist/src-AUC4K6LH.js"
+    },
+    {
+      "declared": 0,
+      "status": "budget",
+      "url": "https://cdn.jsdelivr.net/npm/@finsweet/attributes@2/dist/src-GFTYMQR2.js"
+    },
+    {
+      "declared": 0,
+      "status": "budget",
+      "url": "https://cdn.jsdelivr.net/npm/@finsweet/attributes@2/dist/src-HDR726UO.js"
+    },
+    {
+      "declared": 0,
+      "status": "budget",
+      "url": "https://cdn.jsdelivr.net/npm/@finsweet/attributes@2/dist/src-HI4IOX4Z.js"
+    },
+    {
+      "declared": 0,
+      "status": "budget",
+      "url": "https://cdn.jsdelivr.net/npm/@finsweet/attributes@2/dist/src-KLFUEVVN.js"
+    },
+    {
+      "declared": 0,
+      "status": "budget",
+      "url": "https://cdn.jsdelivr.net/npm/@finsweet/attributes@2/dist/src-M4M5IWJ3.js"
+    },
+    {
+      "declared": 0,
+      "status": "budget",
+      "url": "https://cdn.jsdelivr.net/npm/@finsweet/attributes@2/dist/src-MAOGI2L3.js"
+    },
+    {
+      "declared": 0,
+      "status": "budget",
+      "url": "https://cdn.jsdelivr.net/npm/@finsweet/attributes@2/dist/src-MCTWDYVU.js"
+    },
+    {
+      "declared": 0,
+      "status": "budget",
+      "url": "https://cdn.jsdelivr.net/npm/@finsweet/attributes@2/dist/src-NFD22BDS.js"
+    },
+    {
+      "declared": 0,
+      "status": "budget",
+      "url": "https://cdn.jsdelivr.net/npm/@finsweet/attributes@2/dist/src-NWEPOKZY.js"
+    },
+    {
+      "declared": 0,
+      "status": "budget",
+      "url": "https://cdn.jsdelivr.net/npm/@finsweet/attributes@2/dist/src-PAEDQGTX.js"
+    },
+    {
+      "declared": 0,
+      "status": "budget",
+      "url": "https://cdn.jsdelivr.net/npm/@finsweet/attributes@2/dist/src-PNWKI3M6.js"
+    },
+    {
+      "declared": 0,
+      "status": "budget",
+      "url": "https://cdn.jsdelivr.net/npm/@finsweet/attributes@2/dist/src-SZ4BVHSB.js"
+    },
+    {
+      "declared": 0,
+      "status": "budget",
+      "url": "https://cdn.jsdelivr.net/npm/@finsweet/attributes@2/dist/src-T7SM3ONB.js"
+    },
+    {
+      "declared": 0,
+      "status": "budget",
+      "url": "https://cdn.jsdelivr.net/npm/@finsweet/attributes@2/dist/src-TJ5JY7D3.js"
+    },
+    {
+      "declared": 0,
+      "status": "budget",
+      "url": "https://cdn.jsdelivr.net/npm/@finsweet/attributes@2/dist/src-TYJKTQTA.js"
+    },
+    {
+      "declared": 0,
+      "status": "budget",
+      "url": "https://cdn.jsdelivr.net/npm/@finsweet/attributes@2/dist/src-VHRDLQ4W.js"
+    },
+    {
+      "declared": 0,
+      "status": "budget",
+      "url": "https://cdn.jsdelivr.net/npm/@finsweet/attributes@2/dist/src-VWGKX7LV.js"
+    },
+    {
+      "declared": 0,
+      "status": "budget",
+      "url": "https://cdn.jsdelivr.net/npm/@finsweet/attributes@2/dist/src-WH7BOLRH.js"
+    },
+    {
+      "declared": 0,
+      "status": "budget",
+      "url": "https://cdn.jsdelivr.net/npm/@finsweet/attributes@2/dist/src-WVGUCPJL.js"
+    },
+    {
+      "declared": 0,
+      "status": "budget",
+      "url": "https://cdn.jsdelivr.net/npm/@finsweet/attributes@2/dist/src-ZM4YP3DK.js"
+    },
+    {
+      "declared": 954,
+      "status": "budget",
+      "url": "https://cdn.prod.website-files.com/69f9c76884333229e651e7bc%2F689e5ba67671442434f3ca35%2F6ae1944db01bcbfdb7217371%2Fddpolish-1.0.0.js"
+    },
+    {
+      "declared": 975,
+      "status": "budget",
+      "url": "https://cdn.prod.website-files.com/69f9c76884333229e651e7bc%2F689e5ba67671442434f3ca35%2F6ae199a04b86a1a5a7134d92%2Ffaqpolish-1.0.1.js"
     },
     {
       "declared": 0,
@@ -458,7 +488,7 @@
     {
       "declared": 0,
       "status": "http-403",
-      "url": "https://d3e54v103j8qbb.cloudfront.net/js/%2Be.js"
+      "url": "https://d3e54v103j8qbb.cloudfront.net/js/+e.js"
     },
     {
       "declared": 0,
@@ -521,41 +551,6 @@
       "url": "https://fonts.gstatic.com/s/pixelifysans/v3/CHylV-3HFUT7aC4iv1TxGDR9JnkEi1lR.woff2"
     },
     {
-      "declared": 6864,
-      "status": "budget",
-      "url": "https://fonts.gstatic.com/s/pressstart2p/v16/e3t4euO8T-267oIAQAu6jDQyK3nRivN04w.woff2"
-    },
-    {
-      "declared": 12512,
-      "status": "budget",
-      "url": "https://fonts.gstatic.com/s/pressstart2p/v16/e3t4euO8T-267oIAQAu6jDQyK3nVivM.woff2"
-    },
-    {
-      "declared": 6592,
-      "status": "budget",
-      "url": "https://fonts.gstatic.com/s/pressstart2p/v16/e3t4euO8T-267oIAQAu6jDQyK3nWivN04w.woff2"
-    },
-    {
-      "declared": 6704,
-      "status": "budget",
-      "url": "https://fonts.gstatic.com/s/pressstart2p/v16/e3t4euO8T-267oIAQAu6jDQyK3nYivN04w.woff2"
-    },
-    {
-      "declared": 9856,
-      "status": "budget",
-      "url": "https://fonts.gstatic.com/s/pressstart2p/v16/e3t4euO8T-267oIAQAu6jDQyK3nbivN04w.woff2"
-    },
-    {
-      "declared": 41280,
-      "status": "budget",
-      "url": "https://news.google.com/swg/js/v1/publisher.js"
-    },
-    {
-      "declared": 27731,
-      "status": "budget",
-      "url": "https://platform.twitter.com/widgets.js"
-    },
-    {
       "declared": 0,
       "status": "http-404",
       "url": "https://res.cloudinary.com/wtugnojd/raw/upload/v1794384609/site/Node.js"
@@ -578,212 +573,212 @@
     {
       "declared": 0,
       "status": "budget",
-      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/%40finsweet/attributes%402/dist/chunk-ADKL4AJZ.js"
+      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/@finsweet/attributes@2/dist/chunk-ADKL4AJZ.js"
     },
     {
       "declared": 0,
       "status": "budget",
-      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/%40finsweet/attributes%402/dist/chunk-CB6LZ537.js"
+      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/@finsweet/attributes@2/dist/chunk-CB6LZ537.js"
     },
     {
       "declared": 0,
       "status": "budget",
-      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/%40finsweet/attributes%402/dist/chunk-GGDEANQW.js"
+      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/@finsweet/attributes@2/dist/chunk-GGDEANQW.js"
     },
     {
       "declared": 0,
       "status": "budget",
-      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/%40finsweet/attributes%402/dist/chunk-J3PPETVR.js"
+      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/@finsweet/attributes@2/dist/chunk-J3PPETVR.js"
     },
     {
       "declared": 0,
       "status": "budget",
-      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/%40finsweet/attributes%402/dist/chunk-K46K3RI5.js"
+      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/@finsweet/attributes@2/dist/chunk-K46K3RI5.js"
     },
     {
       "declared": 0,
       "status": "budget",
-      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/%40finsweet/attributes%402/dist/chunk-L4B2V5MO.js"
+      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/@finsweet/attributes@2/dist/chunk-L4B2V5MO.js"
     },
     {
       "declared": 0,
       "status": "budget",
-      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/%40finsweet/attributes%402/dist/chunk-N2ZCN6XY.js"
+      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/@finsweet/attributes@2/dist/chunk-N2ZCN6XY.js"
     },
     {
       "declared": 0,
       "status": "budget",
-      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/%40finsweet/attributes%402/dist/chunk-OF4NI3Y7.js"
+      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/@finsweet/attributes@2/dist/chunk-OF4NI3Y7.js"
     },
     {
       "declared": 0,
       "status": "budget",
-      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/%40finsweet/attributes%402/dist/chunk-VDEO3AAR.js"
+      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/@finsweet/attributes@2/dist/chunk-VDEO3AAR.js"
     },
     {
       "declared": 0,
       "status": "budget",
-      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/%40finsweet/attributes%402/dist/chunk-WIALCYDY.js"
+      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/@finsweet/attributes@2/dist/chunk-WIALCYDY.js"
     },
     {
       "declared": 0,
       "status": "budget",
-      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/%40finsweet/attributes%402/dist/chunk-XRTLPMPO.js"
+      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/@finsweet/attributes@2/dist/chunk-XRTLPMPO.js"
     },
     {
       "declared": 0,
       "status": "budget",
-      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/%40finsweet/attributes%402/dist/chunk-ZI7TAH2K.js"
+      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/@finsweet/attributes@2/dist/chunk-ZI7TAH2K.js"
     },
     {
       "declared": 0,
       "status": "budget",
-      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/%40finsweet/attributes%402/dist/src-42KUKVDL.js"
+      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/@finsweet/attributes@2/dist/src-42KUKVDL.js"
     },
     {
       "declared": 0,
       "status": "budget",
-      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/%40finsweet/attributes%402/dist/src-54HM7DDM.js"
+      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/@finsweet/attributes@2/dist/src-54HM7DDM.js"
     },
     {
       "declared": 0,
       "status": "budget",
-      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/%40finsweet/attributes%402/dist/src-54MDR7OA.js"
+      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/@finsweet/attributes@2/dist/src-54MDR7OA.js"
     },
     {
       "declared": 0,
       "status": "budget",
-      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/%40finsweet/attributes%402/dist/src-5FJEVIDV.js"
+      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/@finsweet/attributes@2/dist/src-5FJEVIDV.js"
     },
     {
       "declared": 0,
       "status": "budget",
-      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/%40finsweet/attributes%402/dist/src-5N4JJT7X.js"
+      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/@finsweet/attributes@2/dist/src-5N4JJT7X.js"
     },
     {
       "declared": 0,
       "status": "budget",
-      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/%40finsweet/attributes%402/dist/src-7W5OKVYP.js"
+      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/@finsweet/attributes@2/dist/src-7W5OKVYP.js"
     },
     {
       "declared": 0,
       "status": "budget",
-      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/%40finsweet/attributes%402/dist/src-A2VD7CGF.js"
+      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/@finsweet/attributes@2/dist/src-A2VD7CGF.js"
     },
     {
       "declared": 0,
       "status": "budget",
-      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/%40finsweet/attributes%402/dist/src-A6N4LPNU.js"
+      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/@finsweet/attributes@2/dist/src-A6N4LPNU.js"
     },
     {
       "declared": 0,
       "status": "budget",
-      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/%40finsweet/attributes%402/dist/src-AUC4K6LH.js"
+      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/@finsweet/attributes@2/dist/src-AUC4K6LH.js"
     },
     {
       "declared": 0,
       "status": "budget",
-      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/%40finsweet/attributes%402/dist/src-GFTYMQR2.js"
+      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/@finsweet/attributes@2/dist/src-GFTYMQR2.js"
     },
     {
       "declared": 0,
       "status": "budget",
-      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/%40finsweet/attributes%402/dist/src-HDR726UO.js"
+      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/@finsweet/attributes@2/dist/src-HDR726UO.js"
     },
     {
       "declared": 0,
       "status": "budget",
-      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/%40finsweet/attributes%402/dist/src-HI4IOX4Z.js"
+      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/@finsweet/attributes@2/dist/src-HI4IOX4Z.js"
     },
     {
       "declared": 0,
       "status": "budget",
-      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/%40finsweet/attributes%402/dist/src-KLFUEVVN.js"
+      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/@finsweet/attributes@2/dist/src-KLFUEVVN.js"
     },
     {
       "declared": 0,
       "status": "budget",
-      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/%40finsweet/attributes%402/dist/src-M4M5IWJ3.js"
+      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/@finsweet/attributes@2/dist/src-M4M5IWJ3.js"
     },
     {
       "declared": 0,
       "status": "budget",
-      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/%40finsweet/attributes%402/dist/src-MAOGI2L3.js"
+      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/@finsweet/attributes@2/dist/src-MAOGI2L3.js"
     },
     {
       "declared": 0,
       "status": "budget",
-      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/%40finsweet/attributes%402/dist/src-MCTWDYVU.js"
+      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/@finsweet/attributes@2/dist/src-MCTWDYVU.js"
     },
     {
       "declared": 0,
       "status": "budget",
-      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/%40finsweet/attributes%402/dist/src-NFD22BDS.js"
+      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/@finsweet/attributes@2/dist/src-NFD22BDS.js"
     },
     {
       "declared": 0,
       "status": "budget",
-      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/%40finsweet/attributes%402/dist/src-NWEPOKZY.js"
+      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/@finsweet/attributes@2/dist/src-NWEPOKZY.js"
     },
     {
       "declared": 0,
       "status": "budget",
-      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/%40finsweet/attributes%402/dist/src-PAEDQGTX.js"
+      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/@finsweet/attributes@2/dist/src-PAEDQGTX.js"
     },
     {
       "declared": 0,
       "status": "budget",
-      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/%40finsweet/attributes%402/dist/src-PNWKI3M6.js"
+      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/@finsweet/attributes@2/dist/src-PNWKI3M6.js"
     },
     {
       "declared": 0,
       "status": "budget",
-      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/%40finsweet/attributes%402/dist/src-SZ4BVHSB.js"
+      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/@finsweet/attributes@2/dist/src-SZ4BVHSB.js"
     },
     {
       "declared": 0,
       "status": "budget",
-      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/%40finsweet/attributes%402/dist/src-T7SM3ONB.js"
+      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/@finsweet/attributes@2/dist/src-T7SM3ONB.js"
     },
     {
       "declared": 0,
       "status": "budget",
-      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/%40finsweet/attributes%402/dist/src-TJ5JY7D3.js"
+      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/@finsweet/attributes@2/dist/src-TJ5JY7D3.js"
     },
     {
       "declared": 0,
       "status": "budget",
-      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/%40finsweet/attributes%402/dist/src-TYJKTQTA.js"
+      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/@finsweet/attributes@2/dist/src-TYJKTQTA.js"
     },
     {
       "declared": 0,
       "status": "budget",
-      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/%40finsweet/attributes%402/dist/src-VHRDLQ4W.js"
+      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/@finsweet/attributes@2/dist/src-VHRDLQ4W.js"
     },
     {
       "declared": 0,
       "status": "budget",
-      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/%40finsweet/attributes%402/dist/src-VWGKX7LV.js"
+      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/@finsweet/attributes@2/dist/src-VWGKX7LV.js"
     },
     {
       "declared": 0,
       "status": "budget",
-      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/%40finsweet/attributes%402/dist/src-WH7BOLRH.js"
+      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/@finsweet/attributes@2/dist/src-WH7BOLRH.js"
     },
     {
       "declared": 0,
       "status": "budget",
-      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/%40finsweet/attributes%402/dist/src-WVGUCPJL.js"
+      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/@finsweet/attributes@2/dist/src-WVGUCPJL.js"
     },
     {
       "declared": 0,
       "status": "budget",
-      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/%40finsweet/attributes%402/dist/src-ZM4YP3DK.js"
+      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/@finsweet/attributes@2/dist/src-ZM4YP3DK.js"
     },
     {
       "declared": 0,
       "status": "http-404",
-      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/keen-slider%406.8.5/6.8.5/keen-slider.js"
+      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/keen-slider@6.8.5/6.8.5/keen-slider.js"
     },
     {
       "declared": 0,
@@ -953,11 +948,6 @@
     {
       "declared": 0,
       "status": "budget",
-      "url": "https://www.cosmos.studio/assets/js/ddpolish-1.0.0.js"
-    },
-    {
-      "declared": 0,
-      "status": "budget",
       "url": "https://www.cosmos.studio/assets/js/dx-v2.css"
     },
     {
@@ -969,16 +959,6 @@
       "declared": 0,
       "status": "http-404",
       "url": "https://www.cosmos.studio/assets/js/f.style.css"
-    },
-    {
-      "declared": 0,
-      "status": "budget",
-      "url": "https://www.cosmos.studio/assets/js/faqpolish-1.0.1.js"
-    },
-    {
-      "declared": 0,
-      "status": "budget",
-      "url": "https://www.cosmos.studio/assets/js/footerhoverlite-1.0.1.js"
     },
     {
       "declared": 0,
@@ -1009,11 +989,6 @@
       "declared": 0,
       "status": "http-404",
       "url": "https://www.cosmos.studio/assets/js/n.style.css"
-    },
-    {
-      "declared": 0,
-      "status": "budget",
-      "url": "https://www.cosmos.studio/assets/js/navhide-1.0.2.js"
     },
     {
       "declared": 0,
@@ -1058,7 +1033,7 @@
     {
       "declared": 0,
       "status": "http-404",
-      "url": "https://www.cosmos.studio/assets/js/vendor/%2Be.js"
+      "url": "https://www.cosmos.studio/assets/js/vendor/+e.js"
     },
     {
       "declared": 0,
@@ -1159,6 +1134,16 @@
       "declared": 0,
       "status": "http-404",
       "url": "https://www.cosmos.studio/assets/js/zeusscaselayout-1.2.0.js"
+    },
+    {
+      "declared": 0,
+      "status": "budget",
+      "url": "https://cdn.jsdelivr.net/gh/cosmos-studio/cosmos-digest-media@64fec129bf26fca15599ec01c32a66a1a16cb231/site/icons/"
+    },
+    {
+      "declared": 0,
+      "status": "http-403",
+      "url": "https://cdn.prod.website-files.com/69f9c76884333229e651e7bc%2F689e5ba67671442434f3ca35%2F"
     },
     {
       "declared": 0,
@@ -1346,16 +1331,6 @@
       "url": "https://res.cloudinary.com/wtugnojd/raw/upload/v1794384609/site/-160.jpg"
     },
     {
-      "declared": 1678,
-      "status": "budget",
-      "url": "https://upload.wikimedia.org/wikipedia/commons/1/1d/Perplexity_AI_logo.svg"
-    },
-    {
-      "declared": 0,
-      "status": "http-404",
-      "url": "https://vimeo.com/api/oembed.json?url=https%3A//vimeo.com/"
-    },
-    {
       "declared": 0,
       "status": "budget",
       "url": "https://widget.clutch.co/static/js/widget.js.LICENSE.txt"
@@ -1378,32 +1353,32 @@
     {
       "declared": 0,
       "status": "http-404",
-      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/gh/cosmos-studio/cosmos-digest-media%400a4688c/site/award-badges/"
+      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/gh/cosmos-studio/cosmos-digest-media@0a4688c/site/award-badges/"
     },
     {
       "declared": 44010,
       "status": "budget",
-      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/gh/cosmos-studio/cosmos-digest-media%404c819c6de08a49af04751f39bf0990720ad2c505/site/img/defense-hero-poster.webp"
+      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/gh/cosmos-studio/cosmos-digest-media@4c819c6de08a49af04751f39bf0990720ad2c505/site/img/defense-hero-poster.webp"
     },
     {
       "declared": 0,
       "status": "http-404",
-      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/gh/cosmos-studio/cosmos-digest-media%4064fec129bf26fca15599ec01c32a66a1a16cb231/site/icons/"
+      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/gh/cosmos-studio/cosmos-digest-media@64fec129bf26fca15599ec01c32a66a1a16cb231/site/icons/"
     },
     {
       "declared": 0,
       "status": "http-404",
-      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/gh/cosmos-studio/cosmos-digest-media%4075c8c36e8ac97d60d586d4f451def30f606c0981/site/c.mov"
+      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/gh/cosmos-studio/cosmos-digest-media@75c8c36e8ac97d60d586d4f451def30f606c0981/site/c.mov"
     },
     {
       "declared": 0,
       "status": "http-404",
-      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/keen-slider%406.8.5/e.mov"
+      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/keen-slider@6.8.5/e.mov"
     },
     {
       "declared": 0,
       "status": "http-404",
-      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/keen-slider%406.8.5/n.mov"
+      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/npm/keen-slider@6.8.5/n.mov"
     },
     {
       "declared": 0,
@@ -1491,28 +1466,52 @@
       "url": "https://www.cosmos.studio/assets/img/purse-square.webp"
     },
     {
-      "declared": 9112,
-      "status": "budget",
-      "url": "https://www.cosmos.studio/assets/img/red-dot-logo.webp"
+      "declared": 0,
+      "status": "http-404",
+      "url": "https://www.cosmos.studio/assets/img/search.svg)%3Bbackground-position%3A1rem%3Bbackground-repeat%3Ano-repeat%3Bbackground-size%3Aauto%3Bborder%3A1px"
     },
     {
       "declared": 0,
       "status": "http-404",
-      "url": "https://www.cosmos.studio/assets/img/search.svg)%3Bbackground-position%3A1rem%3Bbackground-repeat%3Ano-repeat%3Bbackground-size%3Aauto%3Bborder%3A1px"
+      "url": "https://www.cosmos.studio/assets/js/"
+    },
+    {
+      "declared": 0,
+      "status": "http-404",
+      "url": "https://www.cosmos.studio/assets/js/W.lottie"
+    },
+    {
+      "declared": 0,
+      "status": "http-404",
+      "url": "https://www.cosmos.studio/assets/js/awwwards-ribbon-honorable.svg"
+    },
+    {
+      "declared": 0,
+      "status": "http-404",
+      "url": "https://www.cosmos.studio/assets/js/awwwards-ribbon-sotd.svg"
+    },
+    {
+      "declared": 0,
+      "status": "http-404",
+      "url": "https://www.cosmos.studio/assets/js/behance-ribbon-graphic-design-3x.png"
+    },
+    {
+      "declared": 0,
+      "status": "http-404",
+      "url": "https://www.cosmos.studio/assets/js/behance-ribbon-stock-3x.png"
     }
   ],
   "asset_status_counts": {
-    "budget": 89,
-    "error:SSLError": 1,
-    "html-response": 5,
-    "http-400": 11,
-    "http-403": 51,
-    "http-404": 128,
-    "http-429": 35,
-    "ok": 1163,
-    "too-large": 1
+    "budget": 121,
+    "html-response": 4,
+    "http-400": 1,
+    "http-403": 49,
+    "http-404": 130,
+    "ok": 1197,
+    "repaired": 5,
+    "too-large": 10
   },
-  "asset_urls_seen": 1484,
+  "asset_urls_seen": 1512,
   "canonical_paths": [
     "/",
     "/about",
@@ -1635,17 +1634,142 @@
     "For Tech",
     "Something Else"
   ],
-  "exact_page_count": 121,
-  "fallback_pages": 0,
+  "exact_page_count": 114,
+  "fallback_pages": 7,
   "internal_route_count": 121,
-  "localized_asset_count": 1163,
+  "localized_asset_count": 1249,
   "page_source_counts": {
-    "jina": 5,
-    "live": 116
+    "live": 114
   },
   "pages_written": 121,
   "redirect_count": 3,
-  "remaining_remote_asset_count": 76,
-  "site_file_count": 1203,
-  "site_total_bytes": 235562118
+  "remaining_remote_asset_count": 13,
+  "repair_failures": [
+    {
+      "local": "/69f9c76884333229e651e7bc/fonts/6aeaa6c1464661f4ab7c0ba5-InterVariable-latin.woff2",
+      "status": "http-404",
+      "url": "https://www.cosmos.studio/69f9c76884333229e651e7bc/fonts/6aeaa6c1464661f4ab7c0ba5-InterVariable-latin.woff2"
+    },
+    {
+      "local": "/Mad%20Dogs_4.mp4",
+      "status": "empty-or-too-large",
+      "url": "https://www.cosmos.studio/Mad%20Dogs_4.mp4"
+    },
+    {
+      "local": "/Portals/36/Documents/Doctrine/Other_Pubs/ms_2525d.pdf",
+      "status": "http-404",
+      "url": "https://www.cosmos.studio/Portals/36/Documents/Doctrine/Other_Pubs/ms_2525d.pdf"
+    },
+    {
+      "local": "/Portals/54/Documents/DD/issuances/dodd/300009p.PDF",
+      "status": "http-404",
+      "url": "https://www.cosmos.studio/Portals/54/Documents/DD/issuances/dodd/300009p.PDF"
+    },
+    {
+      "local": "/Povir_3.mp4",
+      "status": "empty-or-too-large",
+      "url": "https://www.cosmos.studio/Povir_3.mp4"
+    },
+    {
+      "local": "/Sirius_3.mp4",
+      "status": "empty-or-too-large",
+      "url": "https://www.cosmos.studio/Sirius_3.mp4"
+    },
+    {
+      "local": "/Skylight_10.mp4",
+      "status": "empty-or-too-large",
+      "url": "https://www.cosmos.studio/Skylight_10.mp4"
+    },
+    {
+      "local": "/Skylight_2.mp4",
+      "status": "empty-or-too-large",
+      "url": "https://www.cosmos.studio/Skylight_2.mp4"
+    },
+    {
+      "local": "/Skylight_6.mp4",
+      "status": "empty-or-too-large",
+      "url": "https://www.cosmos.studio/Skylight_6.mp4"
+    },
+    {
+      "local": "/Skylight_7.mp4",
+      "status": "empty-or-too-large",
+      "url": "https://www.cosmos.studio/Skylight_7.mp4"
+    },
+    {
+      "local": "/Skylight_9.mp4",
+      "status": "empty-or-too-large",
+      "url": "https://www.cosmos.studio/Skylight_9.mp4"
+    },
+    {
+      "local": "/Sportfaction_2.mp4",
+      "status": "empty-or-too-large",
+      "url": "https://www.cosmos.studio/Sportfaction_2.mp4"
+    },
+    {
+      "local": "/Talis_2.mp4",
+      "status": "empty-or-too-large",
+      "url": "https://www.cosmos.studio/Talis_2.mp4"
+    },
+    {
+      "local": "/_astro/thinkyville.CSVNowDo.mp4",
+      "status": "http-404",
+      "url": "https://www.cosmos.studio/_astro/thinkyville.CSVNowDo.mp4"
+    },
+    {
+      "local": "/assets/data/globe.js",
+      "status": "http-404",
+      "url": "https://www.cosmos.studio/assets/data/globe.js"
+    },
+    {
+      "local": "/datasets/huggingface/documentation-images/resolve/main/llama.cpp/llama-cpp-hardware-coverage-final.mp4",
+      "status": "http-404",
+      "url": "https://www.cosmos.studio/datasets/huggingface/documentation-images/resolve/main/llama.cpp/llama-cpp-hardware-coverage-final.mp4"
+    },
+    {
+      "local": "/gweb-uniblog-publish-prod/original_videos/rapid-generate-1x-speed_resized.mp4",
+      "status": "http-404",
+      "url": "https://www.cosmos.studio/gweb-uniblog-publish-prod/original_videos/rapid-generate-1x-speed_resized.mp4"
+    },
+    {
+      "local": "/kftzwdyauwt9/658zg0FHAg7zuL73DTFCfC/fff21fd18c260ce64a10a14ee8d4e851/advancing-chip-design-social.png?w=1600&h=900&fit=fill",
+      "status": "http-404",
+      "url": "https://www.cosmos.studio/kftzwdyauwt9/658zg0FHAg7zuL73DTFCfC/fff21fd18c260ce64a10a14ee8d4e851/advancing-chip-design-social.png?w=1600&h=900&fit=fill"
+    },
+    {
+      "local": "/mdx-assets/e193aefe-5e58-431c-8cd2-adadac0c1496/44573edd-9653-49b3-ba07-7b3643545ef9.d3072be3.png",
+      "status": "http-404",
+      "url": "https://www.cosmos.studio/mdx-assets/e193aefe-5e58-431c-8cd2-adadac0c1496/44573edd-9653-49b3-ba07-7b3643545ef9.d3072be3.png"
+    },
+    {
+      "local": "/productions/intel/research/trust/Lee%20%26%20See%20Trust%20Review.pdf",
+      "status": "http-404",
+      "url": "https://www.cosmos.studio/productions/intel/research/trust/Lee%20%26%20See%20Trust%20Review.pdf"
+    },
+    {
+      "local": "/sites/default/files/documents/5794867/National-Security-Archive-David-Gunning-DARPA.pdf",
+      "status": "http-404",
+      "url": "https://www.cosmos.studio/sites/default/files/documents/5794867/National-Security-Archive-David-Gunning-DARPA.pdf"
+    },
+    {
+      "local": "/sti/tr/pdf/ADA570220.pdf",
+      "status": "http-404",
+      "url": "https://www.cosmos.studio/sti/tr/pdf/ADA570220.pdf"
+    },
+    {
+      "local": "/wp-content/uploads/2023/09/Scientific-Measurement-of-Situation-Awareness-in-Operational-Testing-1.pdf",
+      "status": "http-404",
+      "url": "https://www.cosmos.studio/wp-content/uploads/2023/09/Scientific-Measurement-of-Situation-Awareness-in-Operational-Testing-1.pdf"
+    }
+  ],
+  "repaired_local_assets": [
+    "/_m/cdn.jsdelivr.net/npm/%40finsweet/attributes%402/dist/src-T7SM3ONB.js",
+    "/assets/js/runtime/webflow.achunk.3b30247fffb28e48.js",
+    "/assets/js/runtime/webflow.achunk.91a6f07ab49e2764.js"
+  ],
+  "repaired_remote_assets": [
+    "https://cdn.prod.website-files.com/69f9c76884333229e651e7bc/69f9c76f84333229e651ea81_Switzer-Variable.woff2",
+    "https://cdn.prod.website-files.com/69f9c76884333229e651e7bc/69f9c76f84333229e651eb6b_bullet-icon.svg"
+  ],
+  "site_file_count": 1292,
+  "site_total_bytes": 259747207
 }
