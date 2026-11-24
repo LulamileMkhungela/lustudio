@@ -7,7 +7,7 @@ on:
       - .github/workflows/fetch-cosmos.yml
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   probe:
@@ -16,6 +16,9 @@ jobs:
     steps:
       - name: Check out
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
 
       - name: Fetch source probes
         shell: bash
@@ -23,17 +26,17 @@ jobs:
           UA: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
         run: |
           set +e
-          mkdir -p probe
-          : > probe/log.txt
+          mkdir -p scripts/source-probe
+          : > scripts/source-probe/log.txt
           fetch() {
             name="$1"; shift
-            echo "=== $name ===" >> probe/log.txt
-            curl -L --compressed --connect-timeout 15 --max-time 60 -A "$UA" "$@" -D "probe/${name}.headers" -o "probe/${name}.body" 2>>probe/log.txt
-            printf '%s bytes: ' "$name" >> probe/log.txt
-            wc -c < "probe/${name}.body" >> probe/log.txt
-            head -n 8 "probe/${name}.headers" >> probe/log.txt
-            head -c 240 "probe/${name}.body" >> probe/log.txt
-            printf '\n' >> probe/log.txt
+            echo "=== $name ===" >> scripts/source-probe/log.txt
+            curl -L --compressed --connect-timeout 15 --max-time 60 -A "$UA" "$@" -D "scripts/source-probe/${name}.headers" -o "scripts/source-probe/${name}.body" 2>>scripts/source-probe/log.txt
+            printf '%s bytes: ' "$name" >> scripts/source-probe/log.txt
+            wc -c < "scripts/source-probe/${name}.body" >> scripts/source-probe/log.txt
+            head -n 8 "scripts/source-probe/${name}.headers" >> scripts/source-probe/log.txt
+            head -c 240 "scripts/source-probe/${name}.body" >> scripts/source-probe/log.txt
+            printf '\n' >> scripts/source-probe/log.txt
           }
           fetch jina_html -H 'x-respond-with: html' -H 'x-return-format: html' 'https://r.jina.ai/http://www.cosmos.studio/'
           fetch jina_sitemap 'https://r.jina.ai/http://www.cosmos.studio/sitemap.xml'
@@ -45,13 +48,17 @@ jobs:
           fetch site_js 'https://cdn.prod.website-files.com/69f9c76884333229e651e7bc/js/webflow.870bd618.475ada7d0632014b.js'
           fetch gsap 'https://cdn.prod.website-files.com/gsap/3.15.0/gsap.min.js'
           fetch sample_image 'https://cdn.prod.website-files.com/69f9c76884333229e651e7bc/6a6c779df1bd42c0d5633bbf_Profile%20Picture.webp'
-          echo '=== log ===' 
-          cat probe/log.txt
+          echo '=== log ==='
+          cat scripts/source-probe/log.txt
 
-      - name: Upload probes
-        uses: actions/upload-artifact@v4
-        with:
-          name: cosmos-probe
-          path: probe/
-          if-no-files-found: warn
-          retention-days: 1
+      - name: Save probes to this branch
+        shell: bash
+        run: |
+          set -e
+          git config user.name "Arena source fetcher"
+          git config user.email "arena-source-fetcher@users.noreply.github.com"
+          git add -f scripts/source-probe
+          if ! git diff --cached --quiet; then
+            git commit -m "Temp: add Cosmos source probes"
+            git push origin "HEAD:${{ github.ref_name }}"
+          fi
