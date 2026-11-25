@@ -173,6 +173,9 @@ for (const item of pages) {
     if (EDIT_PASS_BANNED_RE.test(cleanVisibleText) || OLD_OWNER_RE.test(cleanVisibleText)) {
       customMarkerIssues.push({ page: item.name, issue: 'removed edit-pass phrase remains visible' });
     }
+    if (html.includes('footer_legal-wrap')) {
+      customMarkerIssues.push({ page: item.name, issue: 'footer legal section remains' });
+    }
     if (item.name === 'home') {
       if (!`${bodyText}\n${html}`.includes(NEW_PRODUCT_STAT)) {
         customMarkerIssues.push({ page: item.name, issue: 'new product stat missing' });

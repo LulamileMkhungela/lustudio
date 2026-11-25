@@ -837,6 +837,11 @@ def apply_edit_pass_raw(raw: str, path: Path) -> str:
         name = tag.name.lower()
         classes = set(tag.classes)
         text = tag_text(raw, tag)
+        if "footer_legal-wrap" in classes:
+            # The WOW-version, AI-facts and injected cookie-settings links all
+            # live in this shared footer section; delete the whole section.
+            edits.append((tag.start, tag.outer_end, ""))
+            continue
         if name == "section" and "section_reason" in classes:
             edits.append((tag.start, tag.outer_end, ""))
         elif "section_awards" in classes and re.search(r"&\s*(?:amp;)?\s*recognitions", text, re.I):

@@ -269,6 +269,8 @@ def validate_html(path: Path, counters: Counter) -> None:
         issues.append(f"award mention remains visible in {path.relative_to(ROOT)}")
     if EDIT_PASS_BANNED_RE.search(visible) or OLD_OWNER_RE.search(visible):
         issues.append(f"removed edit-pass phrase remains visible in {path.relative_to(ROOT)}")
+    if soup.select_one(".footer_legal-wrap"):
+        issues.append(f"footer legal section remains in {path.relative_to(ROOT)}")
     if MONEY_RE.search(visible):
         issues.append(f"dollar currency remains visible in {path.relative_to(ROOT)}")
     if DIGEST_RE.search(visible):
