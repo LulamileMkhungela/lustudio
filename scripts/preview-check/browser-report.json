@@ -1,184 +1,184 @@
 {
   "baseURL": "http://127.0.0.1:8000",
-  "bookCallIssues": [],
-  "customChecks": [
+  "previewMode": "custom",
+  "viewport": {
+    "width": 1440,
+    "height": 1000
+  },
+  "screenshots": [
     {
-      "bookCallCount": 4,
-      "formCount": 0,
-      "mode": "custom",
-      "page": "home",
-      "title": "UI/UX Design Studio for SaaS, AI & Defense Tech | LulaZel Hub",
-      "wordmarkCount": 2
+      "name": "home",
+      "path": "/",
+      "file": "home.png"
     },
     {
-      "bookCallCount": 4,
-      "formCount": 0,
-      "mode": "custom",
-      "page": "home-dark-scheme",
-      "title": "UI/UX Design Studio for SaaS, AI & Defense Tech | LulaZel Hub",
-      "wordmarkCount": 2
+      "name": "dropdown",
+      "path": "/",
+      "file": "dropdown.png"
     },
     {
-      "bookCallCount": 3,
-      "formCount": 1,
-      "mode": "custom",
-      "page": "services",
-      "title": "Website Design Agency | LulaZel Hub",
-      "wordmarkCount": 1
+      "name": "home-dark-scheme",
+      "path": "/",
+      "file": "home-dark-scheme.png"
     },
     {
-      "bookCallCount": 3,
-      "formCount": 2,
-      "mode": "custom",
-      "page": "projects",
-      "title": "UI/UX Design Portfolio & Case Studies | LulaZel Hub",
-      "wordmarkCount": 1
+      "name": "services",
+      "path": "/services/website-design",
+      "file": "services.png"
     },
     {
-      "bookCallCount": 3,
-      "formCount": 0,
-      "mode": "custom",
-      "page": "pricing",
-      "title": "Project Cost Calculator | LulaZel Hub",
-      "wordmarkCount": 1
+      "name": "projects",
+      "path": "/projects",
+      "file": "projects.png"
     },
     {
-      "bookCallCount": 3,
-      "formCount": 0,
-      "mode": "custom",
-      "page": "blog",
-      "title": "Blog: Practical Design Guides | LulaZel Hub",
-      "wordmarkCount": 1
+      "name": "pricing",
+      "path": "/pricing",
+      "file": "pricing.png"
     },
     {
-      "bookCallCount": 4,
-      "formCount": 0,
-      "mode": "custom",
-      "page": "contacts",
-      "title": "Contact LulaZel Hub | UI/UX Design & Development Agency",
-      "wordmarkCount": 1
-    }
-  ],
-  "customMarkerIssues": [],
-  "domChecks": [
-    {
-      "bodyTextLength": 9016,
-      "imageCount": 157,
-      "navbarVisible": true,
-      "page": "home",
-      "sectionCount": 10,
-      "title": "UI/UX Design Studio for SaaS, AI & Defense Tech | LulaZel Hub"
+      "name": "blog",
+      "path": "/blog",
+      "file": "blog.png"
     },
     {
-      "bodyTextLength": 9016,
-      "imageCount": 157,
-      "navbarVisible": true,
-      "page": "home-dark-scheme",
-      "sectionCount": 10,
-      "title": "UI/UX Design Studio for SaaS, AI & Defense Tech | LulaZel Hub"
-    },
-    {
-      "bodyTextLength": 12314,
-      "imageCount": 58,
-      "navbarVisible": true,
-      "page": "services",
-      "sectionCount": 15,
-      "title": "Website Design Agency | LulaZel Hub"
-    },
-    {
-      "bodyTextLength": 2489,
-      "imageCount": 18,
-      "navbarVisible": true,
-      "page": "projects",
-      "sectionCount": 2,
-      "title": "UI/UX Design Portfolio & Case Studies | LulaZel Hub"
-    },
-    {
-      "bodyTextLength": 10100,
-      "imageCount": 20,
-      "navbarVisible": true,
-      "page": "pricing",
-      "sectionCount": 13,
-      "title": "Project Cost Calculator | LulaZel Hub"
-    },
-    {
-      "bodyTextLength": 4740,
-      "imageCount": 29,
-      "navbarVisible": true,
-      "page": "blog",
-      "sectionCount": 1,
-      "title": "Blog: Practical Design Guides | LulaZel Hub"
-    },
-    {
-      "bodyTextLength": 2378,
-      "imageCount": 6,
-      "navbarVisible": true,
-      "page": "contacts",
-      "sectionCount": 1,
-      "title": "Contact LulaZel Hub | UI/UX Design & Development Agency"
+      "name": "contacts",
+      "path": "/contacts",
+      "file": "contacts.png"
     }
   ],
   "dropdownChecks": [
     {
       "defaultLabel": "For You",
+      "selected": "For You",
       "options": [
         "For Marketing Teams",
         "For You",
         "For Tech",
         "Something Else"
-      ],
-      "selected": "For You"
+      ]
+    }
+  ],
+  "domChecks": [
+    {
+      "page": "home",
+      "bodyTextLength": 8969,
+      "sectionCount": 10,
+      "imageCount": 157,
+      "navbarVisible": true,
+      "title": "UI/UX Design Studio for SaaS, AI & Defense Tech | LulaZel Hub"
+    },
+    {
+      "page": "home-dark-scheme",
+      "bodyTextLength": 8969,
+      "sectionCount": 10,
+      "imageCount": 157,
+      "navbarVisible": true,
+      "title": "UI/UX Design Studio for SaaS, AI & Defense Tech | LulaZel Hub"
+    },
+    {
+      "page": "services",
+      "bodyTextLength": 12267,
+      "sectionCount": 15,
+      "imageCount": 58,
+      "navbarVisible": true,
+      "title": "Website Design Agency | LulaZel Hub"
+    },
+    {
+      "page": "projects",
+      "bodyTextLength": 2442,
+      "sectionCount": 2,
+      "imageCount": 18,
+      "navbarVisible": true,
+      "title": "UI/UX Design Portfolio & Case Studies | LulaZel Hub"
+    },
+    {
+      "page": "pricing",
+      "bodyTextLength": 10053,
+      "sectionCount": 13,
+      "imageCount": 20,
+      "navbarVisible": true,
+      "title": "Project Cost Calculator | LulaZel Hub"
+    },
+    {
+      "page": "blog",
+      "bodyTextLength": 4693,
+      "sectionCount": 1,
+      "imageCount": 29,
+      "navbarVisible": true,
+      "title": "Blog: Practical Design Guides | LulaZel Hub"
+    },
+    {
+      "page": "contacts",
+      "bodyTextLength": 2331,
+      "sectionCount": 1,
+      "imageCount": 6,
+      "navbarVisible": true,
+      "title": "Contact LulaZel Hub | UI/UX Design & Development Agency"
+    }
+  ],
+  "customChecks": [
+    {
+      "page": "home",
+      "mode": "custom",
+      "wordmarkCount": 2,
+      "formCount": 0,
+      "bookCallCount": 4,
+      "title": "UI/UX Design Studio for SaaS, AI & Defense Tech | LulaZel Hub"
+    },
+    {
+      "page": "home-dark-scheme",
+      "mode": "custom",
+      "wordmarkCount": 2,
+      "formCount": 0,
+      "bookCallCount": 4,
+      "title": "UI/UX Design Studio for SaaS, AI & Defense Tech | LulaZel Hub"
+    },
+    {
+      "page": "services",
+      "mode": "custom",
+      "wordmarkCount": 1,
+      "formCount": 1,
+      "bookCallCount": 3,
+      "title": "Website Design Agency | LulaZel Hub"
+    },
+    {
+      "page": "projects",
+      "mode": "custom",
+      "wordmarkCount": 1,
+      "formCount": 2,
+      "bookCallCount": 3,
+      "title": "UI/UX Design Portfolio & Case Studies | LulaZel Hub"
+    },
+    {
+      "page": "pricing",
+      "mode": "custom",
+      "wordmarkCount": 1,
+      "formCount": 0,
+      "bookCallCount": 3,
+      "title": "Project Cost Calculator | LulaZel Hub"
+    },
+    {
+      "page": "blog",
+      "mode": "custom",
+      "wordmarkCount": 1,
+      "formCount": 0,
+      "bookCallCount": 3,
+      "title": "Blog: Practical Design Guides | LulaZel Hub"
+    },
+    {
+      "page": "contacts",
+      "mode": "custom",
+      "wordmarkCount": 1,
+      "formCount": 0,
+      "bookCallCount": 4,
+      "title": "Contact LulaZel Hub | UI/UX Design & Development Agency"
     }
   ],
   "failedLocalResponses": [],
-  "formActionIssues": [],
-  "legacyMarkerHits": [],
   "pageErrors": [],
-  "previewMode": "custom",
-  "screenshots": [
-    {
-      "file": "home.png",
-      "name": "home",
-      "path": "/"
-    },
-    {
-      "file": "dropdown.png",
-      "name": "dropdown",
-      "path": "/"
-    },
-    {
-      "file": "home-dark-scheme.png",
-      "name": "home-dark-scheme",
-      "path": "/"
-    },
-    {
-      "file": "services.png",
-      "name": "services",
-      "path": "/services/website-design"
-    },
-    {
-      "file": "projects.png",
-      "name": "projects",
-      "path": "/projects"
-    },
-    {
-      "file": "pricing.png",
-      "name": "pricing",
-      "path": "/pricing"
-    },
-    {
-      "file": "blog.png",
-      "name": "blog",
-      "path": "/blog"
-    },
-    {
-      "file": "contacts.png",
-      "name": "contacts",
-      "path": "/contacts"
-    }
-  ],
-  "viewport": {
-    "height": 1000,
-    "width": 1440
-  }
+  "legacyMarkerHits": [],
+  "customMarkerIssues": [],
+  "formActionIssues": [],
+  "bookCallIssues": []
 }
