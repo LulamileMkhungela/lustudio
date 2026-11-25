@@ -1,0 +1,158 @@
+name: Rebuild source clone and customize LulaZel Hub
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - .github/workflows/fetch-cosmos.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: customize-lulazel-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      BASE_URL: http://127.0.0.1:8000
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install Python dependencies
+        run: python3 -m pip install --disable-pip-version-check beautifulsoup4==4.12.3 requests==2.31.0
+
+      - name: Fetch and build exact static source clone
+        env:
+          UA: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+        shell: bash
+        run: |
+          set -o pipefail
+          python3 scripts/fetch_live_cosmos.py 2>&1 | tee scripts/fetch-build-last-run.txt
+
+      - name: Install browser and Playwright
+        run: |
+          npm install --no-save --no-package-lock playwright
+          npx playwright install chromium --with-deps
+
+      - name: Start local clone server
+        run: |
+          python3 scripts/serve.py 8000 > /tmp/cosmos-server.log 2>&1 &
+          echo $! > /tmp/cosmos-server.pid
+          python3 - <<'PY'
+          import socket, time
+          for _ in range(40):
+              try:
+                  with socket.create_connection(('127.0.0.1', 8000), timeout=1):
+                      print('server ready')
+                      break
+              except OSError:
+                  time.sleep(0.5)
+          else:
+              raise SystemExit('server did not start')
+          PY
+
+      - name: Capture strict-clone browser previews
+        run: node scripts/capture_preview.mjs
+
+      - name: Iteratively repair dynamic browser-discovered assets
+        env:
+          EXPECTED_PREVIEW_MODE: strict
+        shell: bash
+        run: |
+          set -e
+          for i in $(seq 1 8); do
+            echo "dynamic asset repair cycle $i"
+            python3 scripts/repair_cosmos_assets.py
+            node scripts/capture_preview.mjs
+            if python3 scripts/browser_report_clean.py; then
+              break
+            fi
+            if [ "$i" -eq 8 ]; then
+              echo "strict browser preview still has missing local assets after $i cycles"
+              exit 1
+            fi
+          done
+          python3 scripts/browser_report_clean.py
+
+      - name: Validate strict source clone
+        run: python3 scripts/validate_live_cosmos.py > scripts/validate-strict-last-run.txt 2>&1
+
+      - name: Apply LulaZel Hub customization
+        shell: bash
+        run: |
+          set -o pipefail
+          python3 scripts/customize_cosmos_clone.py 2>&1 | tee scripts/customize-last-run.txt
+
+      - name: Validate customized routes, assets and content
+        run: python3 scripts/validate_custom_clone.py
+
+      - name: Capture customized browser previews
+        run: node scripts/capture_preview.mjs
+
+      - name: Validate customized browser report and screenshots
+        env:
+          EXPECTED_PREVIEW_MODE: custom
+        run: python3 scripts/browser_report_clean.py
+
+      - name: Stop local clone server
+        if: always()
+        run: |
+          if [ -f /tmp/cosmos-server.pid ]; then kill "$(cat /tmp/cosmos-server.pid)" || true; fi
+          cat /tmp/cosmos-server.log || true
+
+      - name: Save customized clone to this branch
+        if: success()
+        shell: bash
+        run: |
+          set -e
+          git config user.name "Arena source fetcher"
+          git config user.email "arena-source-fetcher@users.noreply.github.com"
+          git add -A cosmos-copy \
+            scripts/customize_cosmos_clone.py \
+            scripts/validate_custom_clone.py \
+            scripts/validate_live_cosmos.py \
+            scripts/capture_preview.mjs \
+            scripts/browser_report_clean.py \
+            scripts/serve.py \
+            scripts/serve.sh \
+            scripts/customize-last-run.txt \
+            scripts/custom-validation-report.json \
+            scripts/validate-custom-last-run.txt \
+            scripts/validate-strict-last-run.txt \
+            scripts/validate-last-run.txt \
+            scripts/cosmos-canonical-urls.txt \
+            scripts/cosmos-sitemap-raw.txt \
+            scripts/cosmos-redirects.json \
+            scripts/cosmos-live-build-report.json \
+            scripts/cosmos-asset-map.json \
+            scripts/cosmos-remaining-remote-assets.json \
+            scripts/cosmos-repair-report.json \
+            scripts/cosmos-validation-report.json \
+            scripts/fetch-build-last-run.txt \
+            scripts/cosmos-site-file-list.txt \
+            scripts/cosmos-site-file-sizes.txt \
+            scripts/preview-check \
+            .github/workflows/fetch-cosmos.yml \
+            sitemap.xml robots.txt README.md
+          if ! git diff --cached --quiet; then
+            git commit -m "Build and validate customized LulaZel Hub clone"
+            git push origin "HEAD:${{ github.ref_name }}"
+          fi

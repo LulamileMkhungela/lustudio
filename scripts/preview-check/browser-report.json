@@ -1,0 +1,269 @@
+{
+  "baseURL": "http://127.0.0.1:8000",
+  "previewMode": "custom",
+  "viewport": {
+    "width": 1440,
+    "height": 1000
+  },
+  "screenshots": [
+    {
+      "name": "home",
+      "path": "/",
+      "file": "home.png"
+    },
+    {
+      "name": "dropdown",
+      "path": "/",
+      "file": "dropdown.png"
+    },
+    {
+      "name": "home-dark-scheme",
+      "path": "/",
+      "file": "home-dark-scheme.png"
+    },
+    {
+      "name": "services",
+      "path": "/services/website-design",
+      "file": "services.png"
+    },
+    {
+      "name": "projects",
+      "path": "/projects",
+      "file": "projects.png"
+    },
+    {
+      "name": "pricing",
+      "path": "/pricing",
+      "file": "pricing.png"
+    },
+    {
+      "name": "blog",
+      "path": "/blog",
+      "file": "blog.png"
+    },
+    {
+      "name": "contacts",
+      "path": "/contacts",
+      "file": "contacts.png"
+    },
+    {
+      "name": "works-services",
+      "path": "/projects",
+      "file": "works-services.png"
+    }
+  ],
+  "dropdownChecks": [
+    {
+      "defaultLabel": "For You",
+      "selected": "For You",
+      "options": [
+        "For Marketing Teams",
+        "For You",
+        "For Tech",
+        "Something Else"
+      ]
+    }
+  ],
+  "worksFilterChecks": [
+    {
+      "industriesFilterCount": 0,
+      "footerIndustriesGroups": 0,
+      "labels": [
+        "All",
+        "Web Hosting",
+        "Website Design",
+        "Ecommerce",
+        "Business Systems",
+        "Workflow Automation & AI",
+        "AI Assistants",
+        "Basic Graphic Design",
+        "SEO & Search",
+        "Google Ads",
+        "Product Design & Strategy"
+      ],
+      "hiddenServiceLabels": [
+        "Web Hosting",
+        "Website Design",
+        "Ecommerce",
+        "Business Systems",
+        "Workflow Automation & AI",
+        "AI Assistants",
+        "Basic Graphic Design",
+        "SEO & Search",
+        "Google Ads",
+        "Product Design & Strategy",
+        "Web Hosting",
+        "Website Design",
+        "Ecommerce",
+        "Business Systems",
+        "Workflow Automation & AI"
+      ],
+      "filterZIndex": 1000,
+      "sectionZIndex": 98,
+      "ctaZIndex": 0,
+      "laterSectionZIndex": 0,
+      "sectionOverflow": "visible",
+      "hiddenIndustryFields": 0,
+      "staleIndustrySearchFields": 0,
+      "open": true,
+      "width": 512,
+      "height": 344,
+      "top": 547,
+      "bottom": 891,
+      "onTop": true,
+      "hits": [
+        {
+          "y": 565,
+          "onTop": true,
+          "hit": "dropdown_link w-radio is-list-active"
+        },
+        {
+          "y": 633,
+          "onTop": true,
+          "hit": "dropdown_link w-radio"
+        },
+        {
+          "y": 719,
+          "onTop": true,
+          "hit": "dropdown_link w-radio"
+        },
+        {
+          "y": 805,
+          "onTop": true,
+          "hit": "w-form-label"
+        },
+        {
+          "y": 874,
+          "onTop": true,
+          "hit": "dropdown_link w-radio"
+        }
+      ],
+      "ctaTop": 6179,
+      "overlapY": null,
+      "overlapOnTop": null,
+      "listZIndex": "1003"
+    }
+  ],
+  "domChecks": [
+    {
+      "page": "home",
+      "bodyTextLength": 8634,
+      "sectionCount": 10,
+      "imageCount": 145,
+      "navbarVisible": true,
+      "title": "UI/UX Design Studio for SaaS, AI & Defense Tech | LulaZel Hub"
+    },
+    {
+      "page": "home-dark-scheme",
+      "bodyTextLength": 8634,
+      "sectionCount": 10,
+      "imageCount": 145,
+      "navbarVisible": true,
+      "title": "UI/UX Design Studio for SaaS, AI & Defense Tech | LulaZel Hub"
+    },
+    {
+      "page": "services",
+      "bodyTextLength": 12018,
+      "sectionCount": 15,
+      "imageCount": 58,
+      "navbarVisible": true,
+      "title": "Website Design Agency | LulaZel Hub"
+    },
+    {
+      "page": "projects",
+      "bodyTextLength": 2093,
+      "sectionCount": 2,
+      "imageCount": 18,
+      "navbarVisible": true,
+      "title": "UI/UX Design Portfolio & Case Studies | LulaZel Hub"
+    },
+    {
+      "page": "pricing",
+      "bodyTextLength": 9804,
+      "sectionCount": 13,
+      "imageCount": 20,
+      "navbarVisible": true,
+      "title": "Project Cost Calculator | LulaZel Hub"
+    },
+    {
+      "page": "blog",
+      "bodyTextLength": 4444,
+      "sectionCount": 1,
+      "imageCount": 29,
+      "navbarVisible": true,
+      "title": "Blog: Practical Design Guides | LulaZel Hub"
+    },
+    {
+      "page": "contacts",
+      "bodyTextLength": 2082,
+      "sectionCount": 1,
+      "imageCount": 6,
+      "navbarVisible": true,
+      "title": "Contact LulaZel Hub | UI/UX Design & Development Agency"
+    }
+  ],
+  "customChecks": [
+    {
+      "page": "home",
+      "mode": "custom",
+      "wordmarkCount": 2,
+      "formCount": 0,
+      "bookCallCount": 4,
+      "title": "UI/UX Design Studio for SaaS, AI & Defense Tech | LulaZel Hub"
+    },
+    {
+      "page": "home-dark-scheme",
+      "mode": "custom",
+      "wordmarkCount": 2,
+      "formCount": 0,
+      "bookCallCount": 4,
+      "title": "UI/UX Design Studio for SaaS, AI & Defense Tech | LulaZel Hub"
+    },
+    {
+      "page": "services",
+      "mode": "custom",
+      "wordmarkCount": 1,
+      "formCount": 1,
+      "bookCallCount": 3,
+      "title": "Website Design Agency | LulaZel Hub"
+    },
+    {
+      "page": "projects",
+      "mode": "custom",
+      "wordmarkCount": 1,
+      "formCount": 2,
+      "bookCallCount": 3,
+      "title": "UI/UX Design Portfolio & Case Studies | LulaZel Hub"
+    },
+    {
+      "page": "pricing",
+      "mode": "custom",
+      "wordmarkCount": 1,
+      "formCount": 0,
+      "bookCallCount": 3,
+      "title": "Project Cost Calculator | LulaZel Hub"
+    },
+    {
+      "page": "blog",
+      "mode": "custom",
+      "wordmarkCount": 1,
+      "formCount": 0,
+      "bookCallCount": 3,
+      "title": "Blog: Practical Design Guides | LulaZel Hub"
+    },
+    {
+      "page": "contacts",
+      "mode": "custom",
+      "wordmarkCount": 1,
+      "formCount": 0,
+      "bookCallCount": 4,
+      "title": "Contact LulaZel Hub | UI/UX Design & Development Agency"
+    }
+  ],
+  "failedLocalResponses": [],
+  "pageErrors": [],
+  "legacyMarkerHits": [],
+  "customMarkerIssues": [],
+  "formActionIssues": [],
+  "bookCallIssues": []
+}

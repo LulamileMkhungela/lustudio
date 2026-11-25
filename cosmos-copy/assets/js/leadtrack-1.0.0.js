@@ -1,0 +1,7 @@
+/* leadtrack 1.0.0 (2026-11-09): GA4 generate_lead from the thank-you pages. Webflow forms redirect to /thank-you right after submit, so an event sent on submit is lost; submit only leaves a mark, the event goes from /thank-you. Calculator: /thank-you-estimate opened from /pricing. Reloads and back/forward are not counted. Rollback: remove site script leadtrack. */
+(function(){var K='cs_lead',P=location.pathname.replace(/\/$/,''),S=window.sessionStorage;
+function g(n,p){try{if(typeof gtag=='function')gtag('event',n,p)}catch(e){}}
+function fresh(){try{var n=performance.getEntriesByType('navigation')[0];return !n||n.type==='navigate'}catch(e){return true}}
+document.addEventListener('submit',function(e){try{var f=e.target;if(!f||!f.querySelector||!f.querySelector('input[type=email],input[name=Email],input[name=email]'))return;var hp=f.querySelector('[name=cc_x7f3q],[name=cc_website]');if(hp&&hp.value)return;S.setItem(K,JSON.stringify({f:f.getAttribute('data-name')||f.id||'form',p:location.pathname,t:Date.now()}))}catch(x){}},true);
+function done(){try{if(!fresh())return;if(P==='/thank-you'){var m=JSON.parse(S.getItem(K)||'null');S.removeItem(K);if(m&&Date.now()-m.t<1800000)g('generate_lead',{lead_type:'contact_form',form_name:m.f,form_page:m.p})}else if(P==='/thank-you-estimate'&&(document.referrer||'').indexOf(location.host+'/pricing')>-1){g('generate_lead',{lead_type:'calculator',form_name:'calculator',form_page:'/pricing'})}}catch(x){}}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',done);else done();})();

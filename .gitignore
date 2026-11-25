@@ -1,0 +1,5 @@
+image-search/
+cosmos-copy/hts-cache/
+cosmos-copy/hts-log.txt
+__pycache__/
+.DS_Store

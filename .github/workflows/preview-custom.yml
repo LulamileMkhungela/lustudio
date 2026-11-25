@@ -1,0 +1,102 @@
+name: Validate LulaZel Hub browser preview
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - .github/workflows/preview-custom.yml
+      - cosmos-copy/**
+      - scripts/customize_cosmos_clone.py
+      - scripts/validate_custom_clone.py
+      - scripts/capture_preview.mjs
+      - scripts/browser_report_clean.py
+      - scripts/serve.py
+
+permissions:
+  contents: write
+
+concurrency:
+  group: preview-lulazel-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      BASE_URL: http://127.0.0.1:8000
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install Python dependencies
+        run: python3 -m pip install --disable-pip-version-check beautifulsoup4==4.12.3
+
+      - name: Install browser and Playwright
+        run: |
+          npm install --no-save --no-package-lock playwright
+          npx playwright install chromium --with-deps
+
+      - name: Start local clone server
+        run: |
+          python3 scripts/serve.py 8000 > /tmp/lulazel-server.log 2>&1 &
+          echo $! > /tmp/lulazel-server.pid
+          python3 - <<'PY'
+          import socket, time
+          for _ in range(40):
+              try:
+                  with socket.create_connection(('127.0.0.1', 8000), timeout=1):
+                      print('server ready')
+                      break
+              except OSError:
+                  time.sleep(0.5)
+          else:
+              raise SystemExit('server did not start')
+          PY
+
+      - name: Validate customized clone
+        run: python3 scripts/validate_custom_clone.py
+
+      - name: Capture customized browser previews
+        run: node scripts/capture_preview.mjs
+
+      - name: Validate customized browser report and screenshots
+        env:
+          EXPECTED_PREVIEW_MODE: custom
+        run: python3 scripts/browser_report_clean.py
+
+      - name: Stop local clone server
+        if: always()
+        run: |
+          if [ -f /tmp/lulazel-server.pid ]; then kill "$(cat /tmp/lulazel-server.pid)" || true; fi
+          cat /tmp/lulazel-server.log || true
+
+      - name: Save browser previews to this branch
+        if: success()
+        shell: bash
+        run: |
+          set -e
+          git config user.name "Arena preview validator"
+          git config user.email "arena-preview-validator@users.noreply.github.com"
+          git add -A scripts/preview-check \
+            scripts/custom-validation-report.json \
+            scripts/validate-custom-last-run.txt \
+            scripts/validate-last-run.txt \
+            scripts/cosmos-validation-report.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Refresh customized LulaZel Hub browser previews"
+            git push origin "HEAD:${{ github.ref_name }}"
+          fi
