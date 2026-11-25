@@ -180,7 +180,8 @@ for (const item of pages) {
       if (!NEW_DESIGN_STAT_RE.test(`${bodyText}\n${html}`)) {
         customMarkerIssues.push({ page: item.name, issue: 'new design stat missing' });
       }
-      const missingService = SERVICE_DROPDOWN_LABELS.find((label) => !html.includes(label));
+      const decodedHtml = html.replaceAll('&amp;', '&');
+      const missingService = SERVICE_DROPDOWN_LABELS.find((label) => !html.includes(label) && !decodedHtml.includes(label));
       if (missingService) {
         customMarkerIssues.push({ page: item.name, issue: `service dropdown label missing: ${missingService}` });
       }
