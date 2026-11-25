@@ -2,6 +2,9 @@ name: Rebuild source clone and customize LulaZel Hub
 
 on:
   workflow_dispatch:
+  push:
+    paths:
+      - .github/workflows/fetch-cosmos.yml
 
 permissions:
   contents: write
