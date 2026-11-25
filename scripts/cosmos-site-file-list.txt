@@ -168,7 +168,7 @@ cosmos-copy/assets/external/21c51699ad558f4af647.webp
 cosmos-copy/assets/external/24c2e6755571ad4f4efb.webp
 cosmos-copy/assets/external/257801ba75a66eef824c.webp
 cosmos-copy/assets/external/25c49c118e001ebc81b3.jpg
-cosmos-copy/assets/external/2717683baa1372e65db6.webp
+cosmos-copy/assets/img/lulamile.webp
 cosmos-copy/assets/external/271f6a05608f3614e9e8.webp
 cosmos-copy/assets/external/2748c4a17810382f55c6.webp
 cosmos-copy/assets/external/280e0c143203a9a0b7e8.jpg
@@ -183,7 +183,7 @@ cosmos-copy/assets/external/2f0dd3af65c863cc67fe.js
 cosmos-copy/assets/external/32a6a02262e2c9943bfe.js
 cosmos-copy/assets/external/32b21c8147f0ff260af2.js
 cosmos-copy/assets/external/34c303aeae91545adc23.webp
-cosmos-copy/assets/external/35a5e22f9b18e0eedb60.webp
+cosmos-copy/assets/img/lulamile.webp
 cosmos-copy/assets/external/36d543a37591f6fa09b2.css
 cosmos-copy/assets/external/374f1921944ea0f4d213.webp
 cosmos-copy/assets/external/37bbdddbc04b1d84c1fa.webp
@@ -620,7 +620,6 @@ cosmos-copy/assets/img/cosmos-logo.svg
 cosmos-copy/assets/img/cosmos-team-alex.jpg
 cosmos-copy/assets/img/cosmos-team-anna.jpg
 cosmos-copy/assets/img/cosmos-team-daria.jpg
-cosmos-copy/assets/img/cosmos-team-illia.jpg
 cosmos-copy/assets/img/cosmos-team-oleksandra.jpg
 cosmos-copy/assets/img/cosmos-team-olha.jpg
 cosmos-copy/assets/img/cosmos-team-rostyslav.jpg
@@ -793,8 +792,6 @@ cosmos-copy/assets/img/group-1597882622.webp
 cosmos-copy/assets/img/hero12.webp
 cosmos-copy/assets/img/how-to-choose-ui-ux-agency-defense-tech-v3.webp
 cosmos-copy/assets/img/icon-quote.svg
-cosmos-copy/assets/img/illia-kulbachnyi-avatar-192.webp
-cosmos-copy/assets/img/illia-kulbachnyi-ceo-1600.webp
 cosmos-copy/assets/img/image-1-_11zon.webp
 cosmos-copy/assets/img/image-10.webp
 cosmos-copy/assets/img/image-11.webp
@@ -854,8 +851,7 @@ cosmos-copy/assets/img/logo-5ef3b6b6.svg
 cosmos-copy/assets/img/logo-block.webp
 cosmos-copy/assets/img/logo.svg
 cosmos-copy/assets/img/logom.webp
-cosmos-copy/assets/img/mad-dogs-1080-1.jpeg
-cosmos-copy/assets/img/mad-dogs-1080.webp
+cosmos-copy/assets/img/lulamile.webp
 cosmos-copy/assets/img/main-image-2.webp
 cosmos-copy/assets/img/mask-group-2-99bf5217.webp
 cosmos-copy/assets/img/mask-group-2-ab5bbd34.webp
@@ -972,19 +968,6 @@ cosmos-copy/assets/img/ply_9.webp
 cosmos-copy/assets/img/posledovatelnost-01000.webp
 cosmos-copy/assets/img/posledovatelnost-01_1000-c76d2690.webp
 cosmos-copy/assets/img/posledovatelnost-01_1000.webp
-cosmos-copy/assets/img/povir_10.webp
-cosmos-copy/assets/img/povir_11.webp
-cosmos-copy/assets/img/povir_13.webp
-cosmos-copy/assets/img/povir_14.webp
-cosmos-copy/assets/img/povir_15.webp
-cosmos-copy/assets/img/povir_2.webp
-cosmos-copy/assets/img/povir_3.webp
-cosmos-copy/assets/img/povir_4.webp
-cosmos-copy/assets/img/povir_5.webp
-cosmos-copy/assets/img/povir_6.webp
-cosmos-copy/assets/img/povir_7.webp
-cosmos-copy/assets/img/povir_8.webp
-cosmos-copy/assets/img/povir_9.webp
 cosmos-copy/assets/img/preview-v4-2.webp
 cosmos-copy/assets/img/profile-picture.webp
 cosmos-copy/assets/img/purse-square.webp
@@ -1199,7 +1182,6 @@ cosmos-copy/industries/nonprofit-social-impact/index.html
 cosmos-copy/industries/saas/index.html
 cosmos-copy/industries/web3-crypto/index.html
 cosmos-copy/js/jquery-3.5.1.min.dc5e7f18c8.js
-cosmos-copy/legal/ai-instructions/index.html
 cosmos-copy/legal/index.html
 cosmos-copy/legal/privacy-policy/index.html
 cosmos-copy/legal/terms-of-use/index.html
@@ -1215,7 +1197,6 @@ cosmos-copy/projects/fastmates-fasting-app-design/index.html
 cosmos-copy/projects/index.html
 cosmos-copy/projects/jobcannon-ai-hr-branding/index.html
 cosmos-copy/projects/loamly-ai-crm-design/index.html
-cosmos-copy/projects/maddogs-web3-website/index.html
 cosmos-copy/projects/make-it-real-branding/index.html
 cosmos-copy/projects/miyagi-labs-ai-learning-platform/index.html
 cosmos-copy/projects/neo-vision-ai-agency-website/index.html
@@ -1223,7 +1204,6 @@ cosmos-copy/projects/numo-ai-app-branding/index.html
 cosmos-copy/projects/octy-tech-brand-website/index.html
 cosmos-copy/projects/plarium-gamedev-career-website/index.html
 cosmos-copy/projects/ply-procurement-saas-design/index.html
-cosmos-copy/projects/povir-edtech-platform/index.html
 cosmos-copy/projects/procamp-marketing-agency-website/index.html
 cosmos-copy/projects/radioactive-crocs-nft-website/index.html
 cosmos-copy/projects/remroom-sleep-tech-brand/index.html

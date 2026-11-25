@@ -1,4 +1,4 @@
-/* prefsource 1.1.0 (2026-11-09): official Google 'Add to preferred sources' button on the right of the Sources heading of blog posts (Illia: not in the sidebar, Google style). Roll back: re-apply 1.0.0 or remove the page script. */
+/* prefsource 1.1.0 (2026-11-09): official Google 'Add to preferred sources' button on the right of the Sources heading of blog posts (Lulamile: not in the sidebar, Google style). Roll back: re-apply 1.0.0 or remove the page script. */
 (function(){var d=document;
 function build(){var box=d.querySelector('[data-sources]');if(!box||d.querySelector('[data-pref-src]'))return;var h=box.querySelector('h2');if(!h)return;
 var row=d.createElement('div');row.setAttribute('data-pref-src','1');row.style.cssText='display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap';

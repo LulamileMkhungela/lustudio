@@ -1208,7 +1208,6 @@ asset pass 3: 63 URLs
     "/projects/fastmates-fasting-app-design",
     "/projects/jobcannon-ai-hr-branding",
     "/projects/loamly-ai-crm-design",
-    "/projects/maddogs-web3-website",
     "/projects/make-it-real-branding",
     "/projects/miyagi-labs-ai-learning-platform",
     "/projects/neo-vision-ai-agency-website",
@@ -1216,7 +1215,6 @@ asset pass 3: 63 URLs
     "/projects/octy-tech-brand-website",
     "/projects/plarium-gamedev-career-website",
     "/projects/ply-procurement-saas-design",
-    "/projects/povir-edtech-platform",
     "/projects/procamp-marketing-agency-website",
     "/projects/radioactive-crocs-nft-website",
     "/projects/remroom-sleep-tech-brand",
@@ -1294,7 +1292,6 @@ asset pass 3: 63 URLs
     "/industries/nonprofit-social-impact",
     "/industries/saas",
     "/industries/web3-crypto",
-    "/legal/ai-instructions",
     "/legal/privacy-policy",
     "/legal/terms-of-use"
   ],

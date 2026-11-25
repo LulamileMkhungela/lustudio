@@ -1204,7 +1204,6 @@
     "/projects/fastmates-fasting-app-design",
     "/projects/jobcannon-ai-hr-branding",
     "/projects/loamly-ai-crm-design",
-    "/projects/maddogs-web3-website",
     "/projects/make-it-real-branding",
     "/projects/miyagi-labs-ai-learning-platform",
     "/projects/neo-vision-ai-agency-website",
@@ -1212,7 +1211,6 @@
     "/projects/octy-tech-brand-website",
     "/projects/plarium-gamedev-career-website",
     "/projects/ply-procurement-saas-design",
-    "/projects/povir-edtech-platform",
     "/projects/procamp-marketing-agency-website",
     "/projects/radioactive-crocs-nft-website",
     "/projects/remroom-sleep-tech-brand",
@@ -1290,11 +1288,10 @@
     "/industries/nonprofit-social-impact",
     "/industries/saas",
     "/industries/web3-crypto",
-    "/legal/ai-instructions",
     "/legal/privacy-policy",
     "/legal/terms-of-use"
   ],
-  "canonical_url_count": 101,
+  "canonical_url_count": 98,
   "default_dropdown": "For You",
   "dropdown": [
     "For Marketing Teams",
@@ -1302,15 +1299,15 @@
     "For Tech",
     "Something Else"
   ],
-  "exact_page_count": 103,
+  "exact_page_count": 100,
   "fallback_pages": 7,
-  "html_page_count": 109,
+  "html_page_count": 106,
   "internal_route_count": 121,
   "localized_asset_count": 1377,
   "page_source_counts": {
     "live": 114
   },
-  "pages_written": 110,
+  "pages_written": 107,
   "redirect_count": 3,
   "remaining_remote_asset_count": 172,
   "repair_failures": [],
@@ -1319,6 +1316,6 @@
     "/assets/js/runtime/webflow.achunk.91a6f07ab49e2764.js"
   ],
   "repaired_remote_assets": [],
-  "site_file_count": 1285,
-  "site_total_bytes": 94808926
+  "site_file_count": 1265,
+  "site_total_bytes": 92211058
 }

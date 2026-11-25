@@ -67,6 +67,66 @@ KEEP_BLOG_SLUGS = {
     "how-to-choose-ui-ux-agency-defense-tech",
 }
 
+# Second edit pass: exact claims, section-level deletions, owner identity and
+# the service dropdown labels taken from the linked LulaZel repository.
+NEW_PRODUCT_STAT = "20+ products launched since 2017"
+NEW_DESIGN_STAT = "1 design awards normination"
+OWNER_NAME = "Lulamile Mkhungela"
+OWNER_IMAGE = "/assets/img/lulamile.webp"
+OWNER_IMAGE_SOURCES = (
+    "/assets/external/35a5e22f9b18e0eedb60.webp",
+    "/assets/external/2717683baa1372e65db6.webp",
+    "/assets/img/cosmos-team-illia.jpg",
+    "/assets/img/illia-kulbachnyi-avatar-192.webp",
+    "/assets/img/illia-kulbachnyi-ceo-1600.webp",
+    "cosmos-team-illia.jpg",
+)
+REMOVED_CASE_SLUGS = {
+    "povir-edtech-platform",
+    "maddogs-web3-website",
+}
+REMOVED_ROUTE_SLUGS = REMOVED_BLOG_SLUGS | REMOVED_CASE_SLUGS | {"legal/ai-instructions"}
+REMOVED_ROUTE_MARKERS = {
+    *(slug.lower() for slug in REMOVED_ROUTE_SLUGS),
+    "povir",
+    "maddogs",
+    "mad-dogs",
+    "mad dogs",
+    "ai-instructions",
+}
+SERVICE_DROPDOWN_ITEMS = [
+    ("Web Hosting", "/services/website-development"),
+    ("Website Design", "/services/website-design"),
+    ("Ecommerce", "/services/webflow-development"),
+    ("Business Systems", "/services/b2b-ui-ux-design-development"),
+    ("Workflow Automation & AI", "/services/ai-agent-ux-design-agentic-ux"),
+    ("AI Assistants", "/services/ai-product-design"),
+    ("Basic Graphic Design", "/services/brand-identity-design"),
+    ("SEO & Search", "/services/ai-search-optimization-geo-website-design"),
+    ("Google Ads", "/services/agentic-website-design-ai-managed"),
+    ("Product Design & Strategy", "/services/product-ux-ui-design"),
+]
+EDIT_PASS_BANNED = (
+    "Related services",
+    "Services you may also need",
+    "Led by an Awwwards jury member",
+    "Povir",
+    "Mad Dogs",
+    "Follow our work",
+    "WOW version",
+    "Facts for AI assistants",
+    "Cookie settings",
+    "&amp; recognitions",
+    "(Team)",
+    "Latest articles",
+    "Illia Kulbachnyi",
+    "500+",
+    "since 2018",
+    "60+ international design awards",
+)
+CASE_TEXT_RE = re.compile(r"\bPovir\b|\bMad\s+Dogs?\b", re.I)
+NAME_RE = re.compile(r"\bIllia\s+Kulbachnyi\b|\bKulbachnyi\b|\bIllia\b")
+
 AWARD_RE = re.compile(
     r"(?:\bwith\s+|\band\s+|,\s*|·\s*|\ba\s+|\ban\s+)?"
     r"(?:"
@@ -138,7 +198,8 @@ SINGLE_MONEY_RE = re.compile(MONEY_BODY, re.I)
 MONEY_ANY_RE = re.compile(r"\$\s?\d", re.I)
 PROTECT_RE = re.compile(
     r"(?:https?://|//|www\.|mailto:|tel:)[^\s\"'<>]+"
-    r"|\b[A-Za-z0-9_-]*cosmos(?:[.-][A-Za-z0-9_./-]+)+\b",
+    r"|\b[A-Za-z0-9_-]*cosmos(?:[.-][A-Za-z0-9_./-]+)+\b"
+    r"|1\s+design\s+awards?\s+normination",
     re.I,
 )
 OLD_BRAND_RE = re.compile(r"\bCosmos\s+Studio(?:™)?(?!\w)", re.I)
@@ -489,7 +550,8 @@ def tag_text(raw: str, tag: Tag) -> str:
 
 
 def has_removed_slug(value: str) -> bool:
-    return any(slug in value for slug in REMOVED_BLOG_SLUGS)
+    lower = value.lower()
+    return any(marker in lower for marker in REMOVED_ROUTE_MARKERS)
 
 
 def structural_pass(raw: str, path: Path) -> str:
@@ -626,18 +688,57 @@ def structural_pass(raw: str, path: Path) -> str:
     return apply_edits(raw, edits)
 
 
+def award_mention(value: str) -> bool:
+    """Ignore the exact new nomination claim while detecting legacy awards."""
+    return bool(AWARD_RE.search(re.sub(r"1\s+design\s+awards?\s+normination", "", value, flags=re.I)))
+
+
+def apply_edit_pass_text(text: str, *, allow_stats: bool = True) -> str:
+    """Apply the second-pass wording and owner-image replacements to text."""
+    def name_repl(match: re.Match) -> str:
+        return OWNER_NAME if "Kulbachnyi" in match.group(0) else "Lulamile"
+
+    text = NAME_RE.sub(name_repl, text)
+    for source in OWNER_IMAGE_SOURCES:
+        text = text.replace(source, OWNER_IMAGE)
+    if allow_stats:
+        text = re.sub(r"500\+\s*(?:products?|projects?)\s+launched\s+since\s+2018", NEW_PRODUCT_STAT, text, flags=re.I)
+        text = re.sub(r"500\+\s*(?:products?|projects?)\s+since\s+2018", NEW_PRODUCT_STAT, text, flags=re.I)
+        text = re.sub(r"500\+\s*(?:products?|projects?)", NEW_PRODUCT_STAT, text, flags=re.I)
+        text = re.sub(r"500\+", "20+", text)
+        text = re.sub(r"\bsince\s+2018\b", "since 2017", text, flags=re.I)
+        text = re.sub(r"60\+\s*international\s+design\s+awards?", NEW_DESIGN_STAT, text, flags=re.I)
+        text = re.sub(r'"foundingDate"\s*:\s*"2018"', '"foundingDate":"2017"', text)
+    return text
+
+
+def has_case_marker(value: object) -> bool:
+    text = str(value).lower()
+    return bool(CASE_TEXT_RE.search(text) or any(marker in text for marker in ("povir", "maddogs", "mad-dogs")))
+
+
 def transform_ld_value(node, currency_context: str | None = None):
     if isinstance(node, list):
-        return [transform_ld_value(item, currency_context) for item in node]
+        return [
+            transform_ld_value(item, currency_context)
+            for item in node
+            if not has_case_marker(item)
+        ]
     if not isinstance(node, dict):
         return node
     own_currency = node.get("priceCurrency") or node.get("currency")
     usd_context = (own_currency or currency_context) == "USD"
     result: dict = {}
     for key, value in node.items():
-        if "award" in key.lower():
+        if "award" in key.lower() or has_case_marker(value):
             continue
-        if key in {"priceCurrency", "currency"} and value == "USD":
+        if key == "foundingDate" and value == "2018":
+            result[key] = "2017"
+        elif key == "name" and isinstance(value, str) and NAME_RE.search(value):
+            result[key] = NAME_RE.sub(lambda m: OWNER_NAME if "Kulbachnyi" in m.group(0) else "Lulamile", value)
+        elif key == "image" and value in OWNER_IMAGE_SOURCES:
+            result[key] = OWNER_IMAGE
+        elif key in {"priceCurrency", "currency"} and value == "USD":
             result[key] = "ZAR"
         elif key == "urlTemplate" and isinstance(value, str):
             value = value.replace(CALENDLY_URL_HTML, CALENDLY_URL).replace(OLD_CALENDAR_URL, CALENDLY_URL)
@@ -647,7 +748,7 @@ def transform_ld_value(node, currency_context: str | None = None):
         elif key == "value" and usd_context and node.get("@type") in {"MonetaryAmount", "PriceSpecification", "UnitPriceSpecification"}:
             result[key] = convert_price_number(value)
         elif isinstance(value, str):
-            result[key] = transform_common(value, allow_currency=True)
+            result[key] = apply_edit_pass_text(transform_common(value, allow_currency=True))
         elif isinstance(value, (dict, list)):
             result[key] = transform_ld_value(value, own_currency or currency_context)
         else:
@@ -674,6 +775,298 @@ def transform_ld_script(content: str) -> str:
         return content
     transformed = transform_ld_value(data)
     return json.dumps(transformed, ensure_ascii=False, separators=(",", ":"))
+
+
+def service_dropdown_items() -> str:
+    return "".join(
+        '<div class="w-dyn-item" role="listitem">'
+        f'<a class="dropdown-link" href="{html.escape(href, quote=True)}">{html.escape(label)}</a>'
+        "</div>"
+        for label, href in SERVICE_DROPDOWN_ITEMS
+    )
+
+
+def edit_pass_tag_matches(raw: str, tag: Tag) -> bool:
+    if tag.name.lower() in {"script", "style"} or any(ancestor.name.lower() in {"script", "style"} for ancestor in tag.stack):
+        return False
+    text = tag_text(raw, tag)
+    if CASE_TEXT_RE.search(text):
+        return True
+    for attr in ("href", "src", "srcset", "alt", "title", "aria-label", "content", "data-name"):
+        value = tag.attrs.get(attr, "")
+        if value and (CASE_TEXT_RE.search(value) or any(marker in value.lower() for marker in ("povir", "maddogs", "mad-dogs"))):
+            return True
+    return False
+
+
+def edit_pass_section_candidate(raw: str, tag: Tag, parsed: RawHTML) -> Tag:
+    hints = {
+        "section_reason", "section_awards", "section_blog-list", "awards_component",
+        "team_component", "dx-card", "dx-case", "dx-rv-card", "dx-cta2", "dx-tab",
+        "faq_accordion", "works_card", "work-other_item", "w-dyn-item",
+        "menu_case-block", "blog_item-v3", "post-others_item", "home-services_item",
+        "service-sticky", "ct-socials", "footer_legal-wrap", "dx-trust-item",
+        "work-other_block", "works_card-wrap",
+    }
+    chain = [tag] + list(reversed(tag.stack))
+    for candidate in chain:
+        name = candidate.name.lower()
+        if name in {"html", "body", "main", "head"}:
+            break
+        classes = set(candidate.classes)
+        if candidate.attrs.get("data-svc-cover"):
+            if candidate.end_start is not None:
+                return candidate
+        if name in {"section", "article", "figure", "li"} or classes.intersection(hints):
+            if candidate.end_start is None:
+                continue
+            if len(tag_text(raw, candidate)) < 8000:
+                return candidate
+    return tag
+
+
+def apply_edit_pass_raw(raw: str, path: Path) -> str:
+    """Delete whole requested sections/cards/items and update navigation/stats."""
+    parsed = RawHTML(raw)
+    edits: list[tuple[int, int, str]] = []
+
+    # Whole sections and cards explicitly requested for deletion.
+    for tag in parsed.start_tags:
+        if tag.end_start is None:
+            continue
+        name = tag.name.lower()
+        classes = set(tag.classes)
+        text = tag_text(raw, tag)
+        if name == "section" and "section_reason" in classes:
+            edits.append((tag.start, tag.outer_end, ""))
+        elif "section_awards" in classes and re.search(r"&\s*(?:amp;)?\s*recognitions", text, re.I):
+            edits.append((tag.start, tag.outer_end, ""))
+        elif tag.attrs.get("id") == "team" or (name == "section" and "(Team)" in text):
+            edits.append((tag.start, tag.outer_end, ""))
+        elif name == "section" and "section_blog-list" in classes and "Latest articles" in text:
+            edits.append((tag.start, tag.outer_end, ""))
+        elif "is-wow" in classes or "WOW version" in text:
+            edits.append((tag.start, tag.outer_end, ""))
+        elif "Facts for AI assistants" in text or (tag.attrs.get("href") or "").rstrip("/").endswith("/legal/ai-instructions"):
+            chosen = tag
+            for ancestor in reversed(tag.stack):
+                if "w-dyn-item" in ancestor.classes:
+                    chosen = ancestor
+                    break
+            edits.append((chosen.start, chosen.outer_end, ""))
+        elif "Follow our work" in text and name == "div":
+            # The contacts block is a direct child of .ct-info: remove that whole block.
+            direct_child = bool(tag.stack and tag.stack[-1].start == next(
+                (parent.start for parent in parsed.start_tags if "ct-info" in parent.classes),
+                -1,
+            ))
+            if direct_child and "ct-socials" in raw[tag.start:tag.outer_end]:
+                edits.append((tag.start, tag.outer_end, ""))
+        elif name == "div" and "w-dropdown" in classes and "Industries" in text and "/industries/" in raw[tag.start:tag.outer_end]:
+            edits.append((tag.start, tag.outer_end, ""))
+        elif "dx-grid3" in classes and "Senior team only" in text and "Clear timeline" in text:
+            for card in parsed.start_tags:
+                if (
+                    "dx-card" in card.classes
+                    and card.start >= tag.end
+                    and card.outer_end <= tag.end_start
+                    and (tag_text(raw, card).strip() == "02" or "Awwwards jury" in tag_text(raw, card))
+                ):
+                    edits.append((card.start, card.outer_end, ""))
+
+    # Povir / Mad Dogs case studies: remove the whole card, tab, FAQ item,
+    # case article or home-service item that contains the case-study text.
+    for tag in parsed.start_tags:
+        if tag.end_start is None or not edit_pass_tag_matches(raw, tag):
+            continue
+        chosen = edit_pass_section_candidate(raw, tag, parsed)
+        edits.append((chosen.start, chosen.outer_end, ""))
+
+    # Rebuild Services dropdown lists with the ten linked-repo service labels.
+    for dropdown in parsed.start_tags:
+        if "w-dropdown" not in dropdown.classes or dropdown.end_start is None:
+            continue
+        block = raw[dropdown.start:dropdown.outer_end]
+        if "Services" not in tag_text(raw, dropdown) or "Industries" in tag_text(raw, dropdown) or "/services/" not in block:
+            continue
+        for items in parsed.start_tags:
+            if (
+                "w-dyn-items" in items.classes
+                and items.end_start is not None
+                and items.start >= dropdown.end
+                and items.outer_end <= dropdown.end_start
+                and any(ancestor.start == dropdown.start for ancestor in items.stack)
+            ):
+                edits.append((items.end, items.end_start, service_dropdown_items()))
+                break
+
+    # Restore the two requested trust claims. The original third animated
+    # number block now carries one nomination, while the product claim uses 20+.
+    new_trust_item = (
+        '<div class="dx-trust-item dx-reveal" role="listitem" aria-label="1 design awards normination">'
+        '<div class="dx-trust-big">1</div>'
+        '<div class="dx-trust-cap">design awards<br/>normination</div>'
+        "</div>"
+    )
+    for trust in parsed.start_tags:
+        if "dx-trust" not in trust.classes or trust.end_start is None:
+            continue
+        if re.search(r"1\s+design\s+awards?\s+normination", tag_text(raw, trust), re.I):
+            continue
+        edits.append((trust.end_start, trust.end_start, new_trust_item))
+
+    def static_number(value: str, label: str) -> str:
+        return (
+            f'<div class="number_group" role="group" aria-label="{html.escape(label, quote=True)}">'
+            f'<div class="number_main"><div class="number_number">{value}</div></div></div>'
+        )
+    for block in parsed.start_tags:
+        if "number_block" not in block.classes or block.end_start is None:
+            continue
+        text = tag_text(raw, block)
+        wrap = next(
+            (
+                tag for tag in parsed.start_tags
+                if "number_wrap" in tag.classes and tag.start >= block.end and tag.outer_end <= block.end_start
+                and any(ancestor.start == block.start for ancestor in tag.stack)
+            ),
+            None,
+        )
+        desc = next(
+            (
+                tag for tag in parsed.start_tags
+                if "number_desc" in tag.classes and tag.start >= block.end and tag.outer_end <= block.end_start
+                and any(ancestor.start == block.start for ancestor in tag.stack)
+            ),
+            None,
+        )
+        if not wrap or wrap.end_start is None:
+            continue
+        if "Projects successfully launched" in text:
+            edits.append((wrap.end, wrap.end_start, static_number("20+", NEW_PRODUCT_STAT)))
+            if desc and desc.end_start is not None:
+                edits.append((desc.end, desc.end_start, "products launched since 2017"))
+        elif not "Years in Web" in text and (not desc or not tag_text(raw, desc).strip() or "International Design Awards" in text):
+            edits.append((wrap.end, wrap.end_start, static_number("1", NEW_DESIGN_STAT)))
+            if desc and desc.end_start is not None:
+                edits.append((desc.end, desc.end_start, "design awards normination"))
+
+    raw = apply_edits(raw, edits)
+    raw = apply_edit_pass_text(raw)
+    # Remove case-study keys from inline JS/object literals while keeping the
+    # surrounding script valid; trailing commas are legal in these object maps.
+    raw = re.sub(
+        r"['\"](?:povir-edtech-platform|maddogs-web3-website)['\"]\s*:\s*"
+        r"(?:\{[^{}]*?\}|\[\[[^\]]*?\]\]|\[[^\]]*?\]|\"[^\"]*\"|'[^']*')\s*,?",
+        "",
+        raw,
+        flags=re.I | re.S,
+    )
+    raw = re.sub(r"[,\s]*['\"][^'\"]*(?:povir|mad\s+dogs|maddogs)[^'\"]*['\"]\s*(?=[]},;])", "", raw, flags=re.I)
+    return raw
+
+
+def remove_removed_routes() -> None:
+    for rel in ("projects/povir-edtech-platform", "projects/maddogs-web3-website", "legal/ai-instructions"):
+        target = SITE / rel
+        if target.exists():
+            shutil.rmtree(target)
+    for pattern in ("povir_*.webp", "mad-dogs-1080*.webp", "mad-dogs-1080*.jpeg"):
+        for asset in (SITE / "assets" / "img").glob(pattern):
+            asset.unlink(missing_ok=True)
+    for rel in (
+        "assets/img/cosmos-team-illia.jpg",
+        "assets/img/illia-kulbachnyi-avatar-192.webp",
+        "assets/img/illia-kulbachnyi-ceo-1600.webp",
+    ):
+        (SITE / rel).unlink(missing_ok=True)
+
+
+def copy_owner_image() -> None:
+    source = ROOT / "assets" / "img" / "lulamile.webp"
+    if not source.exists():
+        source = SITE / "assets" / "img" / "lulamile.webp"
+    target = SITE / "assets" / "img" / "lulamile.webp"
+    target.parent.mkdir(parents=True, exist_ok=True)
+    if source.exists() and source.resolve() != target.resolve():
+        shutil.copy2(source, target)
+
+
+def disable_cookie_and_award_injections() -> None:
+    """Remove JS-injected cookie settings and recognition badges/tooltips."""
+    for rel in (
+        "assets/js/cc-site-1-0-2.js",
+        "assets/external/6bf4dcd8f410b6fa6a0b.js",
+    ):
+        path = SITE / rel
+        if not path.exists():
+            continue
+        text = path.read_text(encoding="utf-8", errors="replace")
+        start = text.rfind("try{", 0, text.find(".csck{"))
+        end_marker = '}catch(e){console.error("cookiebanner-1.0.0.js",e)}'
+        end = text.find(end_marker)
+        if start >= 0 and end >= 0:
+            end += len(end_marker)
+            text = text[:start] + "/* Cookie consent section removed for LulaZel Hub. */" + text[end:]
+        path.write_text(text, encoding="utf-8")
+
+    for rel in (
+        "assets/js/reviews-letter-1.1.1.js",
+        "assets/external/4d3f084e37d18b50e04d.js",
+    ):
+        path = SITE / rel
+        if not path.exists():
+            continue
+        text = path.read_text(encoding="utf-8", errors="replace")
+        marker = "/* v1.1.0 (2026-11-06): Clutch"
+        start = text.find(marker)
+        if start >= 0:
+            text = text[:start] + "/* Recognition badge injection removed for LulaZel Hub. */\n"
+        path.write_text(text, encoding="utf-8")
+
+    for rel in (
+        "assets/js/headkit-1.0.25.js",
+        "assets/external/85f9b5afad254ae3297c.js",
+    ):
+        path = SITE / rel
+        if not path.exists():
+            continue
+        text = path.read_text(encoding="utf-8", errors="replace")
+        old = "a.dataset.tip='Clutch 2026 award: Top User Research Company. Clutch gives it based on verified client reviews.';a.setAttribute('aria-label',a.dataset.tip);a.removeAttribute('title')"
+        if old in text:
+            text = text.replace(old, "a.removeAttribute('title')")
+        path.write_text(text, encoding="utf-8")
+
+    hero = next(SITE.rglob("hero-fx-0.6.15.js"), None)
+    if hero and hero.exists():
+        text = hero.read_text(encoding="utf-8", errors="replace")
+        text = re.sub(
+            r"const aw=hdrs\.find\(h=>/award/i\.test\(\(h\.querySelector\('h2'\)\|\|{textContent:''}\)\.textContent\)\);\s*"
+            r"if\(aw&&about\)\{aw\.classList\.add\('hfx-awards'\);const lb=aw\.querySelector\('\.text-style-label-caption'\);if\(lb\)lb\.textContent='Awards';about\.after\(aw\);\}",
+            "",
+            text,
+        )
+        hero.write_text(text, encoding="utf-8")
+
+    # The case-page feature script is a recognition-ribbon injector. Remove its
+    # runtime entirely and keep the source-clone script tag as a harmless no-op.
+    for rel in ("assets/js/behance-featured-1.1.1.js",):
+        path = SITE / rel
+        if path.exists():
+            path.write_text("/* Behance feature ribbons removed for LulaZel Hub. */\n", encoding="utf-8")
+
+    for rel in ("assets/js/cc-case-head-1-0-1.js",):
+        path = SITE / rel
+        if not path.exists():
+            continue
+        text = path.read_text(encoding="utf-8", errors="replace")
+        text = re.sub(
+            r"['\"](?:povir-edtech-platform|maddogs-web3-website)['\"]\s*:\s*['\"][^'\"]*['\"]\s*,?",
+            "",
+            text,
+            flags=re.I,
+        )
+        path.write_text(text, encoding="utf-8")
 
 
 def process_html_file(path: Path) -> None:
@@ -749,6 +1142,7 @@ def process_html_file(path: Path) -> None:
                 edits.append((tag.start, tag.end, new_tag))
 
     raw = apply_edits(raw, edits)
+    raw = apply_edit_pass_raw(raw, path)
     path.write_text(raw, encoding="utf-8")
 
 
@@ -791,7 +1185,7 @@ def build_blog_cards() -> str:
             "title": slug.replace("-", " ").title(),
             "description": "A practical LulaZel Hub guide.",
             "pubDate": "Mon, 23 Nov 2026 00:00:00 GMT",
-            "image": "/assets/external/2717683baa1372e65db6.webp",
+            "image": OWNER_IMAGE,
         })
     cards = []
     for item in items:
@@ -805,7 +1199,7 @@ def build_blog_cards() -> str:
         description = transform_common(item["description"], allow_currency=True)
         alt = transform_common(f"{title} cover", allow_currency=True)
         author = blog_author(item["slug"])
-        image = item["image"] or "/assets/external/2717683baa1372e65db6.webp"
+        image = item["image"] or OWNER_IMAGE
         cards.append(
             '<div role="listitem" class="blog_item-v3 w-dyn-item">'
             f'<a href="/blog/{html.escape(item["slug"], quote=True)}" class="blog_block with-gap w-inline-block">'
@@ -813,7 +1207,7 @@ def build_blog_cards() -> str:
             f'<img src="{html.escape(image, quote=True)}" loading="lazy" animation="scroll-zoom" alt="{html.escape(alt, quote=True)}" class="blog_img"/>'
             '<div class="blog_tag"><div class="w-dyn-bind-empty"></div></div></div>'
             '<div class="blog_content-v3"><div class="blog-card_content"><div class="author-block">'
-            '<img alt="" class="author_thumbn" loading="lazy" src="/assets/external/2717683baa1372e65db6.webp"/>'
+            f'<img alt="" class="author_thumbn" loading="lazy" src="{OWNER_IMAGE}"/>'
             f'<div class="author-small">{html.escape(author, quote=True)}</div></div>'
             '<div class="blog_content-in">'
             f'<h2 fs-list-field="title" class="heading-style-h5 is-tablet-xsmaller">{html.escape(title, quote=True)}</h2>'
@@ -836,19 +1230,30 @@ def process_non_html_text(path: Path) -> None:
             raw = transform_common(raw, allow_currency=True, strip_award=False, clean_digests=False, replace_standalone=False)
         else:
             raw = transform_common(raw, allow_currency=False, strip_award=False, clean_digests=False, replace_standalone=False)
+        raw = apply_edit_pass_text(raw, allow_stats=False)
     elif suffix in {".svg", ".xml"}:
         raw = process_xml_text(raw, clean_digests=(suffix == ".svg"))
+        raw = apply_edit_pass_text(raw)
     elif suffix in {".txt", ".md"}:
         lines = []
+        banned_lines = (
+            "WOW version", "Facts for AI assistants", "Cookie settings",
+            "Follow our work", "Related services", "Services you may also need",
+            "Latest articles", "(Team)", "recognitions", "Awwwards jury",
+        )
         for line in raw.splitlines(keepends=True):
-            if has_removed_slug(line):
+            lower = line.lower()
+            if has_removed_slug(line) or CASE_TEXT_RE.search(line) or any(token.lower() in lower for token in banned_lines):
                 continue
             newline = "\r\n" if line.endswith("\r\n") else ("\n" if line.endswith("\n") else "")
             body = line.rstrip("\r\n")
-            lines.append(transform_common(body, allow_currency=True) + newline)
+            lines.append(apply_edit_pass_text(transform_common(body, allow_currency=True)) + newline)
         raw = "".join(lines)
+        if path.name == "llms.txt" and NEW_DESIGN_STAT not in raw:
+            raw = raw.rstrip() + "\n- " + NEW_DESIGN_STAT + "\n"
     elif suffix in {".css", ".mjs", ".json"}:
         raw = transform_common(raw, allow_currency=False, strip_award=False, clean_digests=False, replace_standalone=False)
+        raw = apply_edit_pass_text(raw)
     path.write_text(raw, encoding="utf-8")
 
 
@@ -927,9 +1332,9 @@ def transform_report_string(value: str) -> str:
     )
     # Historic asset-map/report URLs can still contain recognition tokens; they
     # are diagnostics, not site content, so replace rather than preserve them.
-    if AWARD_RE.search(transformed):
+    if award_mention(transformed):
         return "[removed recognition reference]"
-    return transformed
+    return apply_edit_pass_text(transformed)
 
 
 def clean_report_value(value):
@@ -937,15 +1342,15 @@ def clean_report_value(value):
         return [
             clean_report_value(item)
             for item in value
-            if not (isinstance(item, str) and (has_removed_slug(item) or AWARD_RE.search(item)))
+            if not (isinstance(item, str) and (has_removed_slug(item) or award_mention(item)))
         ]
     if isinstance(value, dict):
         result = {}
         for key, item in value.items():
             safe_key = str(key)
-            if has_removed_slug(safe_key) or AWARD_RE.search(safe_key):
+            if has_removed_slug(safe_key) or award_mention(safe_key):
                 continue
-            if isinstance(item, str) and (has_removed_slug(item) or AWARD_RE.search(item)):
+            if isinstance(item, str) and (has_removed_slug(item) or award_mention(item)):
                 continue
             result[transform_report_string(safe_key)] = clean_report_value(item)
         return result
@@ -973,7 +1378,7 @@ def update_report_text_files() -> None:
                 continue
             lines = []
             for line in text.splitlines(keepends=True):
-                if has_removed_slug(line) or AWARD_RE.search(line):
+                if has_removed_slug(line) or award_mention(line) or CASE_TEXT_RE.search(line):
                     continue
                 newline = "\r\n" if line.endswith("\r\n") else ("\n" if line.endswith("\n") else "")
                 body = line.rstrip("\r\n")
@@ -1103,10 +1508,12 @@ def write_readme(urls: list[str]) -> None:
 
 This workspace began as an exact static clone of the original source site and is now customized for LulaZel Hub. The exact Webflow HTML, CSS, JavaScript, GSAP interactions, fonts, animations, project pages, redirects and media references are preserved; only the requested rebrand and content changes were applied.
 
-- {len(urls)} canonical routes remain. The 10 AI news-digest posts and the Clutch recognition post were removed; 12 practical blog guides remain on the blog index and in RSS.
+- {len(urls)} canonical routes remain. The 10 AI news-digest posts, the Clutch recognition post, two retired case-study pages and the retired AI-facts page were removed; 12 practical blog guides remain on the blog index and in RSS.
 - Visible source-site wording, alt/ARIA text, page titles, meta descriptions, structured data, RSS copy, the giant SVG wordmark and the small logo were renamed to `LulaZel Hub`.
 - All visible US-dollar prices, project budgets and hourly rates were converted at **R18 per 1 USD** and presented in South African rand.
-- Every visible recognition and competition mention was removed; the surrounding 500+ / 12 stats remain.
+- The trust claims are `{NEW_PRODUCT_STAT}` and `{NEW_DESIGN_STAT}`. Legacy notice, jury, related-service, alternate-version, consent, social-follow, team and article-list blocks were removed as whole sections or cards.
+- The Services dropdown uses the ten service labels from the linked LulaZel repository: Web Hosting, Website Design, Ecommerce, Business Systems, Workflow Automation & AI, AI Assistants, Basic Graphic Design, SEO & Search, Google Ads, and Product Design & Strategy. The top-nav and mobile Industries dropdowns were removed.
+- Founder references use `{OWNER_NAME}` and `{OWNER_IMAGE}`.
 - Email is `mkhungela.l@gmail.com`. The visible WhatsApp number is `+27 83 719 5064`; the WhatsApp URL remains exactly `{WHATSAPP_URL}`.
 - Every contact form uses `POST {FORMSPREE_URL}`. The Webflow form bridge was redirected from `/api/form` to Formspree.
 - Every Book a Call link points to `{CALENDLY_URL}`.
@@ -1124,6 +1531,8 @@ def main() -> None:
     if not SITE.exists():
         raise SystemExit("cosmos-copy is missing; fetch the exact clone first")
     remove_blog_pages()
+    remove_removed_routes()
+    copy_owner_image()
     urls = canonical_urls()
     write_sitemaps(urls)
     html_files = sorted(SITE.rglob("*.html"))
@@ -1132,6 +1541,7 @@ def main() -> None:
     for path in SITE.rglob("*"):
         if path.is_file() and path.suffix.lower() in TEXT_FILE_SUFFIXES and path.suffix.lower() != ".html":
             process_non_html_text(path)
+    disable_cookie_and_award_injections()
     patch_form_bridge()
     overwrite_logo_svg()
     update_rss(SITE / "blog" / "rss.xml")
@@ -1144,9 +1554,15 @@ def main() -> None:
         "customized": NEW_BRAND,
         "canonical_urls": len(urls),
         "removed_blog_posts": len(REMOVED_BLOG_SLUGS),
+        "removed_case_studies": len(REMOVED_CASE_SLUGS),
+        "service_dropdown_items": len(SERVICE_DROPDOWN_ITEMS),
         "html_files": len(html_files),
         "removed_blog_slugs": len(REMOVED_BLOG_SLUGS),
         "kept_blog_slugs": len(KEEP_BLOG_SLUGS),
+        "owner_name": OWNER_NAME,
+        "owner_image": OWNER_IMAGE,
+        "product_stat": NEW_PRODUCT_STAT,
+        "design_stat": NEW_DESIGN_STAT,
         "usd_zar_rate": str(USD_ZAR),
         "formspree": FORMSPREE_URL,
         "calendly": CALENDLY_URL,

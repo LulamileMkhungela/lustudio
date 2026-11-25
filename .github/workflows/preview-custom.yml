@@ -5,6 +5,12 @@ on:
   push:
     paths:
       - .github/workflows/preview-custom.yml
+      - cosmos-copy/**
+      - scripts/customize_cosmos_clone.py
+      - scripts/validate_custom_clone.py
+      - scripts/capture_preview.mjs
+      - scripts/browser_report_clean.py
+      - scripts/serve.py
 
 permissions:
   contents: write

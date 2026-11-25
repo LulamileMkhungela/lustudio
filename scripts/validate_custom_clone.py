@@ -47,6 +47,11 @@ AWARD_RE = re.compile(
     re.I,
 )
 MONEY_RE = re.compile(r"\$\s?\d")
+
+
+def award_mention(value: str) -> bool:
+    """Ignore the exact new nomination claim while detecting legacy awards."""
+    return bool(AWARD_RE.search(NEW_DESIGN_STAT_RE.sub("", value)))
 DIGEST_RE = re.compile(r"AI\s*&\s*(?:amp;)?\s*Design Weekly|AI\s+and\s+Design Weekly|Clutch Global Leader", re.I)
 REMOVED_BLOG_SLUGS = {
     "canva-video-claude-chatgpt-gemini-mac-tesla-reality-view",
@@ -61,6 +66,38 @@ REMOVED_BLOG_SLUGS = {
     "ai-design-weekly-2",
     "ai-design-weekly-1",
 }
+REMOVED_CASE_SLUGS = {
+    "povir-edtech-platform",
+    "maddogs-web3-website",
+}
+REMOVED_ROUTE_SLUGS = REMOVED_BLOG_SLUGS | REMOVED_CASE_SLUGS | {"legal/ai-instructions"}
+REMOVED_ROUTE_MARKERS = {
+    *(slug.lower() for slug in REMOVED_ROUTE_SLUGS),
+    "povir",
+    "maddogs",
+    "mad-dogs",
+    "mad dogs",
+    "ai-instructions",
+}
+NEW_PRODUCT_STAT = "20+ products launched since 2017"
+NEW_DESIGN_STAT = "1 design awards normination"
+NEW_DESIGN_STAT_RE = re.compile(r"1\s+design\s+awards?\s+normination", re.I)
+OWNER_NAME = "Lulamile Mkhungela"
+OWNER_IMAGE = "/assets/img/lulamile.webp"
+SERVICE_DROPDOWN_LABELS = [
+    "Web Hosting", "Website Design", "Ecommerce", "Business Systems",
+    "Workflow Automation & AI", "AI Assistants", "Basic Graphic Design",
+    "SEO & Search", "Google Ads", "Product Design & Strategy",
+]
+EDIT_PASS_BANNED_RE = re.compile(
+    r"Related services|Services you may also need|Led by an Awwwards jury member"
+    r"|\bPovir\b|\bMad\s+Dogs?\b|Follow our work|WOW version"
+    r"|Facts for AI assistants|Cookie settings|&amp;\s*recognitions|\(Team\)"
+    r"|Latest articles|500\+|since\s+2018"
+    r"|60\+\s*international\s+design\s+awards?",
+    re.I,
+)
+OLD_OWNER_RE = re.compile(r"\bIllia\s+Kulbachnyi\b|\bKulbachnyi\b|\bIllia\b")
 KEEP_BLOG_SLUGS = {
     "pitch-deck-design-services",
     "military-symbology-ui-design",
@@ -228,8 +265,10 @@ def validate_html(path: Path, counters: Counter) -> None:
     visible = "\n".join(visible_strings(soup))
     if OLD_BRAND_RE.search(visible):
         issues.append(f"old Cosmos brand remains visible in {path.relative_to(ROOT)}")
-    if AWARD_RE.search(visible):
+    if award_mention(visible):
         issues.append(f"award mention remains visible in {path.relative_to(ROOT)}")
+    if EDIT_PASS_BANNED_RE.search(visible) or OLD_OWNER_RE.search(visible):
+        issues.append(f"removed edit-pass phrase remains visible in {path.relative_to(ROOT)}")
     if MONEY_RE.search(visible):
         issues.append(f"dollar currency remains visible in {path.relative_to(ROOT)}")
     if DIGEST_RE.search(visible):
@@ -242,8 +281,10 @@ def validate_html(path: Path, counters: Counter) -> None:
         issues.append(f"old calendar URL remains in {path.relative_to(ROOT)}")
     if "'/api/form'" in raw or '"/api/form"' in raw:
         issues.append(f"legacy /api/form remains in {path.relative_to(ROOT)}")
-    if any(slug in raw for slug in REMOVED_BLOG_SLUGS):
-        issues.append(f"removed blog slug remains in {path.relative_to(ROOT)}")
+    if any(marker in raw.lower() for marker in REMOVED_ROUTE_MARKERS):
+        issues.append(f"removed route/case slug remains in {path.relative_to(ROOT)}")
+    if EDIT_PASS_BANNED_RE.search(raw) or OLD_OWNER_RE.search(raw):
+        issues.append(f"removed edit-pass phrase remains in {path.relative_to(ROOT)}")
     if path.as_posix().endswith("contacts/index.html"):
         if WHATSAPP_URL not in raw:
             issues.append("WhatsApp URL was changed")
@@ -314,8 +355,12 @@ def validate_text_assets() -> None:
             text = path.read_text(encoding="utf-8", errors="replace")
         except UnicodeDecodeError:
             continue
-        if any(slug in text for slug in REMOVED_BLOG_SLUGS):
-            issues.append(f"removed blog slug remains in {path.relative_to(ROOT)}")
+        if any(marker in text.lower() for marker in REMOVED_ROUTE_MARKERS):
+            issues.append(f"removed route/case slug remains in {path.relative_to(ROOT)}")
+        if path.suffix.lower() == ".js" and re.search(r"Cookie settings|Clutch 2026 award|textContent='Awards'|data-clutch-badge", text, re.I):
+            issues.append(f"removed JS injection remains in {path.relative_to(ROOT)}")
+        if path.suffix.lower() in {".txt", ".md", ".xml", ".svg"} and (EDIT_PASS_BANNED_RE.search(text) or OLD_OWNER_RE.search(text)):
+            issues.append(f"removed edit-pass phrase remains in {path.relative_to(ROOT)}")
         if re.search(re.escape(OLD_EMAIL), text, re.I):
             issues.append(f"old email remains in {path.relative_to(ROOT)}")
         if OLD_CALENDAR_FRAGMENT in text:
@@ -348,7 +393,7 @@ def validate_text_assets() -> None:
                 )
             if MONEY_RE.search(visible_text):
                 issues.append(f"dollar currency remains in {path.relative_to(ROOT)}")
-            if AWARD_RE.search(visible_text):
+            if award_mention(visible_text):
                 issues.append(f"award mention remains in {path.relative_to(ROOT)}")
         if path.suffix.lower() == ".css":
             validate_css_refs(path)
@@ -391,20 +436,20 @@ def validate_blog_index() -> None:
 def validate_manifests() -> None:
     canonical_file = SCRIPTS / "cosmos-canonical-urls.txt"
     urls = [line.strip() for line in canonical_file.read_text(encoding="utf-8").splitlines() if line.strip()]
-    if len(urls) != 101:
-        issues.append(f"canonical URL count is {len(urls)}, expected 101")
-    if any(slug in url for slug in REMOVED_BLOG_SLUGS for url in urls):
-        issues.append("removed blog slug remains in canonical URL list")
+    if len(urls) != 98:
+        issues.append(f"canonical URL count is {len(urls)}, expected 98")
+    if any(marker in url.lower() for marker in REMOVED_ROUTE_MARKERS for url in urls):
+        issues.append("removed route/case slug remains in canonical URL list")
     for path in [ROOT / "sitemap.xml", SITE / "sitemap.xml"]:
         if not path.exists():
             issues.append(f"sitemap missing: {path.relative_to(ROOT)}")
             continue
         text = path.read_text(encoding="utf-8", errors="replace")
         locs = re.findall(r"<loc>(.*?)</loc>", text, re.S)
-        if len(locs) != 101:
-            issues.append(f"sitemap has {len(locs)} URLs, expected 101: {path.relative_to(ROOT)}")
-        if any(slug in loc for loc in locs for slug in REMOVED_BLOG_SLUGS):
-            issues.append(f"removed blog slug remains in {path.relative_to(ROOT)}")
+        if len(locs) != 98:
+            issues.append(f"sitemap has {len(locs)} URLs, expected 98: {path.relative_to(ROOT)}")
+        if any(marker in loc.lower() for marker in REMOVED_ROUTE_MARKERS for loc in locs):
+            issues.append(f"removed route/case slug remains in {path.relative_to(ROOT)}")
     for name in [
         "cosmos-canonical-urls.txt", "cosmos-sitemap-raw.txt", "cosmos-site-file-list.txt",
         "cosmos-site-file-sizes.txt", "fetch-build-last-run.txt", "validate-last-run.txt",
@@ -413,12 +458,12 @@ def validate_manifests() -> None:
         "cosmos-redirects.json",
     ]:
         path = SCRIPTS / name
-        if path.exists() and any(slug in path.read_text(encoding="utf-8", errors="replace") for slug in REMOVED_BLOG_SLUGS):
-            issues.append(f"removed blog slug remains in {path.relative_to(ROOT)}")
+        if path.exists() and any(marker in path.read_text(encoding="utf-8", errors="replace").lower() for marker in REMOVED_ROUTE_MARKERS):
+            issues.append(f"removed route/case slug remains in {path.relative_to(ROOT)}")
     for name in ["build-manifest.json", "asset-map.json", "remaining-remote-assets.json", "redirects.json", "_redirects"]:
         path = SITE / name
-        if path.exists() and any(slug in path.read_text(encoding="utf-8", errors="replace") for slug in REMOVED_BLOG_SLUGS):
-            issues.append(f"removed blog slug remains in {path.relative_to(ROOT)}")
+        if path.exists() and any(marker in path.read_text(encoding="utf-8", errors="replace").lower() for marker in REMOVED_ROUTE_MARKERS):
+            issues.append(f"removed route/case slug remains in {path.relative_to(ROOT)}")
 
 
 def validate_repository_text() -> None:
@@ -455,10 +500,12 @@ def validate_repository_text() -> None:
             issues.append(f"legacy /api/form remains in {path.relative_to(ROOT)}")
         if MONEY_RE.search(clean_lines):
             issues.append(f"dollar currency remains in {path.relative_to(ROOT)}")
-        if AWARD_RE.search(clean_lines):
+        if award_mention(clean_lines):
             issues.append(f"award mention remains in {path.relative_to(ROOT)}")
-        if any(slug in text for slug in REMOVED_BLOG_SLUGS):
-            issues.append(f"removed blog slug remains in {path.relative_to(ROOT)}")
+        if any(marker in text.lower() for marker in REMOVED_ROUTE_MARKERS):
+            issues.append(f"removed route/case slug remains in {path.relative_to(ROOT)}")
+        if EDIT_PASS_BANNED_RE.search(clean_lines) or OLD_OWNER_RE.search(clean_lines):
+            issues.append(f"removed edit-pass phrase remains in {path.relative_to(ROOT)}")
 
 
 def validate_logo_and_bridge() -> None:
@@ -478,6 +525,39 @@ def validate_logo_and_bridge() -> None:
         issues.append("form bridge still references old email")
 
 
+def validate_edit_pass(html_files: list[Path]) -> None:
+    index = SITE / "index.html"
+    if not index.exists():
+        issues.append("index.html missing for edit-pass checks")
+        return
+    soup = BeautifulSoup(index.read_text(encoding="utf-8", errors="replace"), "html.parser")
+    nav_dropdowns = soup.select(".navbar_links-wrap .w-dropdown, .menu_links-wrap .w-dropdown")
+    services = [
+        dropdown for dropdown in nav_dropdowns
+        if "Services" in dropdown.get_text(" ", strip=True)
+    ]
+    if not services:
+        issues.append("Services dropdown missing from navigation")
+    else:
+        for dropdown in services:
+            labels = [anchor.get_text(" ", strip=True) for anchor in dropdown.select("a.dropdown-link")]
+            if labels != SERVICE_DROPDOWN_LABELS:
+                issues.append(f"Services dropdown labels are wrong: {labels}")
+    if any("Industries" in dropdown.get_text(" ", strip=True) for dropdown in nav_dropdowns):
+        issues.append("Industries dropdown remains in top navigation or mobile menu")
+    if not (SITE / "assets" / "img" / "lulamile.webp").exists():
+        issues.append("owner image missing")
+    for rel in ("projects/povir-edtech-platform", "projects/maddogs-web3-website", "legal/ai-instructions"):
+        if (SITE / rel).exists():
+            issues.append(f"removed page remains: {rel}")
+    product_seen = any(NEW_PRODUCT_STAT in path.read_text(encoding="utf-8", errors="replace") for path in html_files)
+    design_seen = any(NEW_DESIGN_STAT_RE.search(path.read_text(encoding="utf-8", errors="replace")) for path in html_files)
+    if not product_seen:
+        issues.append("new product stat missing from HTML")
+    if not design_seen:
+        issues.append("new design nomination stat missing from HTML")
+
+
 def main() -> int:
     load_redirects()
     counters: Counter = Counter()
@@ -490,6 +570,7 @@ def main() -> int:
     validate_manifests()
     validate_repository_text()
     validate_logo_and_bridge()
+    validate_edit_pass(html_files)
     site_files = [p for p in SITE.rglob("*") if p.is_file()]
     site_bytes = sum(p.stat().st_size for p in site_files)
     rss_items = len(re.findall(r"<item>", (SITE / "blog" / "rss.xml").read_text(encoding="utf-8", errors="replace")))

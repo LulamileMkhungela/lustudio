@@ -47,6 +47,21 @@ const CALENDLY_FRAGMENT = 'calendly.com/lulamile_m/meet-lulamile?month=2026-10&d
 const WHATSAPP_URL = 'https://wa.me/380638324731';
 const NEW_EMAIL = 'mkhungela.l@gmail.com';
 const NEW_PHONE = '+27 83 719 5064';
+const NEW_PRODUCT_STAT = '20+ products launched since 2017';
+const NEW_DESIGN_STAT = '1 design awards normination';
+const NEW_DESIGN_STAT_RE = /1\s+design\s+awards?\s+normination/i;
+const NEW_DESIGN_STAT_GLOBAL_RE = /1\s+design\s+awards?\s+normination/gi;
+const SERVICE_DROPDOWN_LABELS = [
+  'Web Hosting', 'Website Design', 'Ecommerce', 'Business Systems',
+  'Workflow Automation & AI', 'AI Assistants', 'Basic Graphic Design',
+  'SEO & Search', 'Google Ads', 'Product Design & Strategy',
+];
+const EDIT_PASS_BANNED_RE = /Related services|Services you may also need|Led by an Awwwards jury member|\bPovir\b|\bMad\s+Dogs?\b|Follow our work|WOW version|Facts for AI assistants|Cookie settings|&amp;\s*recognitions|\(Team\)|Latest articles|500\+|since\s+2018|60\+\s*international\s+design\s+awards?/i;
+const OLD_OWNER_RE = /\bIllia\s+Kulbachnyi\b|\bKulbachnyi\b|\bIllia\b/;
+const REMOVED_ROUTE_MARKERS = [
+  ...removedBlogSlugs, 'povir-edtech-platform', 'maddogs-web3-website',
+  'legal/ai-instructions', 'povir', 'maddogs', 'mad-dogs', 'mad dogs', 'ai-instructions',
+];
 
 const pages = [
   { name: 'home', path: '/', colorScheme: 'light' },
@@ -144,15 +159,32 @@ for (const item of pages) {
       const haystack = ['old-email', 'old-calendar', 'usd-schema', 'legacy-api-form'].includes(check.name)
         ? `${bodyText}\n${html}`
         : bodyText;
-      if (check.pattern.test(haystack)) {
+      const cleanHaystack = check.name === 'award' ? haystack.replace(NEW_DESIGN_STAT_GLOBAL_RE, '') : haystack;
+      if (check.pattern.test(cleanHaystack)) {
         legacyMarkerHits.push({ page: item.name, token: check.name, source: 'visible-text' });
       }
     }
     if (!pageData.title.includes('LulaZel Hub')) customMarkerIssues.push({ page: item.name, issue: 'title missing LulaZel Hub' });
     if (!bodyText.toLowerCase().includes('lulazel hub')) customMarkerIssues.push({ page: item.name, issue: 'body missing LulaZel Hub' });
     if (pageData.wordmarkCount < 1) customMarkerIssues.push({ page: item.name, issue: 'LulaZel Hub wordmark missing' });
-    const removedSlug = removedBlogSlugs.find((slug) => html.includes(slug));
-    if (removedSlug) customMarkerIssues.push({ page: item.name, issue: `removed blog slug remains: ${removedSlug}` });
+    const removedSlug = REMOVED_ROUTE_MARKERS.find((marker) => html.toLowerCase().includes(marker));
+    if (removedSlug) customMarkerIssues.push({ page: item.name, issue: `removed route/case marker remains: ${removedSlug}` });
+    const cleanVisibleText = bodyText.replace(NEW_DESIGN_STAT_GLOBAL_RE, '');
+    if (EDIT_PASS_BANNED_RE.test(cleanVisibleText) || OLD_OWNER_RE.test(cleanVisibleText)) {
+      customMarkerIssues.push({ page: item.name, issue: 'removed edit-pass phrase remains visible' });
+    }
+    if (item.name === 'home') {
+      if (!`${bodyText}\n${html}`.includes(NEW_PRODUCT_STAT)) {
+        customMarkerIssues.push({ page: item.name, issue: 'new product stat missing' });
+      }
+      if (!NEW_DESIGN_STAT_RE.test(`${bodyText}\n${html}`)) {
+        customMarkerIssues.push({ page: item.name, issue: 'new design stat missing' });
+      }
+      const missingService = SERVICE_DROPDOWN_LABELS.find((label) => !html.includes(label));
+      if (missingService) {
+        customMarkerIssues.push({ page: item.name, issue: `service dropdown label missing: ${missingService}` });
+      }
+    }
     for (const form of pageData.forms) {
       if (form.method !== 'post' || form.action !== FORMSPREE_URL) {
         formActionIssues.push({ page: item.name, ...form });
