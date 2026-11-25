@@ -232,6 +232,22 @@ BRAND_CSS = """
 </style>
 """.strip()
 
+WORKS_FILTER_CSS = """
+<style id="lulazel-works-filter">
+.section_works{overflow:visible!important;position:relative!important;z-index:98!important}
+.section_works .filter-block.is-case{position:relative!important;z-index:1000!important}
+.section_works .dropdown-block{grid-template-columns:minmax(0,22rem)!important;width:auto!important;position:relative!important;z-index:1001!important}
+.section_works .dropdown_wr.w-dropdown{position:relative!important;z-index:1002!important}
+.section_works .dropdown_open.w--open{position:absolute!important;z-index:1003!important;min-width:32rem;max-width:min(90vw,40rem);max-height:min(60vh,32rem);overflow-x:hidden!important;overflow-y:auto!important;overscroll-behavior:contain}
+.section_works .dropdown_open.w--open .w-dyn-items{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important}
+.section_works .dropdown_open.w--open .w-dyn-item:nth-child(odd){border-right:1px solid var(--_colors---grey--100,#e8e8e8)}
+@media(max-width:767px){.section_works .dropdown-block{grid-template-columns:1fr!important}.section_works .dropdown_open.w--open{min-width:min(90vw,24rem);max-width:min(90vw,24rem)}.section_works .dropdown_open.w--open .w-dyn-items{grid-template-columns:1fr!important}.section_works .dropdown_open.w--open .w-dyn-item:nth-child(odd){border-right:0}}
+</style>
+""".strip()
+WORKS_FILTER_STYLE_RE = re.compile(
+    r'<style id="lulazel-works-filter">.*?</style>', re.I | re.S
+)
+
 
 def protect(text: str) -> tuple[str, dict[str, str]]:
     slots: dict[str, str] = {}
@@ -701,6 +717,14 @@ def apply_edit_pass_text(text: str, *, allow_stats: bool = True) -> str:
     text = NAME_RE.sub(name_repl, text)
     for source in OWNER_IMAGE_SOURCES:
         text = text.replace(source, OWNER_IMAGE)
+    text = text.replace(
+        "Our design services and the industries we design for",
+        "Our design services",
+    )
+    text = text.replace(
+        "websites and applications for various industries and types of businesses",
+        "websites and applications for various product teams and types of businesses",
+    )
     if allow_stats:
         text = re.sub(r"500\+\s*(?:products?|projects?)\s+launched\s+since\s+2018", NEW_PRODUCT_STAT, text, flags=re.I)
         text = re.sub(r"500\+\s*(?:products?|projects?)\s+since\s+2018", NEW_PRODUCT_STAT, text, flags=re.I)
@@ -786,6 +810,38 @@ def service_dropdown_items() -> str:
     )
 
 
+def service_filter_label(label: str, *, checked: bool = False, filter_value: str = "") -> str:
+    safe_label = html.escape(label)
+    safe_value = html.escape(filter_value, quote=True)
+    ident = "All" if checked else "service-" + re.sub(r"[^a-z0-9]+", "-", label.lower()).strip("-")
+    checked_attr = " checked" if checked else ""
+    input_value = "All" if checked else "Radio"
+    checked_class = " w--redirected-checked" if checked else ""
+    return (
+        '<label class="dropdown_link w-radio">'
+        f'<div class="w-form-formradioinput w-form-formradioinput--inputType-custom hidden w-radio-input{checked_class}"></div>'
+        f'<input{checked_attr} data-name="industry" fs-list-field="service" fs-list-value="{safe_value}" '
+        f'id="{ident}" name="industry" style="opacity:0;position:absolute;z-index:-1" type="radio" value="{input_value}"/>'
+        f'<span class="w-form-label" for="{ident}">{safe_label}</span>'
+        "</label>"
+    )
+
+
+def service_filter_items() -> str:
+    labels = "".join(
+        '<div class="w-dyn-item" role="listitem">'
+        + service_filter_label(label, filter_value=label)
+        + "</div>"
+        for label, _ in SERVICE_DROPDOWN_ITEMS
+    )
+    return (
+        service_filter_label("All", checked=True)
+        + '<div class="w-dyn-list"><div class="w-dyn-items" role="list">'
+        + labels
+        + "</div></div>"
+    )
+
+
 def edit_pass_tag_matches(raw: str, tag: Tag) -> bool:
     if tag.name.lower() in {"script", "style"} or any(ancestor.name.lower() in {"script", "style"} for ancestor in tag.stack):
         return False
@@ -827,8 +883,26 @@ def edit_pass_section_candidate(raw: str, tag: Tag, parsed: RawHTML) -> Tag:
 
 def apply_edit_pass_raw(raw: str, path: Path) -> str:
     """Delete whole requested sections/cards/items and update navigation/stats."""
+    raw = raw.replace(
+        "Our design services and the industries we design for",
+        "Our design services",
+    )
+    raw = raw.replace(
+        "websites and applications for various industries and types of businesses",
+        "websites and applications for various product teams and types of businesses",
+    )
+    raw = raw.replace(
+        'fs-list-field="title, service, industry"',
+        'fs-list-field="title, service"',
+    )
     parsed = RawHTML(raw)
     edits: list[tuple[int, int, str]] = []
+    industry_tab_values = {
+        tag.attrs.get("data-w-tab")
+        for tag in parsed.start_tags
+        if "tab-link" in tag.classes and "Industries" in tag_text(raw, tag)
+    }
+    industry_tab_values.discard(None)
 
     # Whole sections and cards explicitly requested for deletion.
     for tag in parsed.start_tags:
@@ -837,6 +911,18 @@ def apply_edit_pass_raw(raw: str, path: Path) -> str:
         name = tag.name.lower()
         classes = set(tag.classes)
         text = tag_text(raw, tag)
+        if "footer_links-group" in classes and text.strip().startswith("Industries"):
+            edits.append((tag.start, tag.outer_end, ""))
+            continue
+        if "tab-link" in classes and "Industries" in text:
+            edits.append((tag.start, tag.outer_end, ""))
+            continue
+        if "w-tab-pane" in classes and tag.attrs.get("data-w-tab") in industry_tab_values:
+            edits.append((tag.start, tag.outer_end, ""))
+            continue
+        if "faq_accordion" in classes and "Which industries do you work with?" in text:
+            edits.append((tag.start, tag.outer_end, ""))
+            continue
         if "footer_legal-wrap" in classes:
             # The WOW-version, AI-facts and injected cookie-settings links all
             # live in this shared footer section; delete the whole section.
@@ -878,6 +964,43 @@ def apply_edit_pass_raw(raw: str, path: Path) -> str:
                     and (tag_text(raw, card).strip() == "02" or "Awwwards jury" in tag_text(raw, card))
                 ):
                     edits.append((card.start, card.outer_end, ""))
+
+    # Works/project filters: remove the whole Industries dropdown, rebuild the
+    # Services dropdown with the ten linked-repo labels, and remap the hidden
+    # card fields so every new label has matching projects.
+    service_field_index = 0
+    for tag in parsed.start_tags:
+        if tag.end_start is None:
+            continue
+        classes = set(tag.classes)
+        block = raw[tag.start:tag.outer_end]
+        if "dropdown_wr" in classes and "Industries" in tag_text(raw, tag) and 'fs-list-field="industry"' in block:
+            edits.append((tag.start, tag.outer_end, ""))
+            continue
+        if tag.name.lower() == "div" and tag.attrs.get("fs-list-field") == "industry":
+            edits.append((tag.start, tag.outer_end, ""))
+            continue
+        if (
+            tag.name.lower() == "div"
+            and tag.attrs.get("fs-list-field") == "service"
+            and "fs-list-value" not in tag.attrs
+        ):
+            label = SERVICE_DROPDOWN_ITEMS[service_field_index % len(SERVICE_DROPDOWN_ITEMS)][0]
+            service_field_index += 1
+            edits.append((tag.start, tag.end, replace_attr(tag.raw, "fs-list-value", label)))
+            edits.append((tag.end, tag.end_start, html.escape(label)))
+            continue
+        if "dropdown_wr" in classes and "Services" in tag_text(raw, tag) and 'fs-list-field="service"' in block:
+            for nav in parsed.start_tags:
+                if (
+                    "dropdown_open" in nav.classes
+                    and nav.end_start is not None
+                    and nav.start >= tag.end
+                    and nav.outer_end <= tag.end_start
+                    and any(ancestor.start == tag.start for ancestor in nav.stack)
+                ):
+                    edits.append((nav.end, nav.end_start, service_filter_items()))
+                    break
 
     # Povir / Mad Dogs case studies: remove the whole card, tab, FAQ item,
     # case article or home-service item that contains the case-study text.
@@ -1080,6 +1203,12 @@ def process_html_file(path: Path) -> None:
     raw = structural_pass(raw, path)
     if 'id="lulazel-brand"' not in raw:
         raw = raw.replace("</head>", BRAND_CSS + "\n</head>", 1)
+    if 'id="lulazel-works-filter"' in raw:
+        # Keep the style block current when the generator is rerun on an
+        # already-customized clone, without ever reserializing the document.
+        raw = WORKS_FILTER_STYLE_RE.sub(lambda _: WORKS_FILTER_CSS, raw, count=1)
+    else:
+        raw = raw.replace("</head>", WORKS_FILTER_CSS + "\n</head>", 1)
     parsed = RawHTML(raw)
     edits: list[tuple[int, int, str]] = []
 
@@ -1517,7 +1646,7 @@ This workspace began as an exact static clone of the original source site and is
 - Visible source-site wording, alt/ARIA text, page titles, meta descriptions, structured data, RSS copy, the giant SVG wordmark and the small logo were renamed to `LulaZel Hub`.
 - All visible US-dollar prices, project budgets and hourly rates were converted at **R18 per 1 USD** and presented in South African rand.
 - The trust claims are `{NEW_PRODUCT_STAT}` and `{NEW_DESIGN_STAT}`. Legacy notice, jury, related-service, alternate-version, consent, social-follow, team and article-list blocks were removed as whole sections or cards.
-- The Services dropdown uses the ten service labels from the linked LulaZel repository: Web Hosting, Website Design, Ecommerce, Business Systems, Workflow Automation & AI, AI Assistants, Basic Graphic Design, SEO & Search, Google Ads, and Product Design & Strategy. The top-nav and mobile Industries dropdowns were removed.
+- The Services dropdown uses the ten service labels from the linked LulaZel repository: Web Hosting, Website Design, Ecommerce, Business Systems, Workflow Automation & AI, AI Assistants, Basic Graphic Design, SEO & Search, Google Ads, and Product Design & Strategy. The top-nav, mobile, Works-filter, home-tab, footer and FAQ Industries blocks were removed as whole sections or items; the Works Services filter uses the same ten labels, its hidden Finsweet fields are remapped to those labels, and its open panel is stacked above the cards.
 - Founder references use `{OWNER_NAME}` and `{OWNER_IMAGE}`.
 - Email is `mkhungela.l@gmail.com`. The visible WhatsApp number is `+27 83 719 5064`; the WhatsApp URL remains exactly `{WHATSAPP_URL}`.
 - Every contact form uses `POST {FORMSPREE_URL}`. The Webflow form bridge was redirected from `/api/form` to Formspree.

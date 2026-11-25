@@ -1,5 +1,5 @@
 {
-  "baseURL": "http://127.0.0.1:8000",
+  "baseURL": "http://127.0.0.1:3000",
   "previewMode": "custom",
   "viewport": {
     "width": 1440,
@@ -45,6 +45,11 @@
       "name": "contacts",
       "path": "/contacts",
       "file": "contacts.png"
+    },
+    {
+      "name": "works-services",
+      "path": "/projects",
+      "file": "works-services.png"
     }
   ],
   "dropdownChecks": [
@@ -59,26 +64,106 @@
       ]
     }
   ],
+  "worksFilterChecks": [
+    {
+      "industriesFilterCount": 0,
+      "footerIndustriesGroups": 0,
+      "labels": [
+        "All",
+        "Web Hosting",
+        "Website Design",
+        "Ecommerce",
+        "Business Systems",
+        "Workflow Automation & AI",
+        "AI Assistants",
+        "Basic Graphic Design",
+        "SEO & Search",
+        "Google Ads",
+        "Product Design & Strategy"
+      ],
+      "hiddenServiceLabels": [
+        "Web Hosting",
+        "Website Design",
+        "Ecommerce",
+        "Business Systems",
+        "Workflow Automation & AI",
+        "AI Assistants",
+        "Basic Graphic Design",
+        "SEO & Search",
+        "Google Ads",
+        "Product Design & Strategy",
+        "Web Hosting",
+        "Website Design",
+        "Ecommerce",
+        "Business Systems",
+        "Workflow Automation & AI"
+      ],
+      "filterZIndex": 1000,
+      "sectionZIndex": 98,
+      "ctaZIndex": 0,
+      "laterSectionZIndex": 0,
+      "sectionOverflow": "visible",
+      "hiddenIndustryFields": 0,
+      "staleIndustrySearchFields": 0,
+      "open": true,
+      "width": 512,
+      "height": 344,
+      "top": 513,
+      "bottom": 857,
+      "onTop": true,
+      "hits": [
+        {
+          "y": 531,
+          "onTop": true,
+          "hit": "dropdown_link w-radio is-list-active"
+        },
+        {
+          "y": 599,
+          "onTop": true,
+          "hit": "dropdown_link w-radio"
+        },
+        {
+          "y": 685,
+          "onTop": true,
+          "hit": "dropdown_link w-radio"
+        },
+        {
+          "y": 771,
+          "onTop": true,
+          "hit": "w-form-label"
+        },
+        {
+          "y": 840,
+          "onTop": true,
+          "hit": "dropdown_link w-radio"
+        }
+      ],
+      "ctaTop": 6132,
+      "overlapY": null,
+      "overlapOnTop": null,
+      "listZIndex": "1003"
+    }
+  ],
   "domChecks": [
     {
       "page": "home",
-      "bodyTextLength": 8969,
+      "bodyTextLength": 8636,
       "sectionCount": 10,
-      "imageCount": 157,
+      "imageCount": 145,
       "navbarVisible": true,
       "title": "UI/UX Design Studio for SaaS, AI & Defense Tech | LulaZel Hub"
     },
     {
       "page": "home-dark-scheme",
-      "bodyTextLength": 8969,
+      "bodyTextLength": 8636,
       "sectionCount": 10,
-      "imageCount": 157,
+      "imageCount": 145,
       "navbarVisible": true,
       "title": "UI/UX Design Studio for SaaS, AI & Defense Tech | LulaZel Hub"
     },
     {
       "page": "services",
-      "bodyTextLength": 12267,
+      "bodyTextLength": 12020,
       "sectionCount": 15,
       "imageCount": 58,
       "navbarVisible": true,
@@ -86,7 +171,7 @@
     },
     {
       "page": "projects",
-      "bodyTextLength": 2442,
+      "bodyTextLength": 2095,
       "sectionCount": 2,
       "imageCount": 18,
       "navbarVisible": true,
@@ -94,7 +179,7 @@
     },
     {
       "page": "pricing",
-      "bodyTextLength": 10053,
+      "bodyTextLength": 9806,
       "sectionCount": 13,
       "imageCount": 20,
       "navbarVisible": true,
@@ -102,7 +187,7 @@
     },
     {
       "page": "blog",
-      "bodyTextLength": 4693,
+      "bodyTextLength": 4446,
       "sectionCount": 1,
       "imageCount": 29,
       "navbarVisible": true,
@@ -110,7 +195,7 @@
     },
     {
       "page": "contacts",
-      "bodyTextLength": 2331,
+      "bodyTextLength": 2083,
       "sectionCount": 1,
       "imageCount": 6,
       "navbarVisible": true,

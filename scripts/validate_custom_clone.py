@@ -89,6 +89,7 @@ SERVICE_DROPDOWN_LABELS = [
     "Workflow Automation & AI", "AI Assistants", "Basic Graphic Design",
     "SEO & Search", "Google Ads", "Product Design & Strategy",
 ]
+WORKS_FILTER_EXPECTED_LABELS = ["All", *SERVICE_DROPDOWN_LABELS]
 EDIT_PASS_BANNED_RE = re.compile(
     r"Related services|Services you may also need|Led by an Awwwards jury member"
     r"|\bPovir\b|\bMad\s+Dogs?\b|Follow our work|WOW version"
@@ -271,6 +272,47 @@ def validate_html(path: Path, counters: Counter) -> None:
         issues.append(f"removed edit-pass phrase remains visible in {path.relative_to(ROOT)}")
     if soup.select_one(".footer_legal-wrap"):
         issues.append(f"footer legal section remains in {path.relative_to(ROOT)}")
+    for group in soup.select(".footer_links-group"):
+        if group.get_text(" ", strip=True).startswith("Industries"):
+            issues.append(f"footer Industries section remains in {path.relative_to(ROOT)}")
+    for tab in soup.select(".tab-link"):
+        if re.search(r"\bIndustries\b", tab.get_text(" ", strip=True), re.I):
+            issues.append(f"Industries home tab remains in {path.relative_to(ROOT)}")
+    for question in soup.select(".faq_question"):
+        if re.search(r"Which industries do you work with", question.get_text(" ", strip=True), re.I):
+            issues.append(f"Industries FAQ section remains in {path.relative_to(ROOT)}")
+    works_dropdowns = soup.select(".dropdown_wr.w-dropdown")
+    service_filter_present = False
+    for dropdown in works_dropdowns:
+        dropdown_text = dropdown.get_text(" ", strip=True)
+        if re.search(r"\bIndustries\b", dropdown_text, re.I):
+            issues.append(f"Industries works filter remains in {path.relative_to(ROOT)}")
+        elif "Services" in dropdown_text and dropdown.select_one('[fs-list-field="service"]'):
+            service_filter_present = True
+            labels = [label.get_text(" ", strip=True) for label in dropdown.select(".w-form-label")]
+            if labels != WORKS_FILTER_EXPECTED_LABELS:
+                issues.append(f"works Services filter labels are wrong in {path.relative_to(ROOT)}: {labels}")
+    if soup.select('[fs-list-field="industry"]'):
+        issues.append(f"hidden industry filter field remains in {path.relative_to(ROOT)}")
+    if 'fs-list-field="title, service, industry"' in raw:
+        issues.append(f"stale industry search field remains in {path.relative_to(ROOT)}")
+    service_field_values = []
+    for field in soup.select('[fs-list-field="service"]'):
+        if field.name.lower() != "div":
+            continue
+        value = field.get("fs-list-value") or field.get_text(" ", strip=True)
+        service_field_values.append(value)
+        if value not in SERVICE_DROPDOWN_LABELS:
+            issues.append(f"old works service field remains in {path.relative_to(ROOT)}")
+    if service_filter_present and not set(SERVICE_DROPDOWN_LABELS).issubset(set(service_field_values)):
+        issues.append(f"works service fields do not cover all ten labels in {path.relative_to(ROOT)}")
+    if soup.select_one(".section_works"):
+        if (
+            'id="lulazel-works-filter"' not in raw
+            or "z-index:98" not in raw
+            or "z-index:1000" not in raw
+        ):
+            issues.append(f"works filter stacking CSS missing in {path.relative_to(ROOT)}")
     if MONEY_RE.search(visible):
         issues.append(f"dollar currency remains visible in {path.relative_to(ROOT)}")
     if DIGEST_RE.search(visible):
