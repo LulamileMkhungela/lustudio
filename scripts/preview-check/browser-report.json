@@ -1,83 +1,82 @@
 {
   "baseURL": "http://127.0.0.1:8000",
-  "viewport": {
-    "width": 1440,
-    "height": 1000
-  },
-  "screenshots": [
+  "domChecks": [
     {
-      "name": "home",
-      "path": "/",
-      "file": "home.png"
+      "bodyTextLength": 17356,
+      "imageCount": 217,
+      "navbarVisible": true,
+      "page": "home",
+      "sectionCount": 11,
+      "title": "UI/UX Design Studio for SaaS, AI & Defense Tech | LulaZel Hub"
     },
     {
-      "name": "dropdown",
-      "path": "/",
-      "file": "dropdown.png"
+      "bodyTextLength": 17356,
+      "imageCount": 217,
+      "navbarVisible": true,
+      "page": "home-dark-scheme",
+      "sectionCount": 11,
+      "title": "UI/UX Design Studio for SaaS, AI & Defense Tech | LulaZel Hub"
     },
     {
-      "name": "home-dark-scheme",
-      "path": "/",
-      "file": "home-dark-scheme.png"
+      "bodyTextLength": 14414,
+      "imageCount": 81,
+      "navbarVisible": true,
+      "page": "services",
+      "sectionCount": 16
     },
     {
-      "name": "services",
-      "path": "/services/website-design",
-      "file": "services.png"
-    },
-    {
-      "name": "projects",
-      "path": "/projects",
-      "file": "projects.png"
+      "bodyTextLength": 2740,
+      "imageCount": 23,
+      "navbarVisible": true,
+      "page": "projects",
+      "sectionCount": 2,
+      "title": "UI/UX Design Portfolio & Case Studies | LulaZel Hub"
     }
   ],
   "dropdownChecks": [
     {
       "defaultLabel": "For You",
-      "selected": "For You",
       "options": [
         "For Marketing Teams",
         "For You",
         "For Tech",
         "Something Else"
-      ]
-    }
-  ],
-  "domChecks": [
-    {
-      "page": "home",
-      "bodyTextLength": 17356,
-      "sectionCount": 11,
-      "imageCount": 217,
-      "navbarVisible": true,
-      "title": "UI/UX Design Studio for SaaS, AI & Defense Tech | Cosmos Studio"
-    },
-    {
-      "page": "home-dark-scheme",
-      "bodyTextLength": 17356,
-      "sectionCount": 11,
-      "imageCount": 217,
-      "navbarVisible": true,
-      "title": "UI/UX Design Studio for SaaS, AI & Defense Tech | Cosmos Studio"
-    },
-    {
-      "page": "services",
-      "bodyTextLength": 14414,
-      "sectionCount": 16,
-      "imageCount": 81,
-      "navbarVisible": true,
-      "title": "Website Design Agency with 60+ Awards | Cosmos Studio"
-    },
-    {
-      "page": "projects",
-      "bodyTextLength": 2740,
-      "sectionCount": 2,
-      "imageCount": 23,
-      "navbarVisible": true,
-      "title": "UI/UX Design Portfolio & Case Studies | Cosmos Studio"
+      ],
+      "selected": "For You"
     }
   ],
   "failedLocalResponses": [],
+  "legacyMarkerHits": [],
   "pageErrors": [],
-  "legacyMarkerHits": []
+  "screenshots": [
+    {
+      "file": "home.png",
+      "name": "home",
+      "path": "/"
+    },
+    {
+      "file": "dropdown.png",
+      "name": "dropdown",
+      "path": "/"
+    },
+    {
+      "file": "home-dark-scheme.png",
+      "name": "home-dark-scheme",
+      "path": "/"
+    },
+    {
+      "file": "services.png",
+      "name": "services",
+      "path": "/services/website-design"
+    },
+    {
+      "file": "projects.png",
+      "name": "projects",
+      "path": "/projects"
+    }
+  ],
+  "viewport": {
+    "height": 1000,
+    "width": 1440
+  }
 }

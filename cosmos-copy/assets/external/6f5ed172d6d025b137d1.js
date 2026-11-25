@@ -1,4 +1,4 @@
-/* Cosmos Studio – home "Timeline & Process" 1.0.0 (11 Nov 2026). Approved by Illia (prototype v5).
+/* LulaZel Hub – home "Timeline & Process" 1.0.0 (11 Nov 2026). Approved by Illia (prototype v5).
    Replaces the content of the home .features_timeline card: three service tabs (Product / Website / Brand), gantt with arrows on
    desktop, vertical steps with a popover on phones (<=900px). Colors come from the site's Colors variables; .features_timeline is one
    of the always-dark islands (site dark theme resets the palette inside it), so the card looks the same in both themes.

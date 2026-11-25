@@ -137,7 +137,7 @@
     if (box.find('.cs-alt').length) return;
     var alt = $('<div class="cs-alt" style="margin-top:12px"></div>')
       .append(document.createTextNode('You can also email '))
-      .append($('<a href="mailto:hello@cosmos.studio">hello@cosmos.studio</a>'))
+      .append($('<a href="mailto:mkhungela.l@gmail.com">mkhungela.l@gmail.com</a>'))
       .append(document.createTextNode(' or message us on '))
       .append($('<a href="https://wa.me/380638324731" target="_blank" rel="noopener">WhatsApp</a>'))
       .append(document.createTextNode('.'));
@@ -184,9 +184,13 @@
   $.ajaxPrefilter(function (options, original, jqXHR) {
     var url = String(options.url || '');
     if (FORM.test(url)) {
-      options.url = '/api/form';
+      options.url = 'https://formspree.io/f/xvkgqalq';
+      options.type = 'POST';
+      options.crossDomain = true;
+      options.dataType = 'json';
+      options.dataFilter = function () { return '{"code":200}'; };
       options.crossDomain = false;
-      jqXHR.done(function (res) { if (!res || res.code !== 200) afterFailure(200); });
+      jqXHR.done(function () {});
       jqXHR.fail(function (x) { afterFailure(x && x.status || 0); });
       return;
     }

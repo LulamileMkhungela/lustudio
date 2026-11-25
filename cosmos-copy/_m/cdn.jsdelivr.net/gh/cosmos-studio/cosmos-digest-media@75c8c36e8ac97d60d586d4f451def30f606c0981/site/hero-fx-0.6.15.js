@@ -1,4 +1,4 @@
-/* Cosmos Studio – hero-fx 0.6.15 (12 Nov: Defense tech website caption removed; radar removed from the Defense & Military Tech terrain; About H2 capped at 46rem and balanced; Defense tech website caption moved to the bottom-left, in line with the hero text (it crossed the horizon arc on desktop and was cut off on phones); Defense & Military Tech radar no longer follows the cursor, no pointer listener there; About block lead text capped at 40rem on desktop (Illia); 0.6.10 – 11 Nov: the About block gets the review ticker marker [data-rtk] instead of the Clutch widget, visible on phones too; 0.6.8: night Drone GCS scene for the dark theme, telemetry chip kept clear of the hero text on phones). Animated hero backgrounds by page slug.
+/* LulaZel Hub – hero-fx 0.6.15 (12 Nov: Defense tech website caption removed; radar removed from the Defense & Military Tech terrain; About H2 capped at 46rem and balanced; Defense tech website caption moved to the bottom-left, in line with the hero text (it crossed the horizon arc on desktop and was cut off on phones); Defense & Military Tech radar no longer follows the cursor, no pointer listener there; About block lead text capped at 40rem on desktop (Illia); 0.6.10 – 11 Nov: the About block gets the review ticker marker [data-rtk] instead of the Clutch widget, visible on phones too; 0.6.8: night Drone GCS scene for the dark theme, telemetry chip kept clear of the hero text on phones). Animated hero backgrounds by page slug.
    Runs on all domains. Shaders: Componentry (MIT) grain-gradient; defense scenes written for Cosmos.
    Roll back: remove the page script "herofx" from the Services and Industries templates. */
 (function(){
@@ -279,7 +279,7 @@ function unify(){
  document.head.appendChild(st3);
  const main=document.querySelector('main')||document.body;
  // A. intro block: left text + Clutch widget on the right
- const about=[...main.querySelectorAll('section.dx.dx-sec')].find(e=>/^about cosmos studio$/i.test((e.querySelector('.dx-label')||{textContent:''}).textContent.trim()));
+ const about=[...main.querySelectorAll('section.dx.dx-sec')].find(e=>/^about LulaZel Hub$/i.test((e.querySelector('.dx-label')||{textContent:''}).textContent.trim()));
  if(about){about.classList.add('hfx-about');const hd=about.querySelector('.dx-head');if(hd)hd.classList.add('hfx-hl');
    if(!document.querySelector('[data-rtk]')){const w=document.createElement('div');w.setAttribute('data-rtk','');w.style.minHeight=innerWidth<768?'22.5rem':(innerWidth<992?'34rem':'38rem');
      about.querySelector('.dx-wrap').appendChild(w);if(window.CosmosReviewTicker)CosmosReviewTicker.mount(w);}}
@@ -325,7 +325,7 @@ function start(){ill();unify();
   }
   // move the hero image/video below the first "About" block (Illia, 9 Nov) – only on pages with the new hero
   (function(){const pgl=h1.closest('.padding-global')||sec;const media=[...pgl.children].find(e=>!e.contains(h1)&&e.querySelector('img,video'));if(!media)return;
-    const lab=[...document.querySelectorAll('div,span,p')].find(e=>!sec.contains(e)&&e.children.length===0&&/^(about cosmos studio|we are)$/i.test(e.textContent.trim()));if(!lab)return;
+    const lab=[...document.querySelectorAll('div,span,p')].find(e=>!sec.contains(e)&&e.children.length===0&&/^(about LulaZel Hub|we are)$/i.test(e.textContent.trim()));if(!lab)return;
     let anchor=lab.closest('section');if(anchor&&anchor.nextElementSibling&&anchor.nextElementSibling.classList.contains('hfx-awards'))anchor=anchor.nextElementSibling;if(!anchor||!anchor.parentElement)return;
     const prev=media.previousElementSibling;if(prev&&/padding-section/.test(prev.className))prev.style.display='none';
     const wrap=document.createElement('div');wrap.className='padding-global';wrap.setAttribute('data-hfx-media','');wrap.appendChild(media);

@@ -747,8 +747,7 @@
     },
     {
       "declared": 0,
-      "status": "html-response",
-      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/gh/cosmos-studio/cosmos-digest-media@0a4688c/site/award-badges/"
+      "status": "html-response"
     },
     {
       "declared": 0,
@@ -832,13 +831,11 @@
     },
     {
       "declared": 0,
-      "status": "http-404",
-      "url": "https://www.cosmos.studio/assets/js/awwwards-ribbon-honorable.svg"
+      "status": "http-404"
     },
     {
       "declared": 0,
-      "status": "http-404",
-      "url": "https://www.cosmos.studio/assets/js/awwwards-ribbon-sotd.svg"
+      "status": "http-404"
     },
     {
       "declared": 0,
@@ -1232,23 +1229,12 @@
     "/projects/yawn-crypto-website",
     "/projects/zeuss-skincare-ecommerce-website",
     "/blog",
-    "/blog/adobe-creative-cloud-agents-claude-sheets-chatgpt-businesses",
-    "/blog/ai-design-weekly-1",
-    "/blog/ai-design-weekly-2",
     "/blog/ai-product-design-agencies",
     "/blog/b2b-saas-dashboard-design-patterns",
     "/blog/c2-interface-design",
-    "/blog/canva-video-claude-chatgpt-gemini-mac-tesla-reality-view",
-    "/blog/chatgpt-chat-work-images-2-6-claude-finance",
-    "/blog/claude-fable-5-2-gemini-omni-shield-ai-echodyne",
-    "/blog/claude-meetings-figma-3d-chatgpt-wallet",
-    "/blog/claude-ultra-chatgpt-pro-limits-salesforce-rune",
-    "/blog/clutch-global-award-fall-2026",
-    "/blog/copilot-fusion-figma-ai-model-suno-mcp",
     "/blog/defense-tech-design-agencies",
     "/blog/defense-tech-pitch-deck",
     "/blog/fix-vibe-coded-mvp-lovable-bolt-cursor",
-    "/blog/gpt-6-2-astra-sol-gemini-4-neon-microsoft-today",
     "/blog/how-to-choose-ui-ux-agency-defense-tech",
     "/blog/how-to-choose-ui-ux-design-agency",
     "/blog/military-symbology-ui-design",
@@ -1305,7 +1291,7 @@
     "/legal/privacy-policy",
     "/legal/terms-of-use"
   ],
-  "canonical_url_count": 112,
+  "canonical_url_count": 101,
   "default_dropdown": "For You",
   "dropdown": [
     "For Marketing Teams",
@@ -1313,14 +1299,15 @@
     "For Tech",
     "Something Else"
   ],
-  "exact_page_count": 114,
+  "exact_page_count": 103,
   "fallback_pages": 7,
+  "html_page_count": 109,
   "internal_route_count": 121,
   "localized_asset_count": 1377,
   "page_source_counts": {
     "live": 114
   },
-  "pages_written": 121,
+  "pages_written": 110,
   "redirect_count": 3,
   "remaining_remote_asset_count": 172,
   "repair_failures": [],
@@ -1329,6 +1316,6 @@
     "/assets/js/runtime/webflow.achunk.91a6f07ab49e2764.js"
   ],
   "repaired_remote_assets": [],
-  "site_file_count": 1297,
-  "site_total_bytes": 98176595
+  "site_file_count": 1285,
+  "site_total_bytes": 94808926
 }

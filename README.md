@@ -1,20 +1,16 @@
-# Cosmos Studio static clone
+# LulaZel Hub static site
 
-This workspace is a strict static clone of `https://www.cosmos.studio/`, built from exact live HTML, styles, scripts, wording, projects, and media references.
+This workspace began as an exact static clone of the original source site and is now customized for LulaZel Hub. The exact Webflow HTML, CSS, JavaScript, GSAP interactions, fonts, animations, project pages, redirects and media references are preserved; only the requested rebrand and content changes were applied.
 
-- All 112 canonical sitemap routes and every internal route discovered from those pages have local pages with the exact Cosmos shell.
-- Original Webflow CSS, runtime JavaScript, GSAP interactions, fonts, images, Lottie files, posters and media are preserved.
-- Referenced static assets are localized under `cosmos-copy/assets/`; any oversized remote media that exceeds the repository size budget is listed in `scripts/cosmos-remaining-remote-assets.json` and keeps its exact Cosmos URL.
-- HTTP redirects observed on the live site are recorded in `scripts/cosmos-redirects.json` and implemented by `scripts/serve.py`.
-- The only intentional UI change is a light Cosmos-styled audience dropdown beside the logo: `For Marketing Teams`, `For You` (default), `For Tech`, and `Something Else`.
-- Custom views for non-default dropdown options are intentionally not implemented.
+- 101 canonical routes remain. The 10 AI news-digest posts and the Clutch recognition post were removed; 12 practical blog guides remain on the blog index and in RSS.
+- Visible source-site wording, alt/ARIA text, page titles, meta descriptions, structured data, RSS copy, the giant SVG wordmark and the small logo were renamed to `LulaZel Hub`.
+- All visible US-dollar prices, project budgets and hourly rates were converted at **R18 per 1 USD** and presented in South African rand.
+- Every visible recognition and competition mention was removed; the surrounding 500+ / 12 stats remain.
+- Email is `mkhungela.l@gmail.com`. The visible WhatsApp number is `+27 83 719 5064`; the WhatsApp URL remains exactly `https://wa.me/380638324731`.
+- Every contact form uses `POST https://formspree.io/f/xvkgqalq`. The Webflow form bridge was redirected from `/api/form` to Formspree.
+- Every Book a Call link points to `https://calendly.com/lulamile_m/meet-lulamile?month=2026-10&date=2026-10-29`.
+- Source-site URLs, filenames, CSS/JS classes and canonical links remain unchanged. The logo-adjacent dropdown still defaults to `For You` with `For Marketing Teams`, `For Tech`, and `Something Else`; no custom option views are implemented.
 
-## Refresh the source
+## Rebuild
 
-`scripts/fetch_live_cosmos.py` is run by `.github/workflows/fetch-cosmos.yml` on a machine with access to Cosmos and its CDNs. It fetches the live sitemap and route HTML, localizes assets, applies the dropdown, validates the result, captures browser screenshots, and commits the generated site to the current branch.
-
-## Preview
-
-```bash
-./scripts/serve.sh 3000
-```
+Run `python3 scripts/fetch_live_cosmos.py`, then `python3 scripts/customize_cosmos_clone.py`, then `python3 scripts/validate_custom_clone.py`. The exact-clone workflow is manual only so customization commits are not overwritten. Serve locally with `python3 scripts/serve.py 3000`.

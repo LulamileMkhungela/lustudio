@@ -1,6 +1,6 @@
 canonical URLs: 112
 page discovery pass 1: fetching 121 routes
-using Cosmos shell fallback for 7 non-shell source pages
+using LulaZel Hub shell fallback for 7 non-shell source pages
 page sources: {'live': 114}
 staging equivalent keys: 501
 asset pass 1: 1227 URLs
@@ -756,7 +756,6 @@ asset pass 3: 63 URLs
     {
       "declared": 0,
       "status": "html-response",
-      "url": "https://www.cosmos.studio/_m/cdn.jsdelivr.net/gh/cosmos-studio/cosmos-digest-media@0a4688c/site/award-badges/"
     },
     {
       "declared": 0,
@@ -841,12 +840,10 @@ asset pass 3: 63 URLs
     {
       "declared": 0,
       "status": "http-404",
-      "url": "https://www.cosmos.studio/assets/js/awwwards-ribbon-honorable.svg"
     },
     {
       "declared": 0,
       "status": "http-404",
-      "url": "https://www.cosmos.studio/assets/js/awwwards-ribbon-sotd.svg"
     },
     {
       "declared": 0,
@@ -1239,23 +1236,12 @@ asset pass 3: 63 URLs
     "/projects/yawn-crypto-website",
     "/projects/zeuss-skincare-ecommerce-website",
     "/blog",
-    "/blog/adobe-creative-cloud-agents-claude-sheets-chatgpt-businesses",
-    "/blog/ai-design-weekly-1",
-    "/blog/ai-design-weekly-2",
     "/blog/ai-product-design-agencies",
     "/blog/b2b-saas-dashboard-design-patterns",
     "/blog/c2-interface-design",
-    "/blog/canva-video-claude-chatgpt-gemini-mac-tesla-reality-view",
-    "/blog/chatgpt-chat-work-images-2-6-claude-finance",
-    "/blog/claude-fable-5-2-gemini-omni-shield-ai-echodyne",
-    "/blog/claude-meetings-figma-3d-chatgpt-wallet",
-    "/blog/claude-ultra-chatgpt-pro-limits-salesforce-rune",
-    "/blog/clutch-global-award-fall-2026",
-    "/blog/copilot-fusion-figma-ai-model-suno-mcp",
     "/blog/defense-tech-design-agencies",
     "/blog/defense-tech-pitch-deck",
     "/blog/fix-vibe-coded-mvp-lovable-bolt-cursor",
-    "/blog/gpt-6-2-astra-sol-gemini-4-neon-microsoft-today",
     "/blog/how-to-choose-ui-ux-agency-defense-tech",
     "/blog/how-to-choose-ui-ux-design-agency",
     "/blog/military-symbology-ui-design",

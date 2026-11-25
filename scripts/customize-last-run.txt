@@ -1,0 +1,11 @@
+{
+  "calendly": "https://calendly.com/lulamile_m/meet-lulamile?month=2026-10&date=2026-10-29",
+  "canonical_urls": 101,
+  "customized": "LulaZel Hub",
+  "formspree": "https://formspree.io/f/xvkgqalq",
+  "html_files": 109,
+  "kept_blog_slugs": 12,
+  "removed_blog_posts": 11,
+  "removed_blog_slugs": 11,
+  "usd_zar_rate": "18"
+}

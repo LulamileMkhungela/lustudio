@@ -323,6 +323,17 @@ def browser_count(value) -> int:
 def main() -> None:
     if not SITE.exists():
         raise SystemExit("cosmos-copy missing")
+    # After customization the strict validator's old-brand/no-owner assertions
+    # are intentionally obsolete. Delegate to the custom validator so running
+    # the historical command still validates the current site correctly.
+    index = SITE / "index.html"
+    if index.exists() and "LulaZel Hub" in index.read_text(encoding="utf-8", errors="replace")[:500000]:
+        custom_validator = ROOT / "scripts" / "validate_custom_clone.py"
+        result = subprocess.run(
+            [sys.executable, str(custom_validator), *sys.argv[1:]],
+            cwd=str(ROOT),
+        )
+        raise SystemExit(result.returncode)
     load_redirects()
     canonical_urls = [line.strip() for line in CANONICAL_FILE.read_text(encoding="utf-8").splitlines() if line.strip()]
     if len(canonical_urls) != 112:

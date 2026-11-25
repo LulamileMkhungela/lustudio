@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Static server for the exact Cosmos clone, with captured live redirects."""
+"""Static server for the customized source-site clone, with captured live redirects."""
 from __future__ import annotations
 
 import json
@@ -118,7 +118,7 @@ class CosmosHandler(SimpleHTTPRequestHandler):
 def main() -> None:
     port = int(sys.argv[1]) if len(sys.argv) > 1 else 3000
     server = ThreadingHTTPServer(("0.0.0.0", port), CosmosHandler)
-    print(f"Serving exact Cosmos clone on 0.0.0.0:{port} with {len(REDIRECTS)} redirects", flush=True)
+    print(f"Serving LulaZel Hub static site on 0.0.0.0:{port} with {len(REDIRECTS)} redirects", flush=True)
     server.serve_forever()
 
 
