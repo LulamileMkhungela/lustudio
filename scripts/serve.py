@@ -79,7 +79,7 @@ class CosmosHandler(SimpleHTTPRequestHandler):
             self.end_headers()
             return True
 
-        new_path = re.sub(r"/assets/js//+assets/js/", "/assets/js/", parsed.path)
+        new_path = re.sub(r"/assets/js/(?:/+)?assets/js/", "/assets/js/", parsed.path)
         rel_path = unquote(new_path).lstrip("/")
         if rel_path.endswith("rss.xml") and rel_path not in {"rss.xml", "blog/rss.xml"} and not (SITE / rel_path).exists() and (SITE / "rss.xml").exists():
             new_path = "/rss.xml"
